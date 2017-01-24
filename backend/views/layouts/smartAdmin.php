@@ -31,7 +31,7 @@
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
                 <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+		<!--<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">-->
 
 		<!-- #FAVICONS -->
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
@@ -102,7 +102,7 @@
 		* 'fixed-page-footer' - Fixes footer
 		* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
 	-->
-	<body class="smart-style-0">
+	<body class="smart-style-0 fixed-header">
 
 		<!-- #HEADER -->
 		<header id="header">
@@ -328,7 +328,7 @@
 						
 						<ul id="myTab1" class="nav nav-tabs bordered">
 							<li class="active">
-								<a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-spinner"></i>Pendentes <span class="badge bg-color-red txt-color-white">12</span></a>
+								<a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-bell-o"></i>Pendentes <span class="badge bg-color-red txt-color-white">12</span></a>
 							</li> 
 							<li>
 								<a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-thumbs-o-up"></i> Aprovados</a>
@@ -337,30 +337,6 @@
 								<a href="#s3" data-toggle="tab"><i class="fa fa-fw fa-lg fa-dollar"></i> Vendas</a>
 							</li>
 						</ul>
-
-						<div id="myTabContent1" class="tab-content padding-10">
-							<div class="tab-pane fade in active" id="s1">
-								<p>
-									I have six locks on my door all in a row. When I go out, I lock every other one. I figure no matter how long somebody stands there picking the locks, they are always locking three.
-								</p>
-							</div>
-							<div class="tab-pane fade" id="s2">
-								<p>
-									Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
-								</p>
-							</div>
-							<div class="tab-pane fade" id="s3">
-								<p>
-									Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-								</p>
-							</div>
-							<div class="tab-pane fade" id="s4">
-								<p>
-									Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
-								</p>
-							</div>
-						</div>
-
 					</div>
 					<!-- end widget content -->
 
@@ -845,7 +821,7 @@
 					</li>
 				</ul>
 			</nav>
-			<a href="#ajax/difver.html" class="btn btn-primary nav-demo-btn"><i class="fa fa-info-circle"></i> SmartAdmin Package (187 MB)</a>
+			<!--<a href="#ajax/difver.html" class="btn btn-primary nav-demo-btn"><i class="fa fa-info-circle"></i> SmartAdmin Package (187 MB)</a>-->
 			
 			
 
@@ -1045,7 +1021,7 @@
 		<![endif]-->
 
 		<!-- Demo purpose only -->
-		<script src="js/demo.min.js"></script>
+		<!--<script src="js/demo.min.js"></script>-->
 
 		<!-- MAIN APP JS FILE -->
 		<script src="js/app.min.js"></script>
