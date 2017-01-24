@@ -328,7 +328,7 @@
 						
 						<ul id="myTab1" class="nav nav-tabs bordered">
 							<li class="active">
-								<a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-spinner"></i>Pendentes <span class="badge bg-color-red txt-color-white">12</span></a>
+								<a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-bell-o"></i>Pendentes <span class="badge bg-color-red txt-color-white">12</span></a>
 							</li> 
 							<li>
 								<a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-thumbs-o-up"></i> Aprovados</a>
