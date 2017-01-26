@@ -4,7 +4,7 @@ namespace common\components;
 
 use Yii;
 use yii\base\Component;
-use PagSeguro\Library as PagSeguro;
+use vendor\pagseguro\Library as PagSeguro;
 
 /**
 * PagamentoComponent
@@ -12,6 +12,9 @@ use PagSeguro\Library as PagSeguro;
 **/
 class PagamentoComponent extends Component
 {
+    private $PagSeguroAmbiente = 'sandbox'; // production or sandbox
+    private $PagSeguroEmail = 'eduardomatias.1989@gmail.com';
+    private $PagSeguroToken = '966EF525871B421D9B6536D3F2D89190';
     
     private function pagseguroInitialize()
     {
@@ -22,8 +25,52 @@ class PagamentoComponent extends Component
 
     private function pagseguroSetConfigDefault(&$pag, $data)
     {
+        $paymentRequest = $pag;
+        $paymentRequest->addItem('0001', 'Notebook', 1, 2430.00);  
+        $paymentRequest->addItem('0002', 'Mochila',  1, 150.99);
+        $sedexCode = PagSeguroShippingType::getCodeByType('SEDEX');
         
-        $pag = new \PagSeguro\Domains\Requests\DirectPayment\Boleto();
+        $paymentRequest->setShippingType($sedexCode);  
+        $paymentRequest->setShippingAddress(  
+          '01452002',  
+          'Av. Brig. Faria Lima',  
+          '1384',  
+          'apto. 114',  
+          'Jardim Paulistano',  
+          'São Paulo',  
+          'SP',  
+          'BRA'  
+        ); 
+        
+        $paymentRequest->setSender(  
+            'João Comprador',  
+            'email@comprador.com.br',  
+            '11',  
+            '56273440',  
+            'CPF',  
+            '156.009.442-76'  
+        );
+        
+        
+        
+        $paymentRequest->setCurrency("BRL");  
+        
+        
+        // Referenciando a transação do PagSeguro em seu sistema  
+        $paymentRequest->setReference("REF123");  
+
+        // URL para onde o comprador será redirecionado (GET) após o fluxo de pagamento  
+        $paymentRequest->setRedirectUrl("http://localhost");  
+
+        // URL para onde serão enviadas notificações (POST) indicando alterações no status da transação  
+        $paymentRequest->addParameter('notificationURL', 'http://localhost');  
+
+        
+        
+        
+        
+        
+        /*       
         
         // Set the Payment Mode for this payment request
         $pag->setMode('DEFAULT');
@@ -58,7 +105,7 @@ class PagamentoComponent extends Component
         // set CPF or CNPJ
         $pag->setSender()->setDocument()->withParameters(
             $data['dados_comprador']['cpf-cnpj'], // CPF or CNPJ
-            $data['dados_comprador']['cpf-cnpj-erro'] // mensagem de erro
+            $data['dados_comprador']['cpf-cnpj-numero'] // numero
         );
         
         // $data['telefone'] -> keys[ddd,numero]
@@ -98,7 +145,7 @@ class PagamentoComponent extends Component
             20,
             0
         );
-        
+        */
     }
     
     private function pagseguroSetConfigCreditCard(&$pag, $data)
@@ -116,18 +163,18 @@ class PagamentoComponent extends Component
         );
 
         // Set credit card token
-        $pag->setToken($data['dados_comprador']['cartao-token']);
+        $pag->setToken($data['dados_comprador']['cartao']['token']);
 
         // Set the installment quantity and value (could be obtained using the Installments 
         // service, that have an example here in \public\getInstallments.php)
         $pag->setInstallment()->withParameters(
-            $data['dados_comprador']['cartao-num-parcela'], 
-            $data['dados_comprador']['cartao-vlr-parcela']
+            $data['dados_comprador']['cartao']['num-parcela'], 
+            $data['dados_comprador']['cartao']['vlr-parcela']
         );
 
         // Set the credit card holder information
         $pag->setHolder()->setBirthdate($data['dados_comprador']['data-nascimento']);
-        $pag->setHolder()->setName($data['dados_comprador']['cartao-nome']); // Equals in Credit Card
+        $pag->setHolder()->setName($data['dados_comprador']['cartao']['nome']); // Equals in Credit Card
 
         $pag->setHolder()->setPhone()->withParameters(
             $data['dados_comprador']['telefone'][0]['ddd'],
@@ -153,7 +200,7 @@ class PagamentoComponent extends Component
     private function pagseguroRegister(&$pag)
     {
         //Get the crendentials and register the boleto payment
-        $result = $pag->register(\PagSeguro\Configuration\Configure::getApplicationCredentials());
+        $result = $pag->register(\vendor\pagseguro\Configuration\Configure::getApplicationCredentials());
         return $result;
     }
     
@@ -162,7 +209,7 @@ class PagamentoComponent extends Component
     {
         try {
             $this->pagseguroInitialize();
-            $pag = new ReflectionClass('\PagSeguro\Domains\Requests\DirectPayment\''. $formPagamento);
+            $pag = new ReflectionClass('\vendor\pagseguro\Domains\Requests\DirectPayment\''. $formPagamento);
             $this->pagseguroSetConfigDefault($pag, $data);
             $this->pagseguroSetConfig{$formPagamento}($pag, $data);            
             $result = $this->pagseguroRegister($pag);
@@ -179,21 +226,48 @@ class PagamentoComponent extends Component
     }
     
     // pagamento com pagseguro - CreditCard
-    protected function pagseguroCreditCard($data)
+    public function pagseguroCreditCard($data)
     {
         return $this->pagseguroProcessCheckout("CreditCard", $data);
     }
     
     // pagamento com pagseguro - Boleto
-    protected function pagseguroBoleto($data)
+    public function pagseguroBoleto($data)
     {
         return $this->pagseguroProcessCheckout("Boleto", $data);
     }
     
     // pagamento com pagseguro - OnlineDebit
-    protected function pagseguroOnlineDebit($data)
+    public function pagseguroOnlineDebit($data)
     {
         return $this->pagseguroProcessCheckout("OnlineDebit", $data);
+    }
+    
+    // Configura credenciais
+    private function pagseguroSetConfigCredentials()
+    {
+        \vendor\pagseguro\Configuration\Configure::setEnvironment($this->PagSeguroAmbiente);
+        \vendor\pagseguro\Configuration\Configure::setAccountCredentials(
+            $this->PagSeguroEmail,
+            $this->PagSeguroToken
+        );
+        \vendor\pagseguro\Configuration\Configure::setCharset('UTF-8');// UTF-8 or ISO-8859-1
+        // \vendor\pagseguro\Configuration\Configure::setLog(true, '/logpath/logFilename.log');
+    }
+    
+    // cria sessao do comprador
+    public function pagseguroCreateSession()
+    {
+        try {
+            $this->pagseguroInitialize();
+            $this->pagseguroSetConfigCredentials();
+            $sessionCredentials = \vendor\pagseguro\Configuration\Configure::getAccountCredentials();
+            $sessionCode = \vendor\pagseguro\Services\Session::create($sessionCredentials);
+            return $sessionCode->getResult();
+            
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
     
 }

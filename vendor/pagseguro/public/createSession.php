@@ -24,13 +24,13 @@
 
 require_once "../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 try {
-    $sessionCode = \PagSeguro\Services\Session::create(
-        \PagSeguro\Configuration\Configure::getAccountCredentials()
+    $sessionCode = \vendor\pagseguro\Services\Session::create(
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials()
     );
 
     echo "<strong>ID de sess&atilde;o criado: </strong>{$sessionCode->getResult()}";

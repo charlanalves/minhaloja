@@ -42,10 +42,12 @@ class PagamentoController extends ActiveController
                 'endereco-uf' => '',
                 'endereco-complemento' => '',
             ],
-            'cartao-token' => '',
-            'cartao-nome' => '',
-            'cartao-num-parcela' => '',
-            'cartao-vlr-parcela' => '',
+            'cartao' => [
+                'token' => '',
+                'nome' => '',
+                'num-parcela' => '',
+                'vlr-parcela' => '',
+            ],
         ],
     ];
     
@@ -93,7 +95,7 @@ class PagamentoController extends ActiveController
     }
      */
     
-    public function Gateway(){
+    public static function Gateway(){
         \Yii::$app->pagamentoComponent->{$this->data['gateway']}{$this->data['forma_pag']}($this->data);
     }
 

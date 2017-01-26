@@ -24,12 +24,12 @@
 
 require_once "../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 //Instantiate a new direct payment request, using Credit Card
-$internationalCreditCard = new \PagSeguro\Domains\Requests\DirectPayment\InternationalCreditCard();
+$internationalCreditCard = new \vendor\pagseguro\Domains\Requests\DirectPayment\InternationalCreditCard();
 
 // Set the Payment Mode for this payment request
 $internationalCreditCard->setMode('DEFAULT');
@@ -91,7 +91,7 @@ $internationalCreditCard->setInstallment()->withParameters(1, '30.00');
 try {
     //Get the crendentials and register the boleto payment
     $result = $internationalCreditCard->register(
-        \PagSeguro\Configuration\Configure::getAccountCredentials()
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials()
     );
     echo "<pre>";
     print_r($result);

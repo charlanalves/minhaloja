@@ -2,7 +2,7 @@
 
 require_once "../../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
+\vendor\pagseguro\Library::initialize();
 
 $options = [
     'initial_date' => '2016-05-01T14:55',
@@ -12,8 +12,8 @@ $options = [
 ];
 
 try {
-    $response = \PagSeguro\Services\PreApproval\Search\Date::search(
-        \PagSeguro\Configuration\Configure::getAccountCredentials(),
+    $response = \vendor\pagseguro\Services\PreApproval\Search\Date::search(
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials(),
         $options
     );
 

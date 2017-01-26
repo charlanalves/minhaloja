@@ -2,11 +2,11 @@
 
 require_once "../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
-$preApproval = new \PagSeguro\Domains\Requests\PreApproval();
+$preApproval = new \vendor\pagseguro\Domains\Requests\PreApproval();
 
 // Set the currency
 $preApproval->setCurrency("BRL");
@@ -16,7 +16,7 @@ $preApproval->setCurrency("BRL");
 $preApproval->setReference("REF123");
 
 // Set shipping information for this payment request
-$preApproval->setShipping()->setType(\PagSeguro\Enum\Shipping\Type::SEDEX);
+$preApproval->setShipping()->setType(\vendor\pagseguro\Enum\Shipping\Type::SEDEX);
 $preApproval->setShipping()->setAddress()->withParameters(
     '01452002',
     'Av. Brig. Faria Lima',
@@ -68,11 +68,11 @@ try {
 
     /**
      * @todo For checkout with application use:
-     * \PagSeguro\Configuration\Configure::getApplicationCredentials()
+     * \vendor\pagseguro\Configuration\Configure::getApplicationCredentials()
      *  ->setAuthorizationCode("FD3AF1B214EC40F0B0A6745D041BF50D")
      */
     $response = $preApproval->register(
-        \PagSeguro\Configuration\Configure::getAccountCredentials()
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials()
     );
 
     echo "<h2>Criando requisi&ccedil;&atilde;o de assinatura</h2>"

@@ -2,13 +2,13 @@
 
 require_once "../../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
+\vendor\pagseguro\Library::initialize();
 
 $days = 20;
 
 try {
-    $response = \PagSeguro\Services\PreApproval\Search\Interval::search(
-        \PagSeguro\Configuration\Configure::getAccountCredentials(),
+    $response = \vendor\pagseguro\Services\PreApproval\Search\Interval::search(
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials(),
         $days
     );
 

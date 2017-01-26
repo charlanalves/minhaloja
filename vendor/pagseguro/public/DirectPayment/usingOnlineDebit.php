@@ -2,12 +2,12 @@
 
 require_once "../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 //Instantiate a new Boleto Object
-$onlineDebit = new \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit();
+$onlineDebit = new \vendor\pagseguro\Domains\Requests\DirectPayment\OnlineDebit();
 
 // Set the Payment Mode for this payment request
 $onlineDebit->setMode('DEFAULT');
@@ -80,7 +80,7 @@ $onlineDebit->setShipping()->setAddress()->withParameters(
 try {
     //Get the crendentials and register the boleto payment
     $result = $onlineDebit->register(
-        \PagSeguro\Configuration\Configure::getAccountCredentials()
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials()
     );
 
     echo "<pre>";

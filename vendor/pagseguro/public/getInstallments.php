@@ -24,9 +24,9 @@
 
 require_once "../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 $options = [
     'amount' => 30.00, //Required
@@ -35,8 +35,8 @@ $options = [
 ];
 
 try {
-    $result = \PagSeguro\Services\Installment::create(
-        \PagSeguro\Configuration\Configure::getAccountCredentials(),
+    $result = \vendor\pagseguro\Services\Installment::create(
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials(),
         $options
     );
 

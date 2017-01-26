@@ -2,13 +2,13 @@
 
 require_once "../../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
+\vendor\pagseguro\Library::initialize();
 
 $code = 'F7A6F7CC09CB09CB84E664A1AFA3FD5D2481';
 
 try {
-    $response = \PagSeguro\Services\PreApproval\Search\Notification::search(
-        \PagSeguro\Configuration\Configure::getAccountCredentials(),
+    $response = \vendor\pagseguro\Services\PreApproval\Search\Notification::search(
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials(),
         $code
     );
 

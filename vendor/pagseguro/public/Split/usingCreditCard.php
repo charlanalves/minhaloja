@@ -24,12 +24,12 @@
 
 require_once "../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 //Instantiate a new direct payment request, using Credit Card
-$creditCard = new \PagSeguro\Domains\Requests\DirectPayment\CreditCard();
+$creditCard = new \vendor\pagseguro\Domains\Requests\DirectPayment\CreditCard();
 
 /**
  * @todo Change the receiver Email
@@ -140,7 +140,7 @@ $creditCard->setSplit()->addReceiver()->withParameters(
 try {
     //Get the crendentials and register the boleto payment
     $result = $creditCard->register(
-        \PagSeguro\Configuration\Configure::getApplicationCredentials()
+        \vendor\pagseguro\Configuration\Configure::getApplicationCredentials()
     );
     echo "<pre>";
     print_r($result);

@@ -2,15 +2,15 @@
 
 require_once "../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <?php if (\PagSeguro\Configuration\Configure::getEnvironment()->getEnvironment() == "sandbox") : ?>
+        <?php if (\vendor\pagseguro\Configuration\Configure::getEnvironment()->getEnvironment() == "sandbox") : ?>
             <!--Para integração em ambiente de testes no Sandbox use este link-->
                 <script
                     type="text/javascript"
@@ -28,7 +28,7 @@ require_once "../../vendor/autoload.php";
 
 <?php
 
-$payment = new \PagSeguro\Domains\Requests\Payment();
+$payment = new \vendor\pagseguro\Domains\Requests\Payment();
 
 $payment->addItems()->withParameters(
     '0001',
@@ -72,7 +72,7 @@ $payment->setShipping()->setAddress()->withParameters(
     'apto. 114'
 );
 $payment->setShipping()->setCost()->withParameters(20.00);
-$payment->setShipping()->setType()->withParameters(\PagSeguro\Enum\Shipping\Type::SEDEX);
+$payment->setShipping()->setType()->withParameters(\vendor\pagseguro\Enum\Shipping\Type::SEDEX);
 
 //Add metadata items
 $payment->addMetadata()->withParameters('PASSENGER_CPF', 'insira um numero de CPF valido');
@@ -95,7 +95,7 @@ $payment->setNotificationUrl("http://www.lojamodelo.com.br/nofitication");
 try {
     $onlyCheckoutCode = true;
     $result = $payment->register(
-        \PagSeguro\Configuration\Configure::getAccountCredentials(),
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials(),
         $onlyCheckoutCode
     );
 

@@ -2,11 +2,11 @@
 
 require_once "../../vendor/autoload.php";
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::initialize();
+\vendor\pagseguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\vendor\pagseguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
-$payment = new \PagSeguro\Domains\Requests\Payment();
+$payment = new \vendor\pagseguro\Domains\Requests\Payment();
 
 $payment->addItems()->withParameters(
     '0001',
@@ -53,7 +53,7 @@ $payment->setShipping()->setAddress()->withParameters(
 );
 
 $payment->setShipping()->setCost()->withParameters(20.00);
-$payment->setShipping()->setType()->withParameters(\PagSeguro\Enum\Shipping\Type::SEDEX);
+$payment->setShipping()->setType()->withParameters(\vendor\pagseguro\Enum\Shipping\Type::SEDEX);
 
 //Add metadata items
 $payment->addMetadata()->withParameters('PASSENGER_CPF', 'insira um numero de CPF valido');
@@ -91,11 +91,11 @@ try {
 
     /**
      * @todo For checkout with application use:
-     * \PagSeguro\Configuration\Configure::getApplicationCredentials()
+     * \vendor\pagseguro\Configuration\Configure::getApplicationCredentials()
      *  ->setAuthorizationCode("FD3AF1B214EC40F0B0A6745D041BF50D")
      */
     $result = $payment->register(
-        \PagSeguro\Configuration\Configure::getAccountCredentials()
+        \vendor\pagseguro\Configuration\Configure::getAccountCredentials()
     );
 
     echo "<h2>Criando requisi&ccedil;&atilde;o de pagamento</h2>"
