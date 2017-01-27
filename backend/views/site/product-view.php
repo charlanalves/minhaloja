@@ -1,32 +1,18 @@
 <!-- Bread crumb is created dynamically -->
 <!-- row -->
-<div class="row">
+<div class="row bg-white">
 	
-	<!-- col -->
-	<div class="col-xs-12 col-xs-custom-50 col-sm-7 col-md-7 col-lg-4">
-		<h1 class="page-title txt-color-blueDark">
-			
-			<!-- PAGE HEADER -->
-			<i class="fa-fw fa fa-home"></i> 
-				E-commerce
-			<span>>  
-				Products View
-			</span>
-		</h1>
-	</div>
-	<!-- end col -->
 	
 	<!-- right side of the page with the sparkline graphs -->
 	<!-- col -->
-	<div class="col-xs-12 col-xs-custom-50 col-sm-5 col-md-5 col-lg-8 text-right">
+	<div class="col-xs-12 col-xs-custom-50 col-no-padding col-sm-5 col-md-5 col-lg-8 text-center width-100">
 		
-		<a href="javascript:void(0);" class="btn btn-default shop-btn">
-			<i class="fa fa-3x fa-shopping-cart"></i>
-			<span class="air air-top-right label-danger txt-color-white padding-5">10</span>
+		<a href="javascript:void(0);" class="btn btn-primary">
+<!--			<i class="fa fa-3x fa-thumbs-o-up"></i>-->
+                        <span>Aprovar todos</span>
+			<!--<span class="air air-top-right label-danger txt-color-white padding-5">10</span>-->
 		</a>
-		<a href="javascript:void(0);" class="btn btn-default">
-			<i class="fa fa-3x fa-print"></i>
-		</a>
+		
 		
 	</div>
 	<!-- end col -->
@@ -47,11 +33,11 @@
 
 	<div class="row">
 
-		<div class="col-sm-6 col-md-6 col-lg-6">
+		<div class="col-sm-6 col-md-6 col-lg-6 col-no-padding">
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/1.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 hot">
@@ -59,11 +45,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -74,13 +60,13 @@
 						<div class="description">
 							<p>Proin in ullamcorper lorem. Maecenas eu ipsum </p>
 						</div>
-						<div class="product-info smart-form">
+						<div class="product-info smart-form col-no-padding">
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6"> 
-									<a href="javascript:void(0);" class="btn btn-success">Add to cart</a>
+									<a href="javascript:void(0);" class="btn btn-success">Ativar Produto</a>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div class="rating">
+<!--									<div class="rating">
 										<input type="radio" name="stars-rating" id="stars-rating-5">
 										<label for="stars-rating-5"><i class="fa fa-star"></i></label>
 										<input type="radio" name="stars-rating" id="stars-rating-4">
@@ -91,7 +77,7 @@
 										<label for="stars-rating-2"><i class="fa fa-star text-primary"></i></label>
 										<input type="radio" name="stars-rating" id="stars-rating-1">
 										<label for="stars-rating-1"><i class="fa fa-star text-primary"></i></label>
-									</div>
+									</div>-->
 								</div>
 							</div>
 						</div>
@@ -101,11 +87,11 @@
 			<!-- end product -->
 		</div>	
 
-		<div class="col-sm-6 col-md-6 col-lg-6">
+		<div class="col-sm-6 col-md-6 col-lg-6 col-no-padding">
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/2.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 sale">
@@ -113,11 +99,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -128,11 +114,11 @@
 						<div class="description">
 								<p>Proin in ullamcorper lorem. Maecenas eu ipsum </p>
 						</div>
-						<div class="product-info smart-form">
+						<div class="product-info smart-form col-no-padding">
 							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-6"> <a href="javascript:void(0);" class="btn btn-success">Add to cart</a> </div>
+								<div class="col-md-6 col-sm-6 col-xs-6"> <a href="javascript:void(0);" class="btn btn-success">Ativar Produto</a> </div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div class="rating">
+<!--									<div class="rating">
 
 										<input type="radio" name="stars-rating" id="stars-rating-5">
 										<label for="stars-rating-5"><i class="fa fa-star"></i></label>
@@ -145,7 +131,61 @@
 										<input type="radio" name="stars-rating" id="stars-rating-1">
 										<label for="stars-rating-1"><i class="fa fa-star text-primary"></i></label>
 
-									</div>
+									</div>-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end product -->
+		</div>	
+            
+            <div class="col-sm-6 col-md-6 col-lg-6 col-no-padding">
+			<!-- product -->
+			<div class="product-content product-wrap clearfix">
+				<div class="row">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
+							<div class="product-image"> 
+								<img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive"> 
+								<span class="tag2 sale">
+									Sale
+								</span> 
+							</div>
+						</div>
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
+						<div class="product-deatil">
+								<h5 class="name">
+									<a href="#">
+										Nome do Produto Aqui<span>Categoria</span>
+									</a>
+								</h5>
+								<p class="price-container">
+									<span>$109</span>
+								</p>
+								<span class="tag1"></span> 
+						</div>
+						<div class="description">
+								<p>Proin in ullamcorper lorem. Maecenas eu ipsum </p>
+						</div>
+						<div class="product-info smart-form col-no-padding">
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <a href="javascript:void(0);" class="btn btn-success">Ativar Produto</a> </div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+<!--									<div class="rating">
+
+										<input type="radio" name="stars-rating" id="stars-rating-5">
+										<label for="stars-rating-5"><i class="fa fa-star"></i></label>
+										<input type="radio" name="stars-rating" id="stars-rating-4">
+										<label for="stars-rating-4"><i class="fa fa-star"></i></label>
+										<input type="radio" name="stars-rating" id="stars-rating-3">
+										<label for="stars-rating-3"><i class="fa fa-star text-primary"></i></label>
+										<input type="radio" name="stars-rating" id="stars-rating-2">
+										<label for="stars-rating-2"><i class="fa fa-star text-primary"></i></label>
+										<input type="radio" name="stars-rating" id="stars-rating-1">
+										<label for="stars-rating-1"><i class="fa fa-star text-primary"></i></label>
+
+									</div>-->
 								</div>
 							</div>
 						</div>
@@ -159,7 +199,7 @@
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 hot">
@@ -167,11 +207,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -192,7 +232,7 @@
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/4.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 sale">
@@ -200,11 +240,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -225,7 +265,7 @@
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/5.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 sale">
@@ -233,11 +273,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -258,7 +298,7 @@
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/7.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 sale">
@@ -266,11 +306,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -291,7 +331,7 @@
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/8.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 sale">
@@ -299,11 +339,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
@@ -324,7 +364,7 @@
 			<!-- product -->
 			<div class="product-content product-wrap clearfix">
 				<div class="row">
-						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 							<div class="product-image"> 
 								<img src="img/demo/e-comm/9.png" alt="194x228" class="img-responsive"> 
 								<span class="tag2 sale">
@@ -332,11 +372,11 @@
 								</span> 
 							</div>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50">
+						<div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding">
 						<div class="product-deatil">
 								<h5 class="name">
 									<a href="#">
-										Product Name Title Here <span>Category</span>
+										Nome do Produto Aqui<span>Categoria</span>
 									</a>
 								</h5>
 								<p class="price-container">
