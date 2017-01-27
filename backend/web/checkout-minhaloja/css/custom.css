@@ -1,0 +1,44 @@
+﻿.Checkout.is-desktop .Header {
+    /* background-color: #ecfaff; */
+	
+ background: rgba(210,230,245,1);
+    background: -moz-linear-gradient(top, rgba(210,230,245,1) 0%, rgba(177,218,245,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(210,230,245,1)), color-stop(100%, rgba(177,218,245,1)));
+    background: -webkit-linear-gradient(top, rgba(210,230,245,1) 0%, rgba(177,218,245,1) 100%);
+    background: -o-linear-gradient(top, rgba(210,230,245,1) 0%, rgba(177,218,245,1) 100%);
+    background: -ms-linear-gradient(top, rgba(210,230,245,1) 0%, rgba(177,218,245,1) 100%);
+    background: linear-gradient(to bottom, rgba(210,230,245,1) 0%, rgb(173, 187, 196) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2e6f5', endColorstr='#b1daf5', GradientType=0 );
+}
+
+.Checkout.is-desktop .Header-purchaseDescription, .Checkout.is-desktop .PaymentMethodSelector-tabListItem {
+    font-size: 52px;    
+}
+
+.Checkout.is-desktop .Header-companyName {
+    font-size: 14px;
+}
+
+.Checkout.is-desktop .Header-purchaseDescription, .Checkout.is-desktop .PaymentMethodSelector-tabListItem {
+
+    color: #ffffff;
+    text-shadow: 0 1px 0 #4c4c4c;
+
+}
+
+.Checkout.is-desktop .Header-companyName {
+    font-size: 15px;
+    font-weight: 700;
+    color: #5d5d5d;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.Checkout.is-desktop .Header {
+    padding: 0;
+    padding-top: 16px;
+}
+h2 {
+    margin: 2px 0;
+  
+}
+
