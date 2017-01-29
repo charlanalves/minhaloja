@@ -25,52 +25,6 @@ class PagamentoComponent extends Component
 
     private function pagseguroSetConfigDefault(&$pag, $data)
     {
-        $paymentRequest = $pag;
-        $paymentRequest->addItem('0001', 'Notebook', 1, 2430.00);  
-        $paymentRequest->addItem('0002', 'Mochila',  1, 150.99);
-        $sedexCode = PagSeguroShippingType::getCodeByType('SEDEX');
-        
-        $paymentRequest->setShippingType($sedexCode);  
-        $paymentRequest->setShippingAddress(  
-          '01452002',  
-          'Av. Brig. Faria Lima',  
-          '1384',  
-          'apto. 114',  
-          'Jardim Paulistano',  
-          'São Paulo',  
-          'SP',  
-          'BRA'  
-        ); 
-        
-        $paymentRequest->setSender(  
-            'João Comprador',  
-            'email@comprador.com.br',  
-            '11',  
-            '56273440',  
-            'CPF',  
-            '156.009.442-76'  
-        );
-        
-        
-        
-        $paymentRequest->setCurrency("BRL");  
-        
-        
-        // Referenciando a transação do PagSeguro em seu sistema  
-        $paymentRequest->setReference("REF123");  
-
-        // URL para onde o comprador será redirecionado (GET) após o fluxo de pagamento  
-        $paymentRequest->setRedirectUrl("http://localhost");  
-
-        // URL para onde serão enviadas notificações (POST) indicando alterações no status da transação  
-        $paymentRequest->addParameter('notificationURL', 'http://localhost');  
-
-        
-        
-        
-        
-        
-        /*       
         
         // Set the Payment Mode for this payment request
         $pag->setMode('DEFAULT');
@@ -99,12 +53,12 @@ class PagamentoComponent extends Component
         
         // Set your customer information.
         // If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
-        $pag->setSender()->setName($data['dados_comprador']['comprador']);
+        $pag->setSender()->setName($data['dados_comprador']['nome']);
         $pag->setSender()->setEmail($data['dados_comprador']['email']);
 
         // set CPF or CNPJ
         $pag->setSender()->setDocument()->withParameters(
-            $data['dados_comprador']['cpf-cnpj'], // CPF or CNPJ
+            $data['dados_comprador']['cpf-cnpj-tipo'], // CPF or CNPJ
             $data['dados_comprador']['cpf-cnpj-numero'] // numero
         );
         
@@ -125,17 +79,17 @@ class PagamentoComponent extends Component
         
         // Set shipping information for this payment request
         $pag->setShipping()->setAddress()->withParameters(
-            $data['dados_comprador']['endereco-logradouro'],
-            $data['dados_comprador']['endereco-numero'],
-            $data['dados_comprador']['endereco-bairro'],
-            $data['dados_comprador']['endereco-cep'],
-            $data['dados_comprador']['endereco-cidade'],
-            $data['dados_comprador']['endereco-uf'],
-            'BRA',
-            $data['dados_comprador']['endereco-complemento']
+            $data['dados_comprador']['endereco']['endereco-logradouro'],
+            $data['dados_comprador']['endereco']['endereco-numero'],
+            $data['dados_comprador']['endereco']['endereco-bairro'],
+            $data['dados_comprador']['endereco']['endereco-cep'],
+            $data['dados_comprador']['endereco']['endereco-cidade'],
+            $data['dados_comprador']['endereco']['endereco-uf'],
+            $data['dados_comprador']['endereco']['endereco-pais'],
+            $data['dados_comprador']['endereco']['endereco-complemento']
         );
         
-        // Add a primary receiver for split this payment request
+        // Add a primary receiver for split this payment request - vendedor key
         $pag->setSplit()->setPrimaryReceiver($data['hash-recebedor-primario']);
         
         // Add an receiver for split this payment request
@@ -145,21 +99,22 @@ class PagamentoComponent extends Component
             20,
             0
         );
-        */
+        
     }
     
     private function pagseguroSetConfigCreditCard(&$pag, $data)
     {
+       
         //Set billing information for credit card
         $pag->setBilling()->setAddress()->withParameters(
-            $data['dados_comprador']['endereco-logradouro'],
-            $data['dados_comprador']['endereco-numero'],
-            $data['dados_comprador']['endereco-bairro'],
-            $data['dados_comprador']['endereco-cep'],
-            $data['dados_comprador']['endereco-cidade'],
-            $data['dados_comprador']['endereco-uf'],
-            'BRA',
-            $data['dados_comprador']['endereco-complemento']
+            $data['dados_comprador']['endereco']['endereco-logradouro'],
+            $data['dados_comprador']['endereco']['endereco-numero'],
+            $data['dados_comprador']['endereco']['endereco-bairro'],
+            $data['dados_comprador']['endereco']['endereco-cep'],
+            $data['dados_comprador']['endereco']['endereco-cidade'],
+            $data['dados_comprador']['endereco']['endereco-uf'],
+            $data['dados_comprador']['endereco']['endereco-pais'],
+            $data['dados_comprador']['endereco']['endereco-complemento']
         );
 
         // Set credit card token
@@ -168,7 +123,7 @@ class PagamentoComponent extends Component
         // Set the installment quantity and value (could be obtained using the Installments 
         // service, that have an example here in \public\getInstallments.php)
         $pag->setInstallment()->withParameters(
-            $data['dados_comprador']['cartao']['num-parcela'], 
+            $data['dados_comprador']['cartao']['num-parcela'],
             $data['dados_comprador']['cartao']['vlr-parcela']
         );
 
@@ -182,8 +137,8 @@ class PagamentoComponent extends Component
         );
 
         $pag->setHolder()->setDocument()->withParameters(
-            $data['dados_comprador']['cpf-cnpj'], // CPF or CNPJ
-            $data['dados_comprador']['cpf-cnpj-erro'] // mensagem de erro
+            $data['dados_comprador']['cpf-cnpj-tipo'], // CPF or CNPJ
+            $data['dados_comprador']['cpf-cnpj-numero'] // mensagem de erro
         );
     }
     
@@ -199,7 +154,7 @@ class PagamentoComponent extends Component
     
     private function pagseguroRegister(&$pag)
     {
-        //Get the crendentials and register the boleto payment
+        //Get the crendentials and register the payment
         $result = $pag->register(\vendor\pagseguro\Configuration\Configure::getApplicationCredentials());
         return $result;
     }
@@ -207,11 +162,17 @@ class PagamentoComponent extends Component
     // formas de pagamento [CreditCard, Boleto, OnlineDebit]
     private function pagseguroProcessCheckout($formPagamento, $data)
     {
+        
         try {
+            
+            $ClassNamePagamento = '\vendor\pagseguro\Domains\Requests\DirectPayment\\' . $formPagamento;
+            $metodoNameConfigPagamento = "pagseguroSetConfig" . $formPagamento;
+            
             $this->pagseguroInitialize();
-            $pag = new ReflectionClass('\vendor\pagseguro\Domains\Requests\DirectPayment\''. $formPagamento);
+            $this->pagseguroSetConfigCredentials();
+            $pag = new $ClassNamePagamento;
             $this->pagseguroSetConfigDefault($pag, $data);
-            $this->pagseguroSetConfig{$formPagamento}($pag, $data);            
+            $this->{$metodoNameConfigPagamento}($pag, $data);            
             $result = $this->pagseguroRegister($pag);
             $r['status'] = true;
             $r['return'] = $result;
@@ -247,12 +208,21 @@ class PagamentoComponent extends Component
     private function pagseguroSetConfigCredentials()
     {
         \vendor\pagseguro\Configuration\Configure::setEnvironment($this->PagSeguroAmbiente);
+        
         \vendor\pagseguro\Configuration\Configure::setAccountCredentials(
             $this->PagSeguroEmail,
             $this->PagSeguroToken
         );
+        
         \vendor\pagseguro\Configuration\Configure::setCharset('UTF-8');// UTF-8 or ISO-8859-1
+        
+        \vendor\pagseguro\Configuration\Configure::setApplicationCredentials(
+            'app1538018632',
+            'CAD7FD497171182114F7FFB2AD3FF2D5'
+        );
+        
         // \vendor\pagseguro\Configuration\Configure::setLog(true, '/logpath/logFilename.log');
+
     }
     
     // cria sessao do comprador

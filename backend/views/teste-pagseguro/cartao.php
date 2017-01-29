@@ -4,7 +4,6 @@
     AppMlAsset::register($this);
     $this->title = '';
     
-    $token = \Yii::$app->pagamentoComponent->pagseguroCreateSession();
 ?>
 
 <!-- PRODUCAO -->

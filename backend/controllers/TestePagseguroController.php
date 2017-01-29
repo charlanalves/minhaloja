@@ -15,49 +15,61 @@ class TestePagseguroController extends Controller
         return $this->render('index');
     }
     
+    public function actionCartao()
+    {   
+        return $this->render('cartao');
+    }
+    
     public function actionTeste()
     {
         $data = [
-            'id' => '',
-            'gateway' => 'pagseguro',    // pagseguro
-            'forma_pag' => 'Boleto',  // OnlineDebit, Boleto, CreditCard
-            'hash' => '', 
-            'vendedor_id' => '',
+            //'id' => '', // identifica o pagamento - id criado dinamicamente 
+            'gateway' => 'pagseguro', // pagseguro
+            'forma_pag' => 'CreditCard', // OnlineDebit, Boleto, 
+            'hash' => '225cbb267ff855fc250efbd95901c0afb4edfdf77e396d003abc7f5f38e5f578', // sessao
+            'hash-recebedor-primario' => 'PUB21C6E9BE4D854EA7ACD6A490A27346F7', // vendedor principal key
+            'hash-recebedor-secundario' => 'PUB21C6E9BE4D854EA7ACD6A490A27346F7', // vendedor secundario key
+            'valor-total' => '100.00',
             'produto' => [[
-                'cod'=>'',
-                'desc'=>'',
-                'qtd'=>'',
-                'vlr'=>''
+                'cod'=>'0001',
+                'desc'=>'Produto Teste',
+                'qtd'=>'1',
+                'vlr'=>'100.00'
             ]],
             'dados_comprador' => [
-                'name'=>'',
-                'data-nascimento' => '',
-                'email'=>'',
-                'cpf-cnpj'=>'',
-                'cpf-cnpj-ero'=>'Insira um numero de CPF/CNPJ valido',
+                'nome'=>'Eduardo Matias Pereira',
+                'data-nascimento' => '26/08/1989',
+                'email'=>'eduardomatias1989@sandbox.pagseguro.com.br',
+                'cpf-cnpj-tipo'=>'CPF',
+                'cpf-cnpj-numero'=>'003.325.992-56',
                 'telefone'=>[[
-                    'ddd' => '', 
-                    'numero' => '', 
+                    'ddd' => '31', 
+                    'numero' => '991064029', 
                 ]],
                 'endereco'=>[
-                    'endereco-logradouro' => '',
-                    'endereco-numero' => '',
-                    'endereco-bairro' => '',
-                    'endereco-cep' => '',
-                    'endereco-cidade' => '',
-                    'endereco-uf' => '',
-                    'endereco-complemento' => '',
+                    'endereco-logradouro' => 'Av. Brig. Faria Lima',
+                    'endereco-numero' => '1384',
+                    'endereco-bairro' => 'Jardim Paulistano',
+                    'endereco-cep' => '01452002',
+                    'endereco-cidade' => 'São Paulo',
+                    'endereco-uf' => 'SP',
+                    'endereco-pais' => 'BRA',
+                    'endereco-complemento' => 'apto. 114'
                 ],
                 'cartao' => [
-                    'token' => '',
-                    'nome' => '',
-                    'num-parcela' => '',
-                    'vlr-parcela' => '',
+                    'token' => 'b89f0d18914446438a8b4276fe9cf0bd',
+                    'nome' => 'Eduardo M Pereira',
+                    'num-parcela' => '1',
+                    'vlr-parcela' => '100',
                 ],
             ],
         ];
         
-        PagamentoController::Gateway($data);
+        $PagamentoController = new PagamentoController($data);
+        print_r('<pre>');
+        //print_r($PagamentoController->getPagamento());
+        $PagamentoController->Gateway();
+        
     }
 
 }

@@ -12,41 +12,43 @@ use common\models\SignupForm;
 class PagamentoController extends ActiveController
 {
     private $data = [
-        'id' => '',         // identifica o pagamento - id criado dinamicamente 
-        'gateway' => '',    // pagseguro
-        'forma_pag' => '',  // OnlineDebit, Boleto, CreditCard
-        'hash' => '', 
+        'id' => '', // identifica o pagamento - id criado dinamicamente 
+        'gateway' => 'pagseguro', // pagseguro
+        'forma_pag' => 'CreditCard', // OnlineDebit, Boleto, 
+        'hash' => 'ff4d5a867bc77220c3a7ed68ca195d684942a52db79d81d308be7ee2a58b40a5', // sessao
+        'hash-recebedor-primario' => '',
         'vendedor_id' => '',
         'produto' => [[
-            'cod'=>'',
-            'desc'=>'',
-            'qtd'=>'',
-            'vlr'=>''
+            'cod'=>'0001',
+            'desc'=>'Produto Teste',
+            'qtd'=>'1',
+            'vlr'=>'100.00'
         ]],
         'dados_comprador' => [
-            'name'=>'',
-            'data-nascimento' => '',
-            'email'=>'',
-            'cpf-cnpj'=>'',
-            'cpf-cnpj-ero'=>'Insira um numero de CPF/CNPJ valido',
+            'nome'=>'Eduardo Matias Pereira',
+            'data-nascimento' => '26/08/1989',
+            'email'=>'eduardomatias.1989@gmail.com',
+            'cpf-cnpj-tipo'=>'CPF',
+            'cpf-cnpj-numero'=>'003.325.992-56',
             'telefone'=>[[
-                'ddd' => '', 
-                'numero' => '', 
+                'ddd' => '31', 
+                'numero' => '991064029', 
             ]],
             'endereco'=>[
-                'endereco-logradouro' => '',
-                'endereco-numero' => '',
-                'endereco-bairro' => '',
-                'endereco-cep' => '',
-                'endereco-cidade' => '',
-                'endereco-uf' => '',
-                'endereco-complemento' => '',
+                'endereco-logradouro' => 'Av. Brig. Faria Lima',
+                'endereco-numero' => '1384',
+                'endereco-bairro' => 'Jardim Paulistano',
+                'endereco-cep' => '01452002',
+                'endereco-cidade' => 'São Paulo',
+                'endereco-uf' => 'SP',
+                'endereco-pais' => 'BRA',
+                'endereco-complemento' => 'apto. 114'
             ],
             'cartao' => [
-                'token' => '',
-                'nome' => '',
-                'num-parcela' => '',
-                'vlr-parcela' => '',
+                'token' => 'e8f9c806d3024d6d9eb7983cf5d14383',
+                'nome' => 'Eduardo M Pereira',
+                'num-parcela' => '1',
+                'vlr-parcela' => '100',
             ],
         ],
     ];
@@ -95,8 +97,8 @@ class PagamentoController extends ActiveController
     }
      */
     
-    public static function Gateway(){
-        \Yii::$app->pagamentoComponent->{$this->data['gateway']}{$this->data['forma_pag']}($this->data);
+    public function Gateway(){
+        \Yii::$app->pagamentoComponent->{$this->data['gateway'].$this->data['forma_pag']}($this->data);
     }
 
 
