@@ -22,7 +22,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'checkout'],
                         'allow' => true,
                     ],
                     [
@@ -81,10 +81,20 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+            
+            $abaProdPendentes = $this->renderPartial('product-view');
+            
             return $this->render('tabs', [
                 'model' => $model,
+                'abaProdPendentes' => $abaProdPendentes,
             ]);
         }
+    }
+	
+	public function actionCheckout()
+    {
+        $this->layout = 'smartAdminCheckout';            
+        return $this->render('checkout');
     }
 
     /**

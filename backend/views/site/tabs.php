@@ -1,8 +1,6 @@
 <div id="myTabContent1" class="tab-content padding-10">
     <div class="tab-pane fade in active" id="s1">
-            <p>
-                    I have six locks on my door all in a row. When I go out, I lock every other one. I figure no matter how long somebody stands there picking the locks, they are always locking three.
-            </p>
+           <?= $abaProdPendentes ?>
     </div>
     <div class="tab-pane fade" id="s2">
             <p>
