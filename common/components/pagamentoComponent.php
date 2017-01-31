@@ -12,9 +12,15 @@ use vendor\pagseguro\Library as PagSeguro;
  * */
 class PagamentoComponent extends Component {
 
-    private $PagSeguroAmbiente = 'sandbox'; // production or sandbox
-    private $PagSeguroEmail = 'eduardomatias.1989@gmail.com';
-    private $PagSeguroToken = '966EF525871B421D9B6536D3F2D89190';
+    // constantes PagSeguro
+    const PagSeguroAmbiente = 'sandbox'; // production or sandbox
+    const PagSeguroEmail = 'eduardomatias.1989@gmail.com';
+    const PagSeguroToken = '966EF525871B421D9B6536D3F2D89190';
+    const PagSeguroAppID = 'app1538018632';
+    const PagSeguroAppKey = 'CAD7FD497171182114F7FFB2AD3FF2D5';
+    const PagseguroRedirectUrl = 'http://www.lojamodelo.com.br';
+    const PagseguroNotificationUrl = 'http://www.lojamodelo.com.br/nofitication';
+    
 
     private function pagseguroInitialize() {
         PagSeguro::initialize();
@@ -169,43 +175,22 @@ class PagamentoComponent extends Component {
 
     // Configura credenciais
     private function pagseguroSetConfigCredentials() {
-        \vendor\pagseguro\Configuration\Configure::setEnvironment($this->PagSeguroAmbiente);
+        \vendor\pagseguro\Configuration\Configure::setEnvironment(self::PagSeguroAmbiente);
 
         \vendor\pagseguro\Configuration\Configure::setAccountCredentials(
-                $this->PagSeguroEmail, $this->PagSeguroToken
+                self::PagSeguroEmail, self::PagSeguroToken
         );
 
         \vendor\pagseguro\Configuration\Configure::setCharset('UTF-8'); // UTF-8 or ISO-8859-1
 
         \vendor\pagseguro\Configuration\Configure::setApplicationCredentials(
-            'app1538018632', 
-            'CAD7FD497171182114F7FFB2AD3FF2D5'
+            self::PagSeguroAppID,
+            self::PagSeguroAppKey
         );
         
-        /*
-        $authorization = new \vendor\pagseguro\Domains\Requests\Authorization();
-
-        $authorization->setReference("AUTH_LIB_PHP_0001");
-        $authorization->setRedirectUrl("http://www.lojamodelo.com.br");
-        $authorization->setNotificationUrl("http://www.lojamodelo.com.br/nofitication");
-
-        $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::CREATE_CHECKOUTS);
-        $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::SEARCH_TRANSACTIONS);
-        $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::RECEIVE_TRANSACTION_NOTIFICATIONS);
-        $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::MANAGE_PAYMENT_PRE_APPROVALS);
-        $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::DIRECT_PAYMENT);
-
-        $response = $authorization->register(
-            \vendor\pagseguro\Configuration\Configure::getApplicationCredentials()
-        );
-        var_dump($response);
-        exit();
-        
-        
-
-        */
         \vendor\pagseguro\Configuration\Configure::getApplicationCredentials()
                 ->setAuthorizationCode('CAD7FD497171182114F7FFB2AD3FF2D5');
+        
         // \vendor\pagseguro\Configuration\Configure::setLog(true, '/logpath/logFilename.log');
 
     }
@@ -218,6 +203,33 @@ class PagamentoComponent extends Component {
             $sessionCredentials = \vendor\pagseguro\Configuration\Configure::getAccountCredentials();
             $sessionCode = \vendor\pagseguro\Services\Session::create($sessionCredentials);
             return $sessionCode->getResult();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    // cria Autorizacao para o vendedor
+    public function pagseguroCreateAutorization() {
+        try {
+            $this->pagseguroInitialize();
+            $this->pagseguroSetConfigCredentials();
+            
+            $authorization = new \vendor\pagseguro\Domains\Requests\Authorization();
+
+            $authorization->setReference("AUTH_LIB_PHP_0001");
+            $authorization->setRedirectUrl(self::PagseguroRedirectUr);
+            $authorization->setNotificationUrl(self::PagseguroNotificationUrl);
+            
+            $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::CREATE_CHECKOUTS);
+            $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::SEARCH_TRANSACTIONS);
+            $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::RECEIVE_TRANSACTION_NOTIFICATIONS);
+            $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::MANAGE_PAYMENT_PRE_APPROVALS);
+            $authorization->addPermission(\vendor\pagseguro\Enum\Authorization\Permissions::DIRECT_PAYMENT);
+
+            $response = $authorization->register(
+                \vendor\pagseguro\Configuration\Configure::getApplicationCredentials()
+            );
+            return $response;
         } catch (Exception $e) {
             die($e->getMessage());
         }

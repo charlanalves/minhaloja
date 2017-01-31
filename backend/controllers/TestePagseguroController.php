@@ -28,7 +28,7 @@ class TestePagseguroController extends Controller
             'forma_pag' => 'CreditCard', // OnlineDebit, Boleto, 
             'hash' => 'e1ca1177d8b0d18f87976fb6f7697242ff0c54955fab982bf7b54e8eb7147bd6', // sessao
             'hash-recebedor-primario' => 'PUB21C6E9BE4D854EA7ACD6A490A27346F7', // vendedor principal key
-            'hash-recebedor-secundario' => 'PUBF5E6A73B00C64677928A7CEE036481A9', // vendedor secundario key
+            'hash-recebedor-secundario' => '', // vendedor secundario key
             'valor-total' => '100.00',
             'produto' => [[
                 'cod'=>'0001',

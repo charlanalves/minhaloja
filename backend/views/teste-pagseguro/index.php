@@ -104,7 +104,13 @@
                     console.log(a);
                 },
                 complete: function(a){
-                    $('#parcelamento').val(a);
+                    console.log(a);
+                    /*
+                    $('#parcelamento').append($('<option>', {
+                        value: '',
+                        text: ''
+                    }));
+                    */
                 }
             });
         }

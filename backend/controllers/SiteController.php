@@ -22,7 +22,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'checkout'],
+                        'actions' => ['login', 'error', 'checkout','product-view'],
                         'allow' => true,
                     ],
                     [
@@ -91,10 +91,16 @@ class SiteController extends Controller
         }
     }
 	
-	public function actionCheckout()
+    public function actionCheckout()
     {
         $this->layout = 'smartAdminCheckout';            
         return $this->render('checkout');
+    }
+
+    public function actionProductView()
+    {
+        $this->layout = 'smartAdminCheckout';            
+        return $this->render('product-view');
     }
 
     /**
