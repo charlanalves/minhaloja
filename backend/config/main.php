@@ -37,6 +37,11 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        
+        'pagamentoComponent' => [
+            'class' => 'common\components\pagamentoComponent',
+        ],
+        
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
