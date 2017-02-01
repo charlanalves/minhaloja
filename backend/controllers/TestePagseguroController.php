@@ -20,6 +20,12 @@ class TestePagseguroController extends Controller
         return $this->render('cartao');
     }
     
+    
+    public function actionW()
+    {   
+        return $this->render('w');
+    }
+    
     public function actionTeste()
     {
         $data = [

@@ -36,7 +36,7 @@
                             <div class="row" style="margin: 0px;">
                                 <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
                                     <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
-                                        <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive"> 
+                                        <img src="img/demo/e-comm/4.png" alt="194x228" class="img-responsive"> 
                                         <!--<span class="tag2 hot">5%</span>-->
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                 padding: 0!important;
                                 padding-right: 15px!important;
                                 padding-left: 15px!important;
-                                margin: 4px 0px!important;
+                                margin: 3px 0px!important;
                             }
                             fieldset{
                                 padding: 10px 10px!important;
@@ -69,11 +69,11 @@
                             }
                             .form-padding-left{
                                 /*padding-left: 5px!important*/
-                                padding-left: 5px!important
+                                padding-left: 2px!important
                             }
                             .form-padding-right{
                                 /*padding-right: 5px!important*/
-                                padding-right: 5px!important
+                                padding-right: 2px!important
                             }
                             .page-footer{display: none}
                         </style>
