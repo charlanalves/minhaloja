@@ -1,3 +1,21 @@
+<?php
+
+    /* @var $this yii\web\View */
+    use backend\assets\AppMlAsset;
+    AppMlAsset::register($this);
+    $this->title = '';
+    
+    $token = \Yii::$app->pagamentoComponent->pagseguroCreateSession();
+?>
+
+<!-- PRODUCAO -->
+<!--
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+-->
+
+<!-- TESTE -->
+<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+
 
 <!-- #CSS Links -->
 <!-- Basic Styles -->
@@ -107,7 +125,7 @@
                     </style>
 
                     <form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF">
-
+                        <input type="text" name="valor" hidden="true" value="100">
                         <fieldset>
                             <legend>Meus dados</legend>
 
@@ -219,7 +237,7 @@
 
                                 <section class="col col-9 form-padding-right">
                                     <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
-                                        <input type="text" name="cartao-numero" placeholder="Número do cartão">
+                                        <input type="text" name="cartao-numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" value="5268630475919395" maxlength="16">
                                     </label>
                                 </section>
 
@@ -241,7 +259,7 @@
                                             <option value="0" selected="" disabled="">Mês</option>
                                             <option value="1">Janeiro</option>
                                             <option value="1">Fevereiro</option>
-                                            <option value="3">Março</option>
+                                            <option value="3" selected="">Março</option>
                                             <option value="4">Abril</option>
                                             <option value="5">Maio</option>
                                             <option value="6">Junho</option>
@@ -257,13 +275,13 @@
 
                                 <section class="col col-3 form-padding-right form-padding-left">
                                     <label class="input">
-                                        <input type="text" name="cartao-ano" placeholder="Ano">
+                                        <input type="text" name="cartao-ano" placeholder="Ano" value="2024">
                                     </label>
                                 </section>
 
                                 <section class="col col-3 form-padding-left">
                                     <label class="input">
-                                        <input type="text" name="cartao-cvv" placeholder="CVV">
+                                        <input type="text" name="cartao-cvv" placeholder="CVV" value="560">
                                     </label>
                                 </section>
 
@@ -275,10 +293,7 @@
 
                                 <section class="col col-9 form-padding-left">
                                     <label class="select">
-                                        <select name="cartao-parcela">
-                                            <option value="1" selected="">1 x R$ 279,89</option>
-                                            <option value="1">2 x R$ 139,95</option>
-                                        </select>
+                                        <select name="cartao-parcela"></select>
                                     </label>
                                 </section>
 
@@ -403,123 +418,219 @@
 
 <script type="text/javascript">
 
-    document.addEventListener("DOMContentLoaded", function (event) {
+    pageSetUp();
 
-        pageSetUp();
+    var pagefunction = function () {
 
-        var pagefunction = function () {
+        var errorClass = 'invalid';
+        var errorElement = 'em';
 
-            var errorClass = 'invalid';
-            var errorElement = 'em';
+        var $checkoutForm = $('#checkout-form').validate({
+            errorClass: errorClass,
+            errorElement: errorElement,
+            highlight: function (element) {
+                $(element).parent().removeClass('state-success').addClass("state-error");
+                $(element).removeClass('valid');
+            },
+            unhighlight: function (element) {
+                $(element).parent().removeClass("state-error").addClass('state-success');
+                $(element).addClass('valid');
+            },
+            // Rules for form validation
+            rules: {
+                nome: {
+                    required: true
+                },
+                cpf: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                telefone: {
+                    required: true
+                },
+                uf: {
+                    required: true
+                },
+                cidade: {
+                    required: true
+                },
+                cep: {
+                    required: true
+                },
+                logradouro: {
+                    required: true
+                },
+                'cartao-numero': {
+                    required: true,
+                    creditcard: true
+                },
+                'cartao-cvv': {
+                    required: true,
+                    digits: true
+                },
+                'cartao-mes': {
+                    required: true
+                },
+                'cartao-ano': {
+                    required: true,
+                    digits: true
+                }
+            },
+            // Messages for form validation
+            messages: {
+                name: {
+                    required: 'Informe seu nome completo'
+                },
+                cpf: {
+                    required: 'Informe seu CPF',
+                    digits: 'Digite um CPF valido'
+                },
+                email: {
+                    required: 'Informe seu email',
+                    email: 'Informe um email VALIDO'
+                },
+                telefone: {
+                    required: 'Informe um telefone'
+                },
+                uf: {
+                    required: 'Informe o UF'
+                },
+                cidade: {
+                    required: 'Informe a cidade'
+                },
+                cep: {
+                    required: 'Informe o CEP',
+                    digits: 'Apenas números'
+                },
+                logradouro: {
+                    required: 'Infome o endereço'
+                },
+                'cartao-numero': {
+                    required: 'Informe o número do cartão',
+                    creditcard: 'Informe um número de cartão valido'
+                },
+                'cartao-cvv': {
+                    required: 'Informe o código de segurança do cartão',
+                    digits: 'Apenas números'
+                },
+                'cartao-mes': {
+                    required: 'Selecione um mês'
+                },
+                'cartao-ano': {
+                    required: 'Informe o ano de vencimento do cartão',
+                    digits: 'Apenas números'
+                }
+            },
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
 
-            var $checkoutForm = $('#checkout-form').validate({
-                errorClass: errorClass,
-                errorElement: errorElement,
-                highlight: function (element) {
-                    $(element).parent().removeClass('state-success').addClass("state-error");
-                    $(element).removeClass('valid');
+    };
+
+    // Load form valisation dependency 
+    loadScript("js/plugin/jquery-form/jquery-form.min.js", pagefunction);
+
+
+    var ps = {};
+    var configCartao = {};
+
+    PagSeguroDirectPayment.setSessionId('<?= $token?>');
+
+    // hash do cliente
+    ps.getHash = function() {
+        var hash = PagSeguroDirectPayment.getSenderHash();
+        $('#hash').text(hash);
+        console.log(hash);
+    }
+
+    // get formas de pagamento
+    ps.getFormaPagamento = function(){
+        PagSeguroDirectPayment.getPaymentMethods({
+            success: function(a){
+                console.log(a);
+            },
+            error: function(a){
+                console.log(a);
+            },
+            complete: function(a){
+                console.log(a);
+            }
+        });
+    }
+
+    // get sobre o cartao
+    ps.getConfigCartao = function(){
+        cartao = $('form#checkout-form input[name=cartao-numero]').val();
+        if(cartao.length >= 6){
+            var bin = parseInt(cartao.substring(0,6));
+            PagSeguroDirectPayment.getBrand({
+                cardBin: bin,
+                success: function(a){},
+                error: function(a){
+                    console.log(a);
                 },
-                unhighlight: function (element) {
-                    $(element).parent().removeClass("state-error").addClass('state-success');
-                    $(element).addClass('valid');
-                },
-                // Rules for form validation
-                rules: {
-                    nome: {
-                        required: true
-                    },
-                    cpf: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    telefone: {
-                        required: true
-                    },
-                    uf: {
-                        required: true
-                    },
-                    cidade: {
-                        required: true
-                    },
-                    cep: {
-                        required: true
-                    },
-                    logradouro: {
-                        required: true
-                    },
-                    card: {
-                        required: true,
-                        creditcard: true
-                    },
-                    'cartao-cvv': {
-                        required: true,
-                        digits: true
-                    },
-                    month: {
-                        required: true
-                    },
-                    year: {
-                        required: true,
-                        digits: true
-                    }
-                },
-                // Messages for form validation
-                messages: {
-                    name: {
-                        required: 'Por favor informe seu nome completo'
-                    },
-                    cpf: {
-                        required: 'Por favor informe seu CPF',
-                        digits: 'Digite um CPF valido'
-                    },
-                    email: {
-                        required: 'Por favor informe seu email',
-                        email: 'Informe um email VALIDO'
-                    },
-                    phone: {
-                        required: 'Por favor informe um telefone'
-                    },
-                    country: {
-                        required: 'Please select your country'
-                    },
-                    city: {
-                        required: 'Please enter your city'
-                    },
-                    code: {
-                        required: 'Please enter code',
-                        digits: 'Digits only please'
-                    },
-                    address: {
-                        required: 'Please enter your full address'
-                    },
-                    card: {
-                        required: 'Please enter your card number'
-                    },
-                    cvv: {
-                        required: 'Enter CVV2',
-                        digits: 'Digits only'
-                    },
-                    month: {
-                        required: 'Select month'
-                    },
-                    year: {
-                        required: 'Enter year',
-                        digits: 'Digits only please'
-                    }
-                },
-                // Do not change code below
-                errorPlacement: function (error, element) {
-                    error.insertAfter(element.parent());
+                complete: function(a){
+                    configCartao = a.brand;
+                    $('form#checkout-form input[name=cartao-bandeira]').val(configCartao.name);
+                    ps.getParcelamentoCartao();
                 }
             });
+        }
+    }
 
+    // get token do cartao
+    ps.getTokenCartao = function(){
+        param = {
+            cardNumber: $("form#checkout-form input[name=cartao-numero]").val(),
+            brand: $("form#checkout-form input[name=cartao-bandeira]").val(),
+            cvv: $("form#checkout-form input[name=cartao-cvv]").val(),
+            expirationMonth: $("form#checkout-form input[name=cartao-mes]").val(),
+            expirationYear: $("form#checkout-form input[name=cartao-ano]").val(),
+            success: function(a){},
+            error: function(a){
+                console.log(a);
+            },
+            complete: function(a){
+                console.log(a);
+                configCartao.token = a.card.token;
+                $('#token-cartao').text(configCartao.token);
+            }
         };
 
-        // Load form valisation dependency 
-        loadScript("js/plugin/jquery-form/jquery-form.min.js", pagefunction);
-    });
+        PagSeguroDirectPayment.createCardToken(param);
+
+    }
+
+    // get parcelamentos
+    ps.getParcelamentoCartao = function(){
+        var valor = $("form#checkout-form input[name=valor]").val();
+        var bandeira = $("form#checkout-form input[name=cartao-bandeira]").val();
+        PagSeguroDirectPayment.getInstallments({
+            amount: valor,
+            brand: bandeira,
+            maxInstallmentNoInterest: 4,
+            success: function(a){},
+            error: function(a){
+                console.log(a);
+            },
+            complete: function(a){
+                console.log(a.installments[bandeira]);
+                for(var i in a.installments[bandeira]){
+                    console.log(a.installments[bandeira][i]);
+                    $('form#checkout-form select[name=cartao-parcela]').append($('<option>', {
+                        value: a.installments[bandeira][i].quantity + '-' + a.installments[bandeira][i].installmentAmount,
+                        text: a.installments[bandeira][i].quantity + 'x de R$' + a.installments[bandeira][i].installmentAmount
+                    }));
+                }
+                /*
+                */
+            }
+        });
+    }
 
 </script>

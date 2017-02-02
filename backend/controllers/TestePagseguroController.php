@@ -23,7 +23,7 @@ class TestePagseguroController extends Controller
     
     public function actionW()
     {   
-        return $this->render('w');
+        return $this->renderPartial('w');
     }
     
     public function actionTeste()
