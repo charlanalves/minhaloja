@@ -7,6 +7,9 @@
 		<meta name="author" content="">
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link href="checkout-minhaloja/css/base.min.css" rel="stylesheet">
+		<link href="checkout-minhaloja/css/style.css" rel="stylesheet">
+		<link href="checkout-minhaloja/css/custom.css" rel="stylesheet">
 		
 		<!-- #CSS Links -->
 		<!-- Basic Styles -->
@@ -321,23 +324,7 @@
 			</div>
 			<!-- end pulled right: nav area -->
                         
-                      <div class="widget-body">
-
-						
-						
-						
-						<ul id="myTab1" class="nav nav-tabs bordered">
-							<li class="active">
-								<a href="#s1" data-toggle="tab"><i class="fa fa-fw fa-lg fa-bell-o"></i>Pendentes <span class="badge bg-color-red txt-color-white">12</span></a>
-							</li> 
-							<li>
-								<a href="#s2" data-toggle="tab"><i class="fa fa-fw fa-lg fa-thumbs-o-up"></i> Aprovados</a>
-							</li>
-							<li>
-								<a href="#s3" data-toggle="tab"><i class="fa fa-fw fa-lg fa-dollar"></i> Vendas</a>
-							</li>
-						</ul>
-					</div>
+                
 					<!-- end widget content -->
 
 		</header>
@@ -871,7 +858,7 @@
 		<!-- END #MAIN PANEL -->
 
 		<!-- #PAGE FOOTER -->
-<!--		<div class="page-footer">
+		<div class="page-footer">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<span class="txt-color-white">SmartAdmin 1.8.2 <span class="hidden-xs"> - Web Application Framework</span> © 2014-2016</span>
@@ -919,14 +906,14 @@
 								</li>
 							</ul>
 						</div>
-						 end btn-group
+						<!-- end btn-group-->
 					</div>
-					 end div
+					<!-- end div-->
 				</div>
-				 end col 
+				<!-- end col -->
 			</div>
-			 end row 
-		</div>-->
+			<!-- end row -->
+		</div>
 		<!-- END FOOTER -->
 
 		<!-- #SHORTCUT AREA : With large tiles (activated via clicking user name tag)
@@ -1048,96 +1035,7 @@
 		  })();
 		
 		</script>
-<script type="text/javascript">
-	
-	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
-	 *
-	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
-	 *
-	 * // activate tooltips
-	 * $("[rel=tooltip]").tooltip();
-	 *
-	 * // activate popovers
-	 * $("[rel=popover]").popover();
-	 *
-	 * // activate popovers with hover states
-	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
-	 *
-	 * // activate inline charts
-	 * runAllCharts();
-	 *
-	 * // setup widgets
-	 * setup_widgets_desktop();
-	 *
-	 * // run form elements
-	 * runAllForms();
-	 *
-	 ********************************
-	 *
-	 * pageSetUp() is needed whenever you load a page.
-	 * It initializes and checks for all basic elements of the page
-	 * and makes rendering easier.
-	 *
-	 */
 
-	pageSetUp();
-	
-	/*
-	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
-	 * eg alert("my home function");
-	 * 
-	 * var pagefunction = function() {
-	 *   ...
-	 * }
-	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
-	 * 
-	 * TO LOAD A SCRIPT:
-	 * var pagefunction = function (){ 
-	 *  loadScript(".../plugin.js", run_after_loaded);	
-	 * }
-	 * 
-	 * OR you can load chain scripts by doing
-	 * 
-	 * loadScript(".../plugin.js", function(){
-	 * 	 loadScript("../plugin.js", function(){
-	 * 	   ...
-	 *   })
-	 * });
-	 */
-	
-	// pagefunction
-	
-	var pagefunction = function() {
-		// clears the variable if left blank
-	};
-	
-	// end pagefunction
-
-	// destroy generated instances 
-	// pagedestroy is called automatically before loading a new page
-	// only usable in AJAX version!
-
-	var pagedestroy = function(){
-		
-		/*
-		Example below:
-
-		$("#calednar").fullCalendar( 'destroy' );
-		if (debugState){
-			root.console.log("✔ Calendar destroyed");
-		} 
-
-		For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
-
-		*/
-	}
-
-	// end destroy
-	
-	// run pagefunction
-	pagefunction();
-	
-</script>
 	</body>
 
 </html>
