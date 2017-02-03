@@ -141,3 +141,32 @@
         padding: 3px 9px 7px 2px;
     }
 }
+
+
+.form-actions {
+    margin-top: 95px;
+}
+
+#finalizarVenda {
+    border-radius: 12px;
+    position: relative;
+    top: -94px;    
+    background: #0091d9 !important;
+}
+.h3etapa{
+        margin-top: 43px;
+}
+
+span.campo-obrigatorio {
+    color: #b94a48;
+}
+
+#wizard-1 .form-group {
+    text-align: left;
+}
+div#form-bootstrapWizard {
+    text-align: center;
+    position: relative;
+    left: 88px;
+    top: 7px;    
+}

@@ -30,7 +30,7 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-                <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">
+              
 		<!--<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">-->
 
 		<!-- #FAVICONS -->
@@ -56,7 +56,7 @@
 		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
 		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+                <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">
 	</head>
 
 	<!--
@@ -977,6 +977,8 @@
 			}
 		</script>
 
+                <script src="js/jquery.priceformat.min.js"></script>
+                
 		<!-- IMPORTANT: APP CONFIG -->
 		<script src="js/app.config.js"></script>
 
@@ -1105,11 +1107,7 @@
 	 * });
 	 */
 	
-	// pagefunction
 	
-	var pagefunction = function() {
-		// clears the variable if left blank
-	};
 	
 	// end pagefunction
 
@@ -1136,6 +1134,15 @@
 	
 	// run pagefunction
 	pagefunction();
+        
+        
+          $('.valor').priceFormat({
+                prefix: 'R$ ',
+                centsSeparator: ',',
+                thousandsSeparator: '.'
+            });
+        
+        
 	
 </script>
 	</body>

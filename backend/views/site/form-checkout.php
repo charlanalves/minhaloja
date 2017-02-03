@@ -1,233 +1,397 @@
-    <div class="product-content product-wrap clearfix" style="margin:0;border:0;">
-                        <div class="row" style="margin: 0px;">
-                            <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
-                                <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
-                                    <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive" /> 
-                                    <!--<span class="tag2 hot">5%</span>-->
-                                </div>
-                            </div>
-                            <div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
-                                <div class="product-deatil" style="border:0; padding: 5px; margin: 0px">
-                                    <h6 class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;">
-                                        Aviator Clássico (Ray-Ban) Óculos De Sol
-                                    </h6>
-                                    <div class="font-xs">Tam.: 65 | Cor: Preto | Qtd: 1</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <style>
-                        section {
-                            padding: 0px 15px!important;
-                            margin: 5px 0px!important;
-                        }
-                        fieldset{
-                            margin: 0;
-                            padding: 15px 0px!important;
-                        }
-                        fieldset legend{
-                            padding-top: 0px!important;
-                            margin: 0;
-                        }
-                        .form-padding-left{
-                            /*padding-left: 5px!important
-                            padding-left: 2px!important*/
-                        }
-                        .form-padding-right{
-                            /*padding-right: 5px!important
-                            padding-right: 2px!important*/
-                        }
-                        .page-footer{display: none}
-                    </style>
 
-                    <form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF">
+<!-- widget grid -->
+<section id="widget-grid" class="">
 
-                        <fieldset>
-                            <legend>Meus dados</legend>
+	<!-- row -->
+	<div class="row">
 
-                            <div class="row">
-                                <section class="col col-6 form-padding-right">
-                                    <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="nome" placeholder="Nome completo">
-                                    </label>
-                                </section>
-                                <section class="col col-6 form-padding-left">
-                                    <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="cpf" placeholder="CPF" data-mask="999.999.999-99">
-                                    </label>
-                                </section>
-                            </div>
+		<!-- NEW WIDGET START -->
+		<article class="col-sm-12 col-md-12 col-lg-6">
 
-                            <div class="row">
-                                <section class="col col-6 form-padding-right">
-                                    <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                        <input type="email" name="email" placeholder="E-mail">
-                                    </label>
-                                </section>
-                                <section class="col col-6 form-padding-left">
-                                    <label class="input"> <i class="icon-prepend fa fa-phone"></i>
-                                        <input type="tel" name="telefone" placeholder="Telefone" data-mask="(99) 99999-9999">
-                                    </label>
-                                </section>
-                            </div>
-                        </fieldset>
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                        <fieldset>
-                            <legend>Endereço de entrega</legend>
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
 
-                            <div class="row">
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-check"></i> </span>
+					<h2>VENDA RÁPIDA </h2>
 
-                                <section class="col col-4 form-padding-right">
-                                    <label class="input">
-                                        <input type="text" name="cep" placeholder="CEP" data-mask="99999-999">
-                                    </label>
-                                </section>
+				</header>
 
-                                <section class="col col-8 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="logradouro" placeholder="Logradouro">
-                                    </label>
-                                </section>
+				<!-- widget div-->
+				<div>
 
-                            </div>
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
 
-                            <div class="row">
+					</div>
+					<!-- end widget edit box -->
 
-                                <section class="col col-5 form-padding-right">
-                                    <label class="input">
-                                        <input type="text" name="bairro" placeholder="Bairro">
-                                    </label>
-                                </section>
+					<!-- widget content -->
+					<div class="widget-body">
 
-                                <section class="col col-5 form-padding-left form-padding-right">
-                                    <label class="input">
-                                        <input type="text" name="cidade" placeholder="Cidade">
-                                    </label>
-                                </section>
+						<div class="row">
+							<form id="wizard-1" novalidate="novalidate">
+								<div id="bootstrap-wizard-1" class="col-sm-12">
+									<div id="form-bootstrapWizard" class="form-bootstrapWizard">
+										<ul class="bootstrapWizard form-wizard">
+											<li class="active" data-target="#step1">
+												<a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span class="title">Venda</span> </a>
+											</li>
+											<li data-target="#step2">
+												<a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">Endereço</span> </a>
+											</li>
+										
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab1">
+											<br>
+											<h3 class="h3etapa"><strong>Etapa 1</strong> - Informações da venda</h3>
 
-                                <section class="col col-2 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="uf" placeholder="UF">
-                                    </label>
-                                </section>
+											<div class="row">
 
-                            </div>
+												<div class="col-sm-12">
+													<div class="form-group">
+                                                                                                        <span class="campo-obrigatorio">*Campo obrigatório</span>
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="Nome do produto/serviço" type="text" name="nomeproduto" id="lname">
+														</div>
+													</div>
 
-                            <div class="row">
+												</div>
 
-                                <section class="col col-3 form-padding-right">
-                                    <label class="input">
-                                        <input type="text" name="numero" placeholder="Nº">
-                                    </label>
-                                </section>
+											</div>
 
-                                <section class="col col-9 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="complemento" placeholder="Complemento">
-                                    </label>
-                                </section>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+                                                                                                                <span class="campo-obrigatorio">*Campo obrigatório</span>
+														<div class="input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-usd fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="text" name="valorvenda" id="valorVenda">
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group"> 
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-dropbox fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg valor" placeholder="R$ Valor do frete" type="text" name="valorfrete" id="valorFrete">
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="E-mail do cliente" type="text" name="email" id="email">
 
-                            </div>
+														</div>
+													</div>
+												</div>
+											</div>
 
-                        </fieldset>
+										</div>
+										<div class="tab-pane" id="tab2">
+											<br>
+											<h3 class="h3etapa"><strong>Etapa 2</strong> - Endereço do Cliente</h3>
 
-                        <fieldset>
-                            <legend>Forma de pagamento</legend>
+											<div class="row">
+												<div class="col-sm-4">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-envelope-o fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" data-mask="99999-999" placeholder="99999-999" type="text" name="cep" id="cep">
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="Logradouro" type="text" name="logradouro" id="logradouro">
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="Número" type="textnumero" name="numero" id="numero">
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="Complemento" type="text" name="complemento" id="complemento">															
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<div class="input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+                                                                                                                    <input class="form-control input-lg" placeholder="Bairro" type="text" name="bairro" id="bairro">																														
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<div class="input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+                                                                                                                    <input class="form-control input-lg" placeholder="Cidade" type="text" name="cidade" id="cidade">																														
+														</div>
+													</div>
+												</div>
+                                                                                            <div class="col-sm-6">
+													<div class="form-group">
+														<div class="input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+                                                                                                                    <input class="form-control input-lg" placeholder="Estado" type="text" name="estado" id="estado">																														
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane" id="tab3">
+											<br>
+											<h3><strong>Etapa 3</strong> - Pagamento</h3>
+											<div class="alert alert-info fade in">
+												<button class="close" data-dismiss="alert">
+													×
+												</button>
+												<i class="fa-fw fa fa-info"></i>
+												<strong>Info!</strong> Place an info message box if you wish.
+											</div>
+											<div class="form-group">
+												<label>This is a label</label>
+												<input class="form-control input-lg" placeholder="Another input box here..." type="text" name="etc" id="etc">
+											</div>
+										</div>
+										<div class="tab-pane" id="tab4">
+											<br>
+											<h3><strong>Step 4</strong> - Save Form</h3>
+											<br>
+											<h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
+											<h4 class="text-center">Click next to finish</h4>
+											<br>
+											<br>
+										</div>
 
-                            <div class="row">
-                                <section>
-                                    <div class="inline-group">
-                                        <label class="radio">
-                                            <input type="radio" name="tipo-pagamento" value="cartao-credito" checked="">
-                                            <i></i>Cartão de Crédito
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="tipo-pagamento" value="boleto">
-                                            <i></i>Boleto
-                                        </label>
-                                    </div>
-                                </section>
-                            </div>
+										<div class="form-actions">
+											<div class="row">
+												<div class="col-sm-12">
+													<ul class="pager wizard no-margin">
+														<!--<li class="previous first disabled">
+														<a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+														</li>-->
+														<li class="previous disabled">
+															<a href="javascript:void(0);" class="btn btn-lg btn-default">Anterior </a>
+														</li>
+														<!--<li class="next last">
+														<a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+														</li>-->
+                                                                                                                <span>
+															<a id="finalizarVenda" href="javascript:void(0);" class="btn btn-primary btn-lg">Finalizar Venda </a>
+														</span>
+														<li class="next">
+															<a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Próximo </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
 
-                            <div class="row">
+									</div>
+								</div>
+							</form>
+						</div>
 
-                                <section class="col col-9 form-padding-right">
-                                    <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
-                                        <input type="text" name="cartao-numero" placeholder="Número do cartão">
-                                    </label>
-                                </section>
+					</div>
+					<!-- end widget content -->
 
-                                <section class="col col-3 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="cartao-bandeira" placeholder="Bandeira">
-                                    </label>
-                                </section>
+				</div>
+				<!-- end widget div -->
 
-                            </div>
+			</div>
+			<!-- end widget -->
 
-                            <div class="row">
+		</article>
+		<!-- WIDGET END -->
 
-                                <label class="label col col-3 form-padding-right text-left">Vencimento:</label>
+		
+	</div>
 
-                                <section class="col col-3 form-padding-right form-padding-left">
-                                    <label class="select">
-                                        <select name="cartao-mes">
-                                            <option value="0" selected="" disabled="">Mês</option>
-                                            <option value="1">Janeiro</option>
-                                            <option value="1">Fevereiro</option>
-                                            <option value="3">Março</option>
-                                            <option value="4">Abril</option>
-                                            <option value="5">Maio</option>
-                                            <option value="6">Junho</option>
-                                            <option value="7">Julho</option>
-                                            <option value="8">Agosto</option>
-                                            <option value="9">Setembro</option>
-                                            <option value="10">Outubro</option>
-                                            <option value="11">Novembro</option>
-                                            <option value="12">Dezembro</option>
-                                        </select> <i></i> 
-                                    </label>
-                                </section>
+	<!-- end row -->
 
-                                <section class="col col-3 form-padding-right form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="cartao-ano" placeholder="Ano">
-                                    </label>
-                                </section>
+</section>
+<!-- end widget grid -->
 
-                                <section class="col col-3 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="cartao-cvv" placeholder="CVV">
-                                    </label>
-                                </section>
+<script type="text/javascript">
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
 
-                            </div>
+	
 
-                            <div class="row">
+	// PAGE RELATED SCRIPTS
 
-                                <label class="label col col-3 form-padding-right text-left">Parcela(s):</label>
+	// pagefunction
 
-                                <section class="col col-9 form-padding-left">
-                                    <label class="select">
-                                        <select name="cartao-parcela">
-                                            <option value="1" selected="">1 x R$ 279,89</option>
-                                            <option value="1">2 x R$ 139,95</option>
-                                        </select>
-                                    </label>
-                                </section>
+	var pagefunction = function() {
 
-                            </div>
+		// load bootstrap wizard
+		
+		loadScript("js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js", runBootstrapWizard);
 
-                        </fieldset>
-                    </form>
-                </div>
-					<div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-shopping-cart"></i>
-                        Comprar
-                    </button>
-					</div
+		//Bootstrap Wizard Validations
+                $.validator.addMethod("cep", function(value, element) { return this.optional(element) || /^[0-9]{5}-[0-9]{3}$/.test(value); }, "Por favor, digite um CEP válido");
+		function runBootstrapWizard() {
+
+			var $validator = $("#wizard-1").validate({
+                              
+				rules : {				
+					nomeproduto : {
+						required : true
+					},	
+                                        valorvenda : {
+						required : true
+                                               
+					},
+                                        email: {
+                                            email: true,
+                                        },
+					country : {
+						required : true
+					},
+					city : {
+						required : true
+					},
+					cep : {
+						cep:true,
+					},
+					wphone : {
+						required : true,
+						minlength : 10
+					},
+					hphone : {
+						required : true,
+						minlength : 10
+					}
+				},
+
+				messages : {
+					nomeproduto : "Gentileza informar o nome do produto ou serviço",
+					valorvenda: "Gentileza informar o valor da venda",
+					email : {
+						required : "Informe o e-mail do seu cliente",
+						email : "o e-mail deve ser nesse formato email@dominio.com"
+					}
+				},
+
+				highlight : function(element) {
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+				},
+				unhighlight : function(element) {
+					$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+				},
+				errorElement : 'span',
+				errorClass : 'help-block',
+				errorPlacement : function(error, element) {
+					if (element.parent('.input-group').length) {
+						error.insertAfter(element.parent());
+					} else {
+						error.insertAfter(element);
+					}
+				}
+			});
+
+			$('#bootstrap-wizard-1').bootstrapWizard({
+
+				'tabClass' : 'form-wizard',
+				'onNext' : function(tab, navigation, index) {
+					var $valid = $("#wizard-1").valid();
+					if (!$valid) {
+						$validator.focusInvalid();
+						return false;
+					} else {
+						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
+						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
+					}
+				}
+			});
+
+		};
+
+		// load fuelux wizard
+		
+		loadScript("js/plugin/fuelux/wizard/wizard.min.js", fueluxWizard);
+		
+		function fueluxWizard() {
+
+			var wizard = $('.wizard').wizard();
+
+			wizard.on('finished', function(e, data) {
+				//$("#fuelux-wizard").submit();
+				//console.log("submitted!");
+				$.smallBox({
+					title : "Congratulations! Your form was submitted",
+					content : "<i class='fa fa-clock-o'></i><i>1 seconds ago...</i>",
+					color : "#5F895F",
+					iconSmall : "fa fa-check bounce animated",
+					timeout : 4000
+				});
+
+			});
+
+		};
+
+	};
+
+</script>

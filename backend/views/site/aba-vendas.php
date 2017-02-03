@@ -12,7 +12,7 @@
 
 						
 						<a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-primary btn-lg">
-							Venda Avulsa
+							Venda Rápida
 						</a>
 
 						<!-- Dynamic Modal -->  
