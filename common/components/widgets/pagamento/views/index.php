@@ -1,3 +1,18 @@
+<?php 
+    $dadosJson = (!empty($dados)) ? json_encode($dados) : '{}';
+?>
+
+<script>
+    var dados = JSON.parse('<?= $dadosJson?>');
+    console.log(dados);
+    
+    // campos obrigatorios
+    var gateway = (typeof(dados['gateway']) != 'undefined') ? dados['gateway'] : 'pagseguro';
+    var valorTotal = dados['valor-total'];
+    var hashSecundario = dados['hash-recebedor-secundario'];
+    
+</script>
+
 <?php
 
     /* @var $this yii\web\View */
@@ -6,6 +21,7 @@
     $this->title = '';
     
     $token = \Yii::$app->pagamentoComponent->pagseguroCreateSession();
+    
 ?>
 
 <!-- PRODUCAO -->
@@ -91,10 +107,17 @@
                             </div>
                             <div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
                                 <div class="product-deatil" style="border:0; padding: 5px; margin: 0px">
-                                    <h6 class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;">
+                                    <h1 class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;">
                                         Aviator Clássico (Ray-Ban) Óculos De Sol
-                                    </h6>
-                                    <div class="font-xs">Tam.: 65 | Cor: Preto | Qtd: 1</div>
+                                    </h1>
+                                    <div class="font-xs">
+                                        <p>
+                                            Tam.: 65 | Cor: Preto | Qtd: 1
+                                        </p>
+                                    </div>
+                                    <p class="price-container">
+                                        <span>R$ 100,00</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +148,12 @@
                     </style>
 
                     <form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF">
-                        <input type="text" name="valor" hidden="true" value="100">
+                        
+                        <input type="text" name="hash" hidden="true" value="">
+                        <input type="text" name="gateway" hidden="true" value="">
+                        <input type="text" name="valor-total" hidden="true" value="">
+                        <input type="text" name="token-cartao" hidden="true" value="">
+                        
                         <fieldset>
                             <legend>Meus dados</legend>
 
@@ -219,14 +247,14 @@
                             <legend>Forma de pagamento</legend>
 
                             <div class="row">
-                                <section>
+                                <section class="col col-12">
                                     <div class="inline-group">
                                         <label class="radio">
                                             <input type="radio" name="tipo-pagamento" value="cartao-credito" checked="">
                                             <i></i>Cartão de Crédito
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="tipo-pagamento" value="boleto">
+                                            <input type="radio" name="tipo-pagamento" value="boleto" disabled="">
                                             <i></i>Boleto
                                         </label>
                                     </div>
@@ -235,15 +263,19 @@
 
                             <div class="row">
 
-                                <section class="col col-9 form-padding-right">
+                                <section class="col col-9">
                                     <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
                                         <input type="text" name="cartao-numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" value="5268630475919395" maxlength="16">
                                     </label>
                                 </section>
-
+                                
                                 <section class="col col-3 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="cartao-bandeira" placeholder="Bandeira">
+                                    <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                                        <input type="text" name="cartao-cvv" placeholder="CVV" value="560">
+                                        <b class="tooltip tooltip-top-right">
+                                            <i class="fa fa-warning txt-color-teal"></i> 
+                                            Digite o código de segurança
+                                        </b>
                                     </label>
                                 </section>
 
@@ -251,21 +283,19 @@
 
                             <div class="row">
 
-                                <label class="label col col-3 form-padding-right text-left">Vencimento:</label>
-
-                                <section class="col col-3 form-padding-right form-padding-left">
+                                <section class="col col-4 form-padding-right form-padding-left">
                                     <label class="select">
                                         <select name="cartao-mes">
                                             <option value="0" selected="" disabled="">Mês</option>
-                                            <option value="1">Janeiro</option>
-                                            <option value="1">Fevereiro</option>
-                                            <option value="3" selected="">Março</option>
-                                            <option value="4">Abril</option>
-                                            <option value="5">Maio</option>
-                                            <option value="6">Junho</option>
-                                            <option value="7">Julho</option>
-                                            <option value="8">Agosto</option>
-                                            <option value="9">Setembro</option>
+                                            <option value="01">Janeiro</option>
+                                            <option value="01">Fevereiro</option>
+                                            <option value="03">Março</option>
+                                            <option value="04">Abril</option>
+                                            <option value="05">Maio</option>
+                                            <option value="06">Junho</option>
+                                            <option value="07">Julho</option>
+                                            <option value="08">Agosto</option>
+                                            <option value="09">Setembro</option>
                                             <option value="10">Outubro</option>
                                             <option value="11">Novembro</option>
                                             <option value="12">Dezembro</option>
@@ -273,25 +303,13 @@
                                     </label>
                                 </section>
 
-                                <section class="col col-3 form-padding-right form-padding-left">
+                                <section class="col col-2 form-padding-right form-padding-left">
                                     <label class="input">
                                         <input type="text" name="cartao-ano" placeholder="Ano" value="2024">
                                     </label>
                                 </section>
 
-                                <section class="col col-3 form-padding-left">
-                                    <label class="input">
-                                        <input type="text" name="cartao-cvv" placeholder="CVV" value="560">
-                                    </label>
-                                </section>
-
-                            </div>
-
-                            <div class="row">
-
-                                <label class="label col col-3 form-padding-right text-left">Parcela(s):</label>
-
-                                <section class="col col-9 form-padding-left">
+                                <section class="col col-6 form-padding-left">
                                     <label class="select">
                                         <select name="cartao-parcela"></select>
                                     </label>
@@ -301,6 +319,7 @@
 
                         </fieldset>
                     </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -538,99 +557,106 @@
 
     var ps = {};
     var configCartao = {};
+    var idSession = '<?= $token?>';
+    var cartaoBandeira = '';
+    
+    document.addEventListener("DOMContentLoaded", function(event) {
+        
+        // set campos hidden
+        $('form#checkout-form input[name=valor-total]').val(valorTotal);
+        $('form#checkout-form input[name=gateway]').val(gateway);
+        
+        PagSeguroDirectPayment.setSessionId(idSession);
+        
+        // hash do cliente
+        ps.getHash = function() {
+            var hash = PagSeguroDirectPayment.getSenderHash();
+            $('form#checkout-form input[name=hash]').val(hash);
+            console.log('hash: ' + hash);
+        }
 
-    PagSeguroDirectPayment.setSessionId('<?= $token?>');
-
-    // hash do cliente
-    ps.getHash = function() {
-        var hash = PagSeguroDirectPayment.getSenderHash();
-        $('#hash').text(hash);
-        console.log(hash);
-    }
-
-    // get formas de pagamento
-    ps.getFormaPagamento = function(){
-        PagSeguroDirectPayment.getPaymentMethods({
-            success: function(a){
-                console.log(a);
-            },
-            error: function(a){
-                console.log(a);
-            },
-            complete: function(a){
-                console.log(a);
-            }
-        });
-    }
-
-    // get sobre o cartao
-    ps.getConfigCartao = function(){
-        cartao = $('form#checkout-form input[name=cartao-numero]').val();
-        if(cartao.length >= 6){
-            var bin = parseInt(cartao.substring(0,6));
-            PagSeguroDirectPayment.getBrand({
-                cardBin: bin,
+        // get formas de pagamento
+        ps.getFormaPagamento = function(){
+            PagSeguroDirectPayment.getPaymentMethods({
                 success: function(a){},
                 error: function(a){
                     console.log(a);
                 },
                 complete: function(a){
-                    configCartao = a.brand;
-                    $('form#checkout-form input[name=cartao-bandeira]').val(configCartao.name);
-                    ps.getParcelamentoCartao();
+                    console.log(a);
                 }
             });
         }
-    }
 
-    // get token do cartao
-    ps.getTokenCartao = function(){
-        param = {
-            cardNumber: $("form#checkout-form input[name=cartao-numero]").val(),
-            brand: $("form#checkout-form input[name=cartao-bandeira]").val(),
-            cvv: $("form#checkout-form input[name=cartao-cvv]").val(),
-            expirationMonth: $("form#checkout-form input[name=cartao-mes]").val(),
-            expirationYear: $("form#checkout-form input[name=cartao-ano]").val(),
-            success: function(a){},
-            error: function(a){
-                console.log(a);
-            },
-            complete: function(a){
-                console.log(a);
-                configCartao.token = a.card.token;
-                $('#token-cartao').text(configCartao.token);
+        // get sobre o cartao
+        ps.getConfigCartao = function(){
+            cartao = $('form#checkout-form input[name=cartao-numero]').val();
+            if(cartao.length >= 6){
+                var bin = parseInt(cartao.substring(0,6));
+                PagSeguroDirectPayment.getBrand({
+                    cardBin: bin,
+                    success: function(a){},
+                    error: function(a){
+                        console.log(a);
+                    },
+                    complete: function(a){
+                        configCartao = a.brand;
+                        cartaoBandeira = configCartao.name;
+                        ps.getParcelamentoCartao();
+                    }
+                });
             }
-        };
+        }
+        if($('form#checkout-form input[name=cartao-numero]').val()){
+            ps.getConfigCartao();
+        }
 
-        PagSeguroDirectPayment.createCardToken(param);
-
-    }
-
-    // get parcelamentos
-    ps.getParcelamentoCartao = function(){
-        var valor = $("form#checkout-form input[name=valor]").val();
-        var bandeira = $("form#checkout-form input[name=cartao-bandeira]").val();
-        PagSeguroDirectPayment.getInstallments({
-            amount: valor,
-            brand: bandeira,
-            maxInstallmentNoInterest: 4,
-            success: function(a){},
-            error: function(a){
-                console.log(a);
-            },
-            complete: function(a){
-                console.log(a.installments[bandeira]);
-                for(var i in a.installments[bandeira]){
-                    console.log(a.installments[bandeira][i]);
-                    $('form#checkout-form select[name=cartao-parcela]').append($('<option>', {
-                        value: a.installments[bandeira][i].quantity + '-' + a.installments[bandeira][i].installmentAmount,
-                        text: a.installments[bandeira][i].quantity + 'x de R$' + a.installments[bandeira][i].installmentAmount
-                    }));
+        // get token do cartao
+        ps.getTokenCartao = function(){
+            param = {
+                cardNumber: $("form#checkout-form input[name=cartao-numero]").val(),
+                brand: cartaoBandeira,
+                cvv: $("form#checkout-form input[name=cartao-cvv]").val(),
+                expirationMonth: $("form#checkout-form input[name=cartao-mes]").val(),
+                expirationYear: $("form#checkout-form input[name=cartao-ano]").val(),
+                success: function(a){},
+                error: function(a){
+                    console.log(a);
+                },
+                complete: function(a){
+                    configCartao.token = a.card.token;
+                    $('form#checkout-form input[name=token-cartao]').val(configCartao.token);
                 }
-                /*
-                */
-            }
-        });
-    }
+            };
 
+            PagSeguroDirectPayment.createCardToken(param);
+
+        }
+
+        // get parcelamentos
+        ps.getParcelamentoCartao = function(){
+            PagSeguroDirectPayment.getInstallments({
+                amount: valorTotal,
+                brand: cartaoBandeira,
+                maxInstallmentNoInterest: 4,
+                success: function(a){},
+                error: function(a){
+                    console.log(a);
+                },
+                complete: function(a){
+                    for(var i in a.installments[cartaoBandeira]){
+                        $('form#checkout-form select[name=cartao-parcela]').append($('<option>', {
+                            value: a.installments[cartaoBandeira][i].quantity + '-' + a.installments[cartaoBandeira][i].installmentAmount,
+                            text: a.installments[cartaoBandeira][i].quantity + 'x de R$' + a.installments[cartaoBandeira][i].installmentAmount
+                        }));
+                    }
+                }
+            });
+        }
+    });
+
+    function tessste(){
+        var form = $("form#checkout-form").serializeArray();
+        console.log(form);
+    }
 </script>

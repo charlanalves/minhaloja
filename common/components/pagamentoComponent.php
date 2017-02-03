@@ -18,6 +18,7 @@ class PagamentoComponent extends Component {
     const PagSeguroToken = '966EF525871B421D9B6536D3F2D89190';
     const PagSeguroAppID = 'app1538018632';
     const PagSeguroAppKey = 'CAD7FD497171182114F7FFB2AD3FF2D5';
+    const PagseguroHashRecebedorPrimario = 'PUB21C6E9BE4D854EA7ACD6A490A27346F7';
     const PagseguroRedirectUrl = 'http://www.lojamodelo.com.br';
     const PagseguroNotificationUrl = 'http://www.lojamodelo.com.br/nofitication';
     
@@ -47,30 +48,26 @@ class PagamentoComponent extends Component {
         if (is_array($data['produto'])) {
             foreach ($data['produto'] as $p) {
                 $pag->addItems()->withParameters(
-                        $p['cod'], $p['desc'], $p['qtd'], $p['vlr']
+                    $p['produto-cod'], $p['produto-desc'], $p['produto-qtd'], $p['produto-vlr']
                 );
             }
         }
 
         // Set your customer information.
         // If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
-        $pag->setSender()->setName($data['dados_comprador']['nome']);
-        $pag->setSender()->setEmail($data['dados_comprador']['email']);
+        $pag->setSender()->setName($data['comprador-nome']);
+        $pag->setSender()->setEmail($data['comprador-email']);
 
         // set CPF or CNPJ
         $pag->setSender()->setDocument()->withParameters(
-                $data['dados_comprador']['cpf-cnpj-tipo'], // CPF or CNPJ
-                $data['dados_comprador']['cpf-cnpj-numero'] // numero
+            'CPF', // CPF or CNPJ
+            $data['comprador-cpf'] // numero do CPF
         );
 
-        // $data['telefone'] -> keys[ddd,numero]
-        if (is_array($data['dados_comprador']['telefone'])) {
-            foreach ($data['dados_comprador']['telefone'] as $p) {
-                $pag->setSender()->setPhone()->withParameters(
-                        $p['ddd'], $p['numero']
-                );
-            }
-        }
+        // set tel
+        $pag->setSender()->setPhone()->withParameters(
+            $data['comprador-tel-ddd'], $data['comprador-tel-numero']
+        );
 
         // hash pagseguro do remetente
         $pag->setSender()->setHash($data['hash']);
@@ -78,15 +75,15 @@ class PagamentoComponent extends Component {
         // $pag->setSender()->setIp('127.0.0.0');
         // Set shipping information for this payment request
         $pag->setShipping()->setAddress()->withParameters(
-                $data['dados_comprador']['endereco']['endereco-logradouro'], $data['dados_comprador']['endereco']['endereco-numero'], $data['dados_comprador']['endereco']['endereco-bairro'], $data['dados_comprador']['endereco']['endereco-cep'], $data['dados_comprador']['endereco']['endereco-cidade'], $data['dados_comprador']['endereco']['endereco-uf'], $data['dados_comprador']['endereco']['endereco-pais'], $data['dados_comprador']['endereco']['endereco-complemento']
+            $data['endereco-logradouro'], $data['endereco-numero'], $data['endereco-bairro'], $data['endereco-cep'], $data['endereco-cidade'], $data['endereco-uf'], $data['endereco-pais'], $data['endereco-complemento']
         );
 
         // Add a primary receiver for split this payment request - vendedor key
-        $pag->setSplit()->setPrimaryReceiver($data['hash-recebedor-primario']);
+        $pag->setSplit()->setPrimaryReceiver(self::PagseguroHashRecebedorPrimario);
 
         // Add an receiver for split this payment request
         $pag->setSplit()->addReceiver()->withParameters(
-                $data['hash-recebedor-secundario'], $data['valor-total'], 20, 0
+            $data['hash-recebedor-secundario'], $data['valor-total'], 20, 0
         );
     }
 
@@ -94,29 +91,29 @@ class PagamentoComponent extends Component {
 
         //Set billing information for credit card
         $pag->setBilling()->setAddress()->withParameters(
-                $data['dados_comprador']['endereco']['endereco-logradouro'], $data['dados_comprador']['endereco']['endereco-numero'], $data['dados_comprador']['endereco']['endereco-bairro'], $data['dados_comprador']['endereco']['endereco-cep'], $data['dados_comprador']['endereco']['endereco-cidade'], $data['dados_comprador']['endereco']['endereco-uf'], $data['dados_comprador']['endereco']['endereco-pais'], $data['dados_comprador']['endereco']['endereco-complemento']
+            $data['endereco-logradouro'], $data['endereco-numero'], $data['endereco-bairro'], $data['endereco-cep'], $data['endereco-cidade'], $data['endereco-uf'], $data['endereco-pais'], $data['endereco-complemento']
         );
 
         // Set credit card token
-        $pag->setToken($data['dados_comprador']['cartao']['token']);
+        $pag->setToken($data['cartao-token']);
 
         // Set the installment quantity and value (could be obtained using the Installments 
         // service, that have an example here in \public\getInstallments.php)
         $pag->setInstallment()->withParameters(
-                $data['dados_comprador']['cartao']['num-parcela'], $data['dados_comprador']['cartao']['vlr-parcela']
+            $data['cartao-num-parcela'], $data['cartao-vlr-parcela']
         );
 
         // Set the credit card holder information
-        $pag->setHolder()->setBirthdate($data['dados_comprador']['data-nascimento']);
-        $pag->setHolder()->setName($data['dados_comprador']['cartao']['nome']); // Equals in Credit Card
+        $pag->setHolder()->setBirthdate($data['comprador-data-nascimento']);
+        $pag->setHolder()->setName($data['cartao-nome']); // Equals in Credit Card
 
         $pag->setHolder()->setPhone()->withParameters(
-                $data['dados_comprador']['telefone'][0]['ddd'], $data['dados_comprador']['telefone'][0]['numero']
+            $data['comprador-tel-ddd'], $data['comprador-tel-numero']
         );
 
         $pag->setHolder()->setDocument()->withParameters(
-                $data['dados_comprador']['cpf-cnpj-tipo'], // CPF or CNPJ
-                $data['dados_comprador']['cpf-cnpj-numero'] // mensagem de erro
+            'CPF', // CPF or CNPJ
+            $data['comprador-cpf'] // numero do CPF
         );
     }
 
