@@ -178,6 +178,7 @@ div#form-bootstrapWizard {
     padding-top: 7px;
     padding-bottom: 100%;
 }
+
 .height-800{
     height: 800px;
 }
@@ -189,6 +190,9 @@ div#form-bootstrapWizard {
 
 @media (min-width: 768px) {
 
+     .height-800{
+        height: auto;
+    }
     .modal-dialog.modal-venda-rapida {    
         margin: 50px auto; 
     }
@@ -199,6 +203,7 @@ div#form-bootstrapWizard {
     #container-finalizar-venda-web{
         display: block !important;
     }
+   
 }
 
 .fixed-page{

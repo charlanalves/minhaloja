@@ -85,7 +85,7 @@
                                                                                                                 <span class="campo-obrigatorio">*Campo obrigatório</span>
 														<div class="input-group">
                                                                                                                     <span class="input-group-addon"><i class="fa fa-usd fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="text" name="valorvenda" id="valorVenda">
+															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="number" name="valorvenda" id="valorVenda">
 														</div>
 													</div>
 												</div>
@@ -95,7 +95,7 @@
 													<div class="form-group"> 
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-dropbox fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg valor" placeholder="R$ Valor do frete" type="text" name="valorfrete" id="valorFrete">
+															<input class="form-control input-lg valor" placeholder="R$ Valor do frete" type="number" name="valorfrete" id="valorFrete">
 														</div>
 													</div>
 												</div>
