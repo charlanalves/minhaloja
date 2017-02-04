@@ -10,7 +10,7 @@
 		<article class="col-sm-12 col-md-12">
 
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+			<div data-widget-collapsed="true" class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-fullscreenbutton="true" data-widget-editbutton="false" data-widget-deletebutton="false">
 				<!-- widget options:
 				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -29,6 +29,7 @@
 					<h2>VENDA RÁPIDA </h2>
 
 				</header>
+                                
 
 				<!-- widget div-->
 				<div>
@@ -43,7 +44,7 @@
 					<!-- widget content -->
 					<div class="widget-body">
 
-						<div class="row">
+						<div class="row height-800">
 							<form id="wizard-1" novalidate="novalidate">
 								<div id="bootstrap-wizard-1" class="col-sm-12">
 									<div id="form-bootstrapWizard" class="form-bootstrapWizard">
@@ -116,7 +117,7 @@
 											<h3 class="h3etapa"><strong>Etapa 2</strong> - Endereço do Cliente</h3>
 
 											<div class="row">
-												<div class="col-sm-4">
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-envelope-o fa-lg fa-fw"></i></span>
@@ -124,7 +125,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-4">
+                                                                                        </div>
+											<div class="row">                                                                                        
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
@@ -132,7 +135,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-4">
+                                                                                        </div>
+											<div class="row">                                                                                        
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
@@ -142,7 +147,7 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
@@ -150,7 +155,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+                                                                                        </div>
+											<div class="row">
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
                                                                                                                     <span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
@@ -158,7 +165,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+                                                                                        </div>
+											<div class="row">
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
                                                                                                                     <span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
@@ -166,7 +175,9 @@
 														</div>
 													</div>
 												</div>
-                                                                                            <div class="col-sm-6">
+                                                                                        </div>
+											<div class="row">
+                                                                                            <div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
                                                                                                                     <span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
@@ -176,53 +187,27 @@
 												</div>
 											</div>
 										</div>
-										<div class="tab-pane" id="tab3">
-											<br>
-											<h3><strong>Etapa 3</strong> - Pagamento</h3>
-											<div class="alert alert-info fade in">
-												<button class="close" data-dismiss="alert">
-													×
-												</button>
-												<i class="fa-fw fa fa-info"></i>
-												<strong>Info!</strong> Place an info message box if you wish.
-											</div>
-											<div class="form-group">
-												<label>This is a label</label>
-												<input class="form-control input-lg" placeholder="Another input box here..." type="text" name="etc" id="etc">
-											</div>
-										</div>
-										<div class="tab-pane" id="tab4">
-											<br>
-											<h3><strong>Step 4</strong> - Save Form</h3>
-											<br>
-											<h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
-											<h4 class="text-center">Click next to finish</h4>
-											<br>
-											<br>
-										</div>
+										
+										<div id="container-finalizar-venda-web" class="form-actions simple-hide" >
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-12 finalizar-venda">
+                                                                                            <span>
+                                                                                                <a id="finalizarVenda" href="javascript:void(0);" class="btn btn-primary btn-lg">Finalizar Venda </a>
+                                                                                            </span>													
+                                                                                        </div>
+                                                                                    
+                                                                                        <div class="col-sm-12">
+                                                                                                <ul class="pager wizard no-margin">
 
-										<div class="form-actions">
-											<div class="row">
-												<div class="col-sm-12">
-													<ul class="pager wizard no-margin">
-														<!--<li class="previous first disabled">
-														<a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
-														</li>-->
-														<li class="previous disabled">
-															<a href="javascript:void(0);" class="btn btn-lg btn-default">Anterior </a>
-														</li>
-														<!--<li class="next last">
-														<a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
-														</li>-->
-                                                                                                                <span>
-															<a id="finalizarVenda" href="javascript:void(0);" class="btn btn-primary btn-lg">Finalizar Venda </a>
-														</span>
-														<li class="next">
-															<a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Próximo </a>
-														</li>
-													</ul>
-												</div>
-											</div>
+                                                                                                        <li class="previous disabled">
+                                                                                                                <a href="javascript:void(0);" class="btn btn-lg btn-default">Anterior </a>
+                                                                                                        </li>
+                                                                                                        <li class="next">
+                                                                                                                <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Próximo </a>
+                                                                                                        </li>
+                                                                                                </ul>
+                                                                                        </div>
+                                                                                    </div>
 										</div>
 
 									</div>
@@ -237,6 +222,7 @@
 				<!-- end widget div -->
 
 			</div>
+                        
 			<!-- end widget -->
 
 		</article>
@@ -367,7 +353,7 @@
 						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
 						$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
 					}
-				}
+				},
 			});
 
 		};

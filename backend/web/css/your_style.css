@@ -142,16 +142,8 @@
     }
 }
 
-
-.form-actions {
-    margin-top: 95px;
-    padding: 13px 0px 15px !important;
-}
-
 #finalizarVenda {
     border-radius: 12px;
-    position: relative;
-    top: -94px;    
     background: #0091d9 !important;
 }
 .h3etapa{
@@ -168,7 +160,57 @@ span.campo-obrigatorio {
 div#form-bootstrapWizard {
     text-align: center;
     position: relative;
-    left: 88px;
+    left: 25%;
     top: 7px;    
+}
+
+.modal-dialog.modal-venda-rapida {    
+    margin: 0 auto; 
+}
+
+.modal-content.modal-content-venda-rapida {
+    border: 0;
+}
+
+#container-finalizar-venda{    
+    width: 100%;
+    margin: 0;
+    padding-top: 7px;
+    padding-bottom: 100%;
+}
+.height-800{
+    height: 800px;
+}
+
+#container-finalizar-venda-web{
+    display: none !important;
+}
+
+
+@media (min-width: 768px) {
+
+    .modal-dialog.modal-venda-rapida {    
+        margin: 50px auto; 
+    }
+
+    #container-finalizar-venda{    
+        display: none !important;
+    }
+    #container-finalizar-venda-web{
+        display: block !important;
+    }
+}
+
+.fixed-page{
+    position: fixed;
+    z-index: 9999999;
+}
+
+.finalizar-venda{
+    text-align: center;
+}
+
+.simple-hide{
+    display: none;
 }
 

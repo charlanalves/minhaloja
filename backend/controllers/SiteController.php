@@ -88,6 +88,9 @@ class SiteController extends Controller
             
             $abaVendas = $this->renderPartial('aba-vendas');
             
+            \Yii::$app->view->params['bloco-finalizar-venda'] = $this->renderPartial('finalizar-venda');
+
+            
             return $this->render('tabs', [
                 'model' => $model,
                 'abaProdPendentes' => $abaProdPendentes,
