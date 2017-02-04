@@ -127,6 +127,9 @@
        width: 100%;
        padding: 8px !important;
    }
+   .row.bg-white {
+    margin-top: 51px;
+}
 }
 
 @media (max-width:380px) {
@@ -187,6 +190,13 @@ div#form-bootstrapWizard {
     display: none !important;
 }
 
+  .fixed-header #main {
+         margin-top: 0 !important; 
+    }
+    #main {
+        min-height: 420px !important;
+    }
+
 
 @media (min-width: 768px) {
 
@@ -203,6 +213,9 @@ div#form-bootstrapWizard {
     #container-finalizar-venda-web{
         display: block !important;
     }
+    
+
+  
    
 }
 

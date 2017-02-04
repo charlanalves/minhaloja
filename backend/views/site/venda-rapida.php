@@ -85,7 +85,7 @@
                                                                                                                 <span class="campo-obrigatorio">*Campo obrigatório</span>
 														<div class="input-group">
                                                                                                                     <span class="input-group-addon"><i class="fa fa-usd fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="number" name="valorvenda" id="valorVenda">
+															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="number" name="valorvenda" id="valorVenda" >
 														</div>
 													</div>
 												</div>
@@ -105,7 +105,7 @@
 													<div class="form-group">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg" placeholder="E-mail do cliente" type="text" name="email" id="email">
+															<input class="form-control input-lg" placeholder="E-mail do cliente" type="email" name="email" id="email">
 
 														</div>
 													</div>
