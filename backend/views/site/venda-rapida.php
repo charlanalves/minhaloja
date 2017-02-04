@@ -7,7 +7,7 @@
 	<div class="row">
 
 		<!-- NEW WIDGET START -->
-		<article class="col-sm-12 col-md-12 col-lg-6">
+		<article class="col-sm-12 col-md-12">
 
 			<!-- Widget ID (each widget will need unique ID)-->
 			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
@@ -79,7 +79,7 @@
 											</div>
 
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-12">
 													<div class="form-group">
                                                                                                                 <span class="campo-obrigatorio">*Campo obrigatório</span>
 														<div class="input-group">
@@ -88,7 +88,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+											</div>
+											<div class="row">
+												<div class="col-sm-12">
 													<div class="form-group"> 
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-dropbox fa-lg fa-fw"></i></span>
@@ -96,7 +98,9 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+											</div>
+											<div class="row">
+												<div class="col-sm-12">
 													<div class="form-group">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
@@ -106,7 +110,6 @@
 													</div>
 												</div>
 											</div>
-
 										</div>
 										<div class="tab-pane" id="tab2">
 											<br>

@@ -20,7 +20,7 @@
 						    <div class="modal-dialog">  
 						        <div class="modal-content">
 						        	<!-- content will be filled here from "ajax/modal-content/model-content-1.html" -->
-									<?= Yii::$app->controller->renderPartial('form-checkout') ?>
+									<?= Yii::$app->controller->renderPartial('venda-rapida') ?>
 						        </div>  
 						    </div>
 				

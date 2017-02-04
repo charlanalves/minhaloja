@@ -145,6 +145,7 @@
 
 .form-actions {
     margin-top: 95px;
+    padding: 13px 0px 15px !important;
 }
 
 #finalizarVenda {
@@ -170,3 +171,4 @@ div#form-bootstrapWizard {
     left: 88px;
     top: 7px;    
 }
+
