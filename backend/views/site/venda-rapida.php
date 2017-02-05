@@ -389,15 +389,25 @@
            var validou = $('#wizard-1').valid();    
            if (validou) {
                alert('validou');
+               var formData = $('#wizard-1').serializeArray(),
+                   url = './index/pedido/create';
+               
+                $.post(url, formData, function(data) {
+                    if(typeof data.error == 'undefined') {
 
+                    }
+
+                }).fail(function(){ 
+                      
+                });
            }
        });   
                 
     $("#main").on('keyup', '#cep', function(){
 
          var val = $(this).val().trim();
-         val = val.replace(/\X/g, '');
-		 val = val.replace(/\-/g,'');
+             val = val.replace(/\X/g, '');
+             val = val.replace(/\-/g,'');
 
 
             if (val.length == 8){
@@ -418,10 +428,10 @@
 
                 }).fail(function(){ 
                         $('#campos-ocultos').removeClass('simple-hide');    
-                                setBorder(['#tab2 input:not("#cep, #complemento")']); 
-                     cleanFields(['#tab2 input:not("#cep, #complemento")']); 
-                                enabledFields(['#tab2 input:not("#cep, #complemento")'], false);         
-           		});
+                            setBorder(['#tab2 input:not("#cep, #complemento")']); 
+                            cleanFields(['#tab2 input:not("#cep, #complemento")']); 
+                            enabledFields(['#tab2 input:not("#cep, #complemento")'], false);         
+                });
             } else {
                 $('#campos-ocultos').addClass('simple-hide');
             }
@@ -431,14 +441,14 @@
     function setValues(elementName, data){
      if (elementName != ''){
          $('#'+elementName).val(data[elementName]);
-         $('#'+elementName).prop('disabled', true);
+         $('#'+elementName).prop('readonly', true);
       } else {
             $('#'+elementName).css('border-color', 'red');
       }
     }
 
     function setBorder(selElements, color){
-            color = (color || 'red');
+        color = (color || 'red');
         for (var i in selElements){
             $(selElements[i]).rules("add", {
                 required: true,
@@ -466,7 +476,7 @@
 
     function enabledFields(selElements, disabled){	
         for (var i in selElements){
-            $(selElements[i]).prop('disabled', disabled);
+            $(selElements[i]).prop('readonly', disabled);
         }
 
     }
