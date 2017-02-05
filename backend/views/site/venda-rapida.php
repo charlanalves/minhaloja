@@ -63,23 +63,20 @@
 										<div class="tab-pane active" id="tab1">
 											<br>
 											<h3 class="h3etapa"><strong>Etapa 1</strong> - Informações da venda</h3>
-
-											<div class="row">
-
+                                                                                         <div class="row">
 												<div class="col-sm-12">
 													<div class="form-group">
                                                                                                         <span class="campo-obrigatorio">*Campo obrigatório</span>
 														<div class="input-group">
-															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg" placeholder="Nome do produto/serviço" type="text" name="nomeproduto" id="lname">
+															<span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="E-mail do cliente" type="email" name="email" id="email">
+
 														</div>
 													</div>
-
 												</div>
-
 											</div>
-
-											<div class="row">
+                                                                                        
+                                                                                        <div class="row">
 												<div class="col-sm-12">
 													<div class="form-group">
                                                                                                                 <span class="campo-obrigatorio">*Campo obrigatório</span>
@@ -90,6 +87,22 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row">
+
+												<div class="col-sm-12">
+													<div class="form-group">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-product-hunt fa-lg fa-fw"></i></span>
+															<input class="form-control input-lg" placeholder="Nome do produto/serviço" type="text" name="nomeproduto" id="lname">
+														</div>
+													</div>
+
+												</div>
+
+											</div>
+
+											
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="form-group"> 
@@ -100,17 +113,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<div class="input-group">
-															<span class="input-group-addon"><i class="fa fa-envelope fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg" placeholder="E-mail do cliente" type="email" name="email" id="email">
-
-														</div>
-													</div>
-												</div>
-											</div>
+						
 										</div>
 										<div class="tab-pane" id="tab2">
 											<br>
@@ -126,6 +129,7 @@
 													</div>
 												</div>
                                                                                         </div>
+                                                                                    <span id="campos-ocultos" class="simple-hide">
 											<div class="row">                                                                                        
 												<div class="col-sm-12">
 													<div class="form-group">
@@ -186,6 +190,7 @@
 													</div>
 												</div>
 											</div>
+                                                                                </span>
 										</div>
 										
 										<div id="container-finalizar-venda-web" class="form-actions simple-hide" >
@@ -286,16 +291,15 @@
 			var $validator = $("#wizard-1").validate({
                               
 				rules : {				
-					nomeproduto : {
-						required : true
-					},	
+					
+                                        email: {
+                                            required : true,
+                                            email: true
+                                        },
                                         valorvenda : {
 						required : true
                                                
 					},
-                                        email: {
-                                            email: true,
-                                        },
 					country : {
 						required : true
 					},
@@ -319,7 +323,7 @@
 					nomeproduto : "Gentileza informar o nome do produto ou serviço",
 					valorvenda: "Gentileza informar o valor da venda",
 					email : {
-						required : "Informe o e-mail do seu cliente",
+						required : "Gentileza, Informar o e-mail do seu cliente",
 						email : "o e-mail deve ser nesse formato email@dominio.com"
 					}
 				},
@@ -380,7 +384,97 @@
 			});
 
 		};
+                
+    $('body').on('click','#finalizarVenda',function(){
+           var validou = $('#wizard-1').valid();    
+           if (validou) {
+               alert('validou');
+
+           }
+       });   
+                
+    $("#main").on('keyup', '#cep', function(){
+
+         var val = $(this).val().trim();
+         val = val.replace(/\X/g, '');
+		 val = val.replace(/\-/g,'');
+
+
+            if (val.length == 8){
+                var url='http://correiosapi.apphb.com/cep/'+ val;
+                 $.get(url, function(data) {
+                        setBorder(['#tab2 input:not("#cep, #complemento")'], '#ccc')
+                        $('#campos-ocultos').removeClass('simple-hide');
+                        if(typeof data.message == 'undefined') {
+                            data.logradouro = data.logradouro + ' ' +data.tipoDeLogradouro;
+                            setValues('logradouro', data); 
+                            setValues('bairro', data); 
+                            setValues('cidade', data); 
+                            setValues('estado', data);  
+
+                            setBorder(['#numero']);     
+                        }
+
+
+                }).fail(function(){ 
+                        $('#campos-ocultos').removeClass('simple-hide');    
+                                setBorder(['#tab2 input:not("#cep, #complemento")']); 
+                     cleanFields(['#tab2 input:not("#cep, #complemento")']); 
+                                enabledFields(['#tab2 input:not("#cep, #complemento")'], false);         
+           		});
+            } else {
+                $('#campos-ocultos').addClass('simple-hide');
+            }
+        
+    });    
+
+    function setValues(elementName, data){
+     if (elementName != ''){
+         $('#'+elementName).val(data[elementName]);
+         $('#'+elementName).prop('disabled', true);
+      } else {
+            $('#'+elementName).css('border-color', 'red');
+      }
+    }
+
+    function setBorder(selElements, color){
+            color = (color || 'red');
+        for (var i in selElements){
+            $(selElements[i]).rules("add", {
+                required: true,
+                messages: {
+                    required: "O campo acima é obrigatório",
+                }
+              });
+                $(selElements[i]).css('border-color', color);
+        }
+    }
+
+    function removeBorder(selElements){	
+        for (var i in selElements){
+            $(selElements[i]).rules("remove", "required");
+            $(selElements[i]).css('border-color', '#ccc');
+        }
+    }
+
+    function cleanFields(selElements){	
+        for (var i in selElements){
+            $(selElements[i]).val('');
+        }
+
+    }
+
+    function enabledFields(selElements, disabled){	
+        for (var i in selElements){
+            $(selElements[i]).prop('disabled', disabled);
+        }
+
+    }
 
 	};
+        
+        
+ 
+
 
 </script>

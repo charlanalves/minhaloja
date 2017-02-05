@@ -1121,17 +1121,9 @@
                 thousandsSeparator: '.'
             });
         
- document.addEventListener('DOMContentLoaded', function(){
-    $('body').on('click','#finalizarVenda',function(){
-           var validou = $('#wizard-1').valid();    
-           if (validou) {
-               alert('validou')
 
-           }
-       });
-});
 	
 </script>
-	</body>
+</body>
 
 </html>
