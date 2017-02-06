@@ -14,7 +14,7 @@ class PagamentoController extends ActiveController
     private $data = [
         'id' => '', // identifica o pagamento - id criado dinamicamente 
         'gateway' => 'pagseguro', // pagseguro
-        'forma_pag' => 'CreditCard', // OnlineDebit, Boleto, 
+        'forma-pag' => 'CreditCard', // OnlineDebit, Boleto, 
         'hash' => 'ff4d5a867bc77220c3a7ed68ca195d684942a52db79d81d308be7ee2a58b40a5', // sessao
         'hash-recebedor-primario' => '',
         'vendedor_id' => '',

@@ -31,7 +31,7 @@ class TestePagseguroController extends Controller
         $data = [
             //'id' => '', // identifica o pagamento - id criado dinamicamente 
             'gateway' => 'pagseguro', // pagseguro
-            'forma_pag' => 'CreditCard', // OnlineDebit, Boleto, 
+            'forma-pag' => 'CreditCard', // OnlineDebit, Boleto, 
             'hash' => 'e1ca1177d8b0d18f87976fb6f7697242ff0c54955fab982bf7b54e8eb7147bd6', // sessao
             'hash-recebedor-primario' => 'PUB21C6E9BE4D854EA7ACD6A490A27346F7', // vendedor principal key
             'hash-recebedor-secundario' => '', // vendedor secundario key

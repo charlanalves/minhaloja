@@ -1,15 +1,14 @@
 <?php 
-    $dadosJson = (!empty($dados)) ? json_encode($dados) : '{}';
+    $dadosJson = (!empty($dados)) ? json_encode($dados, true) : '{}';
 ?>
 
 <script>
     var dados = JSON.parse('<?= $dadosJson?>');
     console.log(dados);
     
-    // campos obrigatorios
-    var gateway = (typeof(dados['gateway']) != 'undefined') ? dados['gateway'] : 'pagseguro';
-    var valorTotal = dados['valor-total'];
-    var hashSecundario = dados['hash-recebedor-secundario'];
+    var gateway = dados['gateway'];
+    var valorTotal = dados['valor_total'];
+    var hashSecundario = dados['hash_recebedor_secundario'];
     
 </script>
 
@@ -83,6 +82,7 @@
 <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
 <div id="content">
+    
     <a href="#" data-toggle="modal" data-target="#remoteModal" class="btn btn-primary btn-lg">
         COMPRAR
     </a>
@@ -149,10 +149,10 @@
 
                     <form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF">
                         
-                        <input type="text" name="hash" hidden="true" value="">
+                        <input type="text" name="hash_recebedor_primario" hidden="true" value="">
                         <input type="text" name="gateway" hidden="true" value="">
-                        <input type="text" name="valor-total" hidden="true" value="">
-                        <input type="text" name="token-cartao" hidden="true" value="">
+                        <input type="text" name="valor_total" hidden="true" value="">
+                        <input type="text" name="cartao_token" hidden="true" value="">
                         
                         <fieldset>
                             <legend>Meus dados</legend>
@@ -160,12 +160,12 @@
                             <div class="row">
                                 <section class="col col-6 form-padding-right">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="nome" placeholder="Nome completo">
+                                        <input type="text" name="comprador_nome" placeholder="Nome completo">
                                     </label>
                                 </section>
                                 <section class="col col-6 form-padding-left">
                                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                        <input type="text" name="cpf" placeholder="CPF" data-mask="999.999.999-99">
+                                        <input type="text" name="comprador_cpf" placeholder="CPF" data-mask="999.999.999-99">
                                     </label>
                                 </section>
                             </div>
@@ -173,12 +173,12 @@
                             <div class="row">
                                 <section class="col col-6 form-padding-right">
                                     <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                        <input type="email" name="email" placeholder="E-mail">
+                                        <input type="email" name="comprador_email" placeholder="E-mail">
                                     </label>
                                 </section>
                                 <section class="col col-6 form-padding-left">
                                     <label class="input"> <i class="icon-prepend fa fa-phone"></i>
-                                        <input type="tel" name="telefone" placeholder="Telefone" data-mask="(99) 99999-9999">
+                                        <input type="tel" name="comprador_tel" placeholder="Telefone" data-mask="(99) 99999-9999">
                                     </label>
                                 </section>
                             </div>
@@ -191,13 +191,13 @@
 
                                 <section class="col col-4 form-padding-right">
                                     <label class="input">
-                                        <input type="text" name="cep" placeholder="CEP" data-mask="99999-999">
+                                        <input type="text" name="endereco_cep" placeholder="CEP" data-mask="99999-999">
                                     </label>
                                 </section>
 
                                 <section class="col col-8 form-padding-left">
                                     <label class="input">
-                                        <input type="text" name="logradouro" placeholder="Logradouro">
+                                        <input type="text" name="endereco_logradouro" placeholder="Logradouro">
                                     </label>
                                 </section>
 
@@ -207,19 +207,19 @@
 
                                 <section class="col col-5 form-padding-right">
                                     <label class="input">
-                                        <input type="text" name="bairro" placeholder="Bairro">
+                                        <input type="text" name="endereco_bairro" placeholder="Bairro">
                                     </label>
                                 </section>
 
                                 <section class="col col-5 form-padding-left form-padding-right">
                                     <label class="input">
-                                        <input type="text" name="cidade" placeholder="Cidade">
+                                        <input type="text" name="endereco_cidade" placeholder="Cidade">
                                     </label>
                                 </section>
 
                                 <section class="col col-2 form-padding-left">
                                     <label class="input">
-                                        <input type="text" name="uf" placeholder="UF">
+                                        <input type="text" name="endereco_uf" placeholder="UF">
                                     </label>
                                 </section>
 
@@ -229,13 +229,13 @@
 
                                 <section class="col col-3 form-padding-right">
                                     <label class="input">
-                                        <input type="text" name="numero" placeholder="Nº">
+                                        <input type="text" name="endereco_numero" placeholder="Nº">
                                     </label>
                                 </section>
 
                                 <section class="col col-9 form-padding-left">
                                     <label class="input">
-                                        <input type="text" name="complemento" placeholder="Complemento">
+                                        <input type="text" name="endereco_complemento" placeholder="Complemento">
                                     </label>
                                 </section>
 
@@ -250,11 +250,11 @@
                                 <section class="col col-12">
                                     <div class="inline-group">
                                         <label class="radio">
-                                            <input type="radio" name="tipo-pagamento" value="cartao-credito" checked="">
+                                            <input type="radio" name="forma_pag" value="CreditCard" checked="">
                                             <i></i>Cartão de Crédito
                                         </label>
                                         <label class="radio">
-                                            <input type="radio" name="tipo-pagamento" value="boleto" disabled="">
+                                            <input type="radio" name="forma_pag" value="Boleto" disabled="">
                                             <i></i>Boleto
                                         </label>
                                     </div>
@@ -265,13 +265,13 @@
 
                                 <section class="col col-9">
                                     <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
-                                        <input type="text" name="cartao-numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" value="5268630475919395" maxlength="16">
+                                        <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16">
                                     </label>
                                 </section>
                                 
                                 <section class="col col-3 form-padding-left">
                                     <label class="input"> <i class="icon-append fa fa-question-circle"></i>
-                                        <input type="text" name="cartao-cvv" placeholder="CVV" value="560">
+                                        <input type="text" name="cartao_cvv" placeholder="CVV">
                                         <b class="tooltip tooltip-top-right">
                                             <i class="fa fa-warning txt-color-teal"></i> 
                                             Digite o código de segurança
@@ -285,7 +285,7 @@
 
                                 <section class="col col-4 form-padding-right form-padding-left">
                                     <label class="select">
-                                        <select name="cartao-mes">
+                                        <select name="cartao_mes">
                                             <option value="0" selected="" disabled="">Mês</option>
                                             <option value="01">Janeiro</option>
                                             <option value="01">Fevereiro</option>
@@ -305,13 +305,13 @@
 
                                 <section class="col col-2 form-padding-right form-padding-left">
                                     <label class="input">
-                                        <input type="text" name="cartao-ano" placeholder="Ano" value="2024">
+                                        <input type="text" name="cartao_ano" placeholder="Ano" >
                                     </label>
                                 </section>
 
                                 <section class="col col-6 form-padding-left">
                                     <label class="select">
-                                        <select name="cartao-parcela"></select>
+                                        <select name="cartao_parcela"></select>
                                     </label>
                                 </section>
 
@@ -470,30 +470,30 @@
                 telefone: {
                     required: true
                 },
-                uf: {
+                endereco_uf: {
                     required: true
                 },
-                cidade: {
+                'endereco_cidade': {
                     required: true
                 },
-                cep: {
+                endereco_cep: {
                     required: true
                 },
                 logradouro: {
                     required: true
                 },
-                'cartao-numero': {
+                'cartao_numero': {
                     required: true,
                     creditcard: true
                 },
-                'cartao-cvv': {
+                'cartao_cvv': {
                     required: true,
                     digits: true
                 },
-                'cartao-mes': {
+                'cartao_mes': {
                     required: true
                 },
-                'cartao-ano': {
+                'cartao_ano': {
                     required: true,
                     digits: true
                 }
@@ -514,31 +514,31 @@
                 telefone: {
                     required: 'Informe um telefone'
                 },
-                uf: {
+                endereco_uf: {
                     required: 'Informe o UF'
                 },
-                cidade: {
+                'endereco_cidade': {
                     required: 'Informe a cidade'
                 },
-                cep: {
+                endereco_cep: {
                     required: 'Informe o CEP',
                     digits: 'Apenas números'
                 },
-                logradouro: {
+                endereco_logradouro: {
                     required: 'Infome o endereço'
                 },
-                'cartao-numero': {
+                'cartao_numero': {
                     required: 'Informe o número do cartão',
                     creditcard: 'Informe um número de cartão valido'
                 },
-                'cartao-cvv': {
+                'cartao_cvv': {
                     required: 'Informe o código de segurança do cartão',
                     digits: 'Apenas números'
                 },
-                'cartao-mes': {
+                'cartao_mes': {
                     required: 'Selecione um mês'
                 },
-                'cartao-ano': {
+                'cartao_ano': {
                     required: 'Informe o ano de vencimento do cartão',
                     digits: 'Apenas números'
                 }
@@ -559,20 +559,21 @@
     var configCartao = {};
     var idSession = '<?= $token?>';
     var cartaoBandeira = '';
+    var parcelaFixa = false;
     
     document.addEventListener("DOMContentLoaded", function(event) {
         
         // set campos hidden
-        $('form#checkout-form input[name=valor-total]').val(valorTotal);
+        $('form#checkout-form input[name=valor_total]').val(valorTotal);
         $('form#checkout-form input[name=gateway]').val(gateway);
         
         PagSeguroDirectPayment.setSessionId(idSession);
         
         // hash do cliente
         ps.getHash = function() {
-            var hash = PagSeguroDirectPayment.getSenderHash();
-            $('form#checkout-form input[name=hash]').val(hash);
-            console.log('hash: ' + hash);
+            var hash_recebedor_primario = PagSeguroDirectPayment.getSenderHash();
+            $('form#checkout-form input[name=hash_recebedor_primario]').val(hash_recebedor_primario);
+            console.log('hash_recebedor_primario: ' + hash_recebedor_primario);
         }
 
         // get formas de pagamento
@@ -590,7 +591,7 @@
 
         // get sobre o cartao
         ps.getConfigCartao = function(){
-            cartao = $('form#checkout-form input[name=cartao-numero]').val();
+            cartao = $('form#checkout-form input[name=cartao_numero]').val();
             if(cartao.length >= 6){
                 var bin = parseInt(cartao.substring(0,6));
                 PagSeguroDirectPayment.getBrand({
@@ -607,25 +608,25 @@
                 });
             }
         }
-        if($('form#checkout-form input[name=cartao-numero]').val()){
+        if($('form#checkout-form input[name=cartao_numero]').val()){
             ps.getConfigCartao();
         }
 
         // get token do cartao
         ps.getTokenCartao = function(){
             param = {
-                cardNumber: $("form#checkout-form input[name=cartao-numero]").val(),
+                cardNumber: $("form#checkout-form input[name=cartao_numero]").val(),
                 brand: cartaoBandeira,
-                cvv: $("form#checkout-form input[name=cartao-cvv]").val(),
-                expirationMonth: $("form#checkout-form input[name=cartao-mes]").val(),
-                expirationYear: $("form#checkout-form input[name=cartao-ano]").val(),
+                cvv: $("form#checkout-form input[name=cartao_cvv]").val(),
+                expirationMonth: $("form#checkout-form input[name=cartao_mes]").val(),
+                expirationYear: $("form#checkout-form input[name=cartao_ano]").val(),
                 success: function(a){},
                 error: function(a){
                     console.log(a);
                 },
                 complete: function(a){
                     configCartao.token = a.card.token;
-                    $('form#checkout-form input[name=token-cartao]').val(configCartao.token);
+                    $('form#checkout-form input[name=cartao_token]').val(configCartao.token);
                 }
             };
 
@@ -635,28 +636,63 @@
 
         // get parcelamentos
         ps.getParcelamentoCartao = function(){
-            PagSeguroDirectPayment.getInstallments({
-                amount: valorTotal,
-                brand: cartaoBandeira,
-                maxInstallmentNoInterest: 4,
-                success: function(a){},
-                error: function(a){
-                    console.log(a);
-                },
-                complete: function(a){
-                    for(var i in a.installments[cartaoBandeira]){
-                        $('form#checkout-form select[name=cartao-parcela]').append($('<option>', {
-                            value: a.installments[cartaoBandeira][i].quantity + '-' + a.installments[cartaoBandeira][i].installmentAmount,
-                            text: a.installments[cartaoBandeira][i].quantity + 'x de R$' + a.installments[cartaoBandeira][i].installmentAmount
-                        }));
+            if(!parcelaFixa){
+                PagSeguroDirectPayment.getInstallments({
+                    amount: valorTotal,
+                    brand: cartaoBandeira,
+                    maxInstallmentNoInterest: 4,
+                    success: function(a){},
+                    error: function(a){
+                        console.log(a);
+                    },
+                    complete: function(a){
+                        for(var i in a.installments[cartaoBandeira]){
+                            $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
+                                value: a.installments[cartaoBandeira][i].quantity + '-' + a.installments[cartaoBandeira][i].installmentAmount,
+                                text: a.installments[cartaoBandeira][i].quantity + 'x de R$' + a.installments[cartaoBandeira][i].installmentAmount
+                            }));
+                        }
                     }
-                }
-            });
+                });
+            }
         }
+        
+        // preenche form com os parametros recebidos
+        for(var i in dados){
+            console.log(i + ': ' + dados[i]);
+            // retira telefone e parcelas
+            if(i != 'comprador_tel_ddd' && i != 'comprador_tel_numero' && i != 'cartao_num_parcela' && i != 'cartao_vlr_parcela') {
+                $('form#checkout-form input[name=\'' + i + '\']').val(dados[i]);            
+                $('form#checkout-form input[name=\'' + i + '\']').prop("disabled", true);
+            }
+        };
+        
+        // telefone
+        if(dados['comprador_tel_ddd'] && dados['comprador_tel_numero']){
+            $('form#checkout-form input[name=comprador_tel]').val('(' + dados['comprador_tel_ddd'] + ') ' + dados['comprador_tel_numero']);
+            $('form#checkout-form input[name=comprador_tel]').prop("disabled", true);
+        }
+        
+        // parcela
+        if(dados['cartao_num_parcela'] && dados['cartao_vlr_parcela'] && dados['forma_pag'] == 'CreditCard'){
+            $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
+                value: dados['cartao_num_parcela'] + '-' + dados['cartao_vlr_parcela'],
+                text:  dados['cartao_num_parcela'] + 'x de R$' + dados['cartao_vlr_parcela']
+            }));
+            $('form#checkout-form select[name=cartao_parcela]').prop("disabled", true);
+            parcelaFixa = true;
+        }
+
+
+        $('form#checkout-form').submit(function(event){
+            var form = this.serializeArray();
+            console.log(event);
+            console.log(form);
+            event.preventDefault();
+        });
+        
     });
 
-    function tessste(){
-        var form = $("form#checkout-form").serializeArray();
-        console.log(form);
-    }
+
+    
 </script>

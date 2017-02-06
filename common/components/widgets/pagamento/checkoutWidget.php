@@ -17,52 +17,66 @@ class checkoutWidget extends Widget
 
     public function run()
     {
-        return $this->render('index',['dados'=> self::bindParam($this->data)]);
+        /*
+         * @todo testa campos obrigatorios
+         * item array: key['item_cod','item_desc','item_qtd','item_vlr']
+         * gateway string: pagseguro
+         * forma_pag string: CreditCard || OnlineDebit || Boleto 
+         * valor_total float
+         */
+        $dados = self::bindParam($this->data);
+        
+        return $this->render('index',['dados'=> $dados]);
     }
     
     // parametros padroes do checkout com parametros recebidos
     private static function bindParam($data) {
 
+        // itens
+        foreach ($data['item'] as $p) {
+            $item[] = [
+                $p['item_cod'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '',
+                $p['item_desc'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '', 
+                $p['item_qtd'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '',
+                $p['item_vlr'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '',
+            ];
+        }
+        
         return [
             // dados de configuracao
             'id' => uniqid('pag_' . date('Ymd') . '_'),
-            'gateway' => (!empty($data['gateway'])) ? $data['gateway'] : 'pagseguro', // pagseguro padrao
-            'forma_pag' => (!empty($data['gateway'])) ? $data['gateway'] : '',  
-            'hash' => '', // sessao é criada na tela de checkout
-            'hash-recebedor-secundario' => '', // vendedor secundario key
-            'valor-total' => (!empty($data['valor-total'])) ? $data['valor-total'] : '',
+            'gateway' => $data['gateway'],
+            'forma_pag' => $data['forma_pag'],  
+            'hash_recebedor_primario' => '', // sessao é criada na tela de checkout
+            'hash_recebedor_secundario' => $data['hash_recebedor_secundario'], // vendedor secundario key
+            'valor_total' => $data['valor_total'],
 
-            // dados do produto
-            'produto' => [[
-                'produto-cod' => '0001',
-                'produto-desc' => 'Produto Teste', 
-                'produto-qtd' => '1',
-                'produto-vlr' => '100.00',
-            ]],
+            // dados do item
+            'item' => [$item],
 
             // dados do comprador
-            'comprador-nome'=> (!empty($data['comprador-nome'])) ? $data['comprador-nome'] : '',
-            'comprador-data-nascimento' => (!empty($data['comprador-data-nascimento'])) ? $data['comprador-data-nascimento'] : '',
-            'comprador-email'=> (!empty($data['comprador-email'])) ? $data['comprador-email'] : '',
-            'comprador-cpf'=> (!empty($data['comprador-cpf'])) ? $data['comprador-cpf'] : '',
-            'comprador-tel-ddd' => (!empty($data['comprador-tel-ddd'])) ? $data['comprador-tel-ddd'] : '',
-            'comprador-tel-numero' => (!empty($data['comprador-tel-numero'])) ? $data['comprador-tel-numero'] : '',
+            'comprador_nome'=> (!empty($data['comprador_nome'])) ? $data['comprador_nome'] : '',
+            'comprador_data_nascimento' => (!empty($data['comprador_data_nascimento'])) ? $data['comprador_data_nascimento'] : '',
+            'comprador_email'=> (!empty($data['comprador_email'])) ? $data['comprador_email'] : '',
+            'comprador_cpf'=> (!empty($data['comprador_cpf'])) ? $data['comprador_cpf'] : '',
+            'comprador_tel_ddd' => (!empty($data['comprador_tel_ddd'])) ? $data['comprador_tel_ddd'] : '',
+            'comprador_tel_numero' => (!empty($data['comprador_tel_numero'])) ? $data['comprador_tel_numero'] : '',
 
             // endereco de entrega
-            'endereco-logradouro' => (!empty($data['endereco-logradouro'])) ? $data['endereco-logradouro'] : '',
-            'endereco-numero' => (!empty($data['endereco-numero'])) ? $data['endereco-numero'] : '',
-            'endereco-bairro' => (!empty($data['endereco-bairro'])) ? $data['endereco-bairro'] : '',
-            'endereco-cep' => (!empty($data['endereco-cep'])) ? $data['endereco-cep'] : '',
-            'endereco-cidade' => (!empty($data['endereco-cidad'])) ? $data['endereco-cidad'] : '',
-            'endereco-uf' => (!empty($data['endereco-uf'])) ? $data['endereco-uf'] : '',
-            'endereco-pais' => 'BRA',
-            'endereco-complemento' => (!empty($data['endereco-complemento'])) ? $data['endereco-complemento'] : '',
+            'endereco_logradouro' => (!empty($data['endereco_logradouro'])) ? $data['endereco_logradouro'] : '',
+            'endereco_numero' => (!empty($data['endereco_numero'])) ? $data['endereco_numero'] : '',
+            'endereco_bairro' => (!empty($data['endereco_bairro'])) ? $data['endereco_bairro'] : '',
+            'endereco_cep' => (!empty($data['endereco_cep'])) ? $data['endereco_cep'] : '',
+            'endereco_cidade' => (!empty($data['endereco_cidade'])) ? $data['endereco_cidade'] : '',
+            'endereco_uf' => (!empty($data['endereco_uf'])) ? $data['endereco_uf'] : '',
+            'endereco_pais' => 'BRA',
+            'endereco_complemento' => (!empty($data['endereco_complemento'])) ? $data['endereco_complemento'] : '',
 
             // dados do cartao
-            'cartao-token' => '', // token gerado na tela
-            'cartao-nome' => '',
-            'cartao-num-parcela' => (!empty($data['cartao-num-parcela'])) ? $data['cartao-num-parcela'] : '',
-            'cartao-vlr-parcela' => (!empty($data['cartao-vlr-parcela'])) ? $data['cartao-vlr-parcela'] : '',
+            'cartao_token' => '', // token gerado na tela
+            'cartao_nome' => '', // nao solicitado
+            'cartao_num_parcela' => (!empty($data['cartao_num_parcela'])) ? $data['cartao_num_parcela'] : '',
+            'cartao_vlr_parcela' => (!empty($data['cartao_vlr_parcela'])) ? $data['cartao_vlr_parcela'] : '',
         ];
     }
 }
