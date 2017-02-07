@@ -411,12 +411,15 @@
 
 
             if (val.length == 8){
-                var url='http://correiosapi.apphb.com/cep/'+ val;
+                var url='http://viacep.com.br/ws/'+ val +'/json/';
                  $.get(url, function(data) {
                         setBorder(['#tab2 input:not("#cep, #complemento")'], '#ccc')
                         $('#campos-ocultos').removeClass('simple-hide');
-                        if(typeof data.message == 'undefined') {
-                            data.logradouro = data.logradouro + ' ' +data.tipoDeLogradouro;
+                        if(typeof data.message == 'undefined') { 
+                            
+                            data.cidade = data.localidade;
+                            data.estado = data.uf;
+                            
                             setValues('logradouro', data); 
                             setValues('bairro', data); 
                             setValues('cidade', data); 
@@ -439,7 +442,7 @@
     });    
 
     function setValues(elementName, data){
-     if (elementName != ''){
+     if (data[elementName] != ''){
          $('#'+elementName).val(data[elementName]);
          $('#'+elementName).prop('readonly', true);
       } else {
