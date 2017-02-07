@@ -82,7 +82,19 @@
                                                                                                                 <span class="campo-obrigatorio">*Campo obrigatório</span>
 														<div class="input-group">
                                                                                                                     <span class="input-group-addon"><i class="fa fa-usd fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="number" name="valorvenda" id="valorVenda" >
+															<input class="form-control input-lg valor" placeholder="R$ Valor da venda" type="text" name="valorvenda" id="valorVenda" >
+														</div>
+													</div>
+												</div>
+											</div>
+                                                                                        <div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<div class="input-group">
+                                                                                                                    <span class="input-group-addon"><i class="fa fa-usd fa-lg fa-fw"></i></span>
+                                                                                                                    <select class="form-control input-lg" name="numeroparcelas" id="numeroParcelas" >
+                                                                                                                        <option value=""></option>
+                                                                                                                    </select>
 														</div>
 													</div>
 												</div>
@@ -402,7 +414,10 @@
                 });
            }
        });   
-                
+ $("#main").on('click', '#numeroParcelas', function(){
+	total = $('#valorVenda').val();
+	genParcelas(total);
+});         
     $("#main").on('keyup', '#cep', function(){
 
          var val = $(this).val().trim();
@@ -483,6 +498,24 @@
         }
 
     }
+    
+function toFixed(num, fixed) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
+    return num.toString().match(re)[0];
+}
+function genParcelas(total, nparcelas){
+    total = total.replace(/[^0-9]/g,'');
+    options = $("#numeroParcelas");
+
+    nparcelas = (nparcelas || 10);
+	
+    for(var np=1; np <= nparcelas; np++) {
+        totalparcela = total / np;
+        totalparcela = totalparcela.toFixed(2);
+	    textoParcela = np + ' X de R$ ' + totalparcela;
+        options.append($("<option />").val(np).text(textoParcela));
+	}
+}
 
 	};
         
