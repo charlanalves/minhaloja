@@ -1,7 +1,6 @@
 <?php
 namespace backend\controllers;
 
-use Yii;
 use yii\web\Controller;
 use backend\controllers\PagamentoController;
 
@@ -23,7 +22,7 @@ class TestePagseguroController extends Controller
     
     public function actionW()
     {   
-        return $this->renderPartial('w');
+        return $this->render('w');
     }
     
     public function actionTeste()

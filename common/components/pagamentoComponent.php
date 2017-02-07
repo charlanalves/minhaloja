@@ -2,7 +2,6 @@
 
 namespace common\components;
 
-use Yii;
 use yii\base\Component;
 use vendor\pagseguro\Library as PagSeguro;
 
