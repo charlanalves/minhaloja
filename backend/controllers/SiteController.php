@@ -82,11 +82,20 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             
-            $abaProdPendentes = $this->renderPartial('product-view');
+            $abaProdPendentes = $this->renderPartial('aba-prod-pendentes');
+            
+            $abaProdAtivos = $this->renderPartial('aba-prod-ativos');
+            
+            $abaVendas = $this->renderPartial('aba-vendas');
+            
+            \Yii::$app->view->params['bloco-finalizar-venda'] = $this->renderPartial('finalizar-venda');
+
             
             return $this->render('tabs', [
                 'model' => $model,
                 'abaProdPendentes' => $abaProdPendentes,
+                'abaProdAtivos' => $abaProdAtivos,
+                'abaVendas' => $abaVendas,
             ]);
         }
     }
