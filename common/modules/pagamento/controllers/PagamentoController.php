@@ -44,9 +44,9 @@ class PagamentoController extends Controller
         foreach ($data['item'] as $p) {
             $item[] = [
                 $p['item_cod'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '',
-                $p['item_desc'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '', 
-                $p['item_qtd'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '',
-                $p['item_vlr'] => (!empty($p['item_cod'])) ? $p['item_cod'] : '',
+                $p['item_desc'] => (!empty($p['item_desc'])) ? $p['item_desc'] : '', 
+                $p['item_qtd'] => (!empty($p['item_qtd'])) ? $p['item_qtd'] : '',
+                $p['item_vlr'] => (!empty($p['item_vlr'])) ? $p['item_vlr'] : '',
             ];
         }
         
@@ -96,9 +96,53 @@ class PagamentoController extends Controller
         return $this->data;
     }
     
-    public function Gateway(){
+    public function actionGateway()
+    {
+        //set data
+        $this->setPagamento(\Yii::$app->request->post('dados'));
+        
+        var_dump($this->data);
+        //return;
+        
+        //$dados = (!empty(($data = $this->data))) ? self::bindParam($data) : [];
         \Yii::$app->pagamentoComponent->{$this->data['gateway'].$this->data['forma_pag']}($this->data);
     }
 
+    /*
+     * setPagamento
+     * Formata dados recebidos do formulario
+     * @todo validar campos obrigatorios para fazer o checkout
+     */
+    private function setPagamento($dados) 
+    {        
+        $this->data['id'] = uniqid('pag_'.date('Ymd').'_');
+        foreach($dados as $v)
+            if($v['name'] == 'item')
+                foreach($v['value'][0] as $k => $vv){
+                    $vv = array_values($vv);
+                    $this->data[$v['name']][$k]['item_qtd'] = $vv[0];
+                    $this->data[$v['name']][$k]['item_cod'] = $vv[1];
+                    $this->data[$v['name']][$k]['item_desc'] = $vv[2];
+                    $this->data[$v['name']][$k]['item_vlr'] = $vv[3];
+                }
+            else
+                $this->data[$v['name']] = $v['value'];
+        
+        //parcelas
+        if(!empty($this->data['cartao_parcela'])){
+            $cp = explode('-', $this->data['cartao_parcela']);
+            $this->data['cartao_num_parcela'] = $cp[0];
+            $this->data['cartao_vlr_parcela'] = $cp[1];
+        }
+            
+        // telefone
+        $this->data['comprador_tel_ddd'] = substr($this->data['comprador_tel'], 1, 2);
+        $this->data['comprador_tel_numero'] = substr($this->data['comprador_tel'], 5);
+        unset($this->data['comprador_tel']);
+        
+        $this->data['hash_recebedor_secundario'] = '';
+        $this->data['comprador_data_nascimento'] = '26/08/1989';
+        $this->data['cartao_nome'] = 'Comprador D Teste';
+    }
 
 }

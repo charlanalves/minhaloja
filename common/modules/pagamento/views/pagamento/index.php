@@ -7,57 +7,18 @@
     var gateway = dados['gateway'];
     var valorTotal = dados['valor_total'];
     var hashSecundario = dados['hash_recebedor_secundario'];
+    var item = dados['item'];
+    var endereco_pais = dados['endereco_pais'];
     
 </script>
 
 <?php
 
-    /* @var $this yii\web\View */
-//    use backend\assets\AppMlAsset;
-//    AppMlAsset::register($this);
     $this->title = '';
     
     $token = \Yii::$app->pagamentoComponent->pagseguroCreateSession();
     
 ?>
-
-<!-- PRODUCAO -->
-<!--
-<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
--->
-
-<!-- TESTE -->
-<!--<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>-->
-
-
-<!-- #CSS Links -->
-<!-- Basic Styles -->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">-->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">-->
-
-<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">-->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">-->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">-->
-
-<!-- DEV links : turn this on when you like to develop directly -->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="../Source_UNMINIFIED_CSS/smartadmin-production.css">-->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="../Source_UNMINIFIED_CSS/smartadmin-skins.css">-->
-
-<!-- SmartAdmin RTL Support -->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">--> 
-
-<!-- We recommend you use "your_style.css" to override SmartAdmin
-     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
-<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">-->
-<!--<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">-->
-
-<!-- #FAVICONS -->
-<!--<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">-->
-<!--<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">-->
 
 <!-- #GOOGLE FONT -->
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
@@ -131,7 +92,7 @@
         .page-footer{display: none}
     </style>
 
-    <form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
+    <form action="" id="checkout-form" name="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
 
         <input type="text" name="hash_recebedor_primario" hidden="true" value="">
         <input type="text" name="gateway" hidden="true" value="">
@@ -162,7 +123,7 @@
                 </section>
                 <section class="col col-6 form-padding-left">
                     <label class="input"> <i class="icon-prepend fa fa-phone"></i>
-                        <input type="tel" name="comprador_tel" placeholder="Telefone" data-mask="(99) 99999-9999">
+                        <input type="tel" name="comprador_tel" placeholder="Telefone" data-mask="(99) 999999999">
                     </label>
                 </section>
             </div>
@@ -231,9 +192,9 @@
             <legend>Forma de pagamento</legend>
 
             <div class="row">
-                <section class="col col-12">
+                <section class="col col-9">
                     <div class="inline-group">
-                        <label class="radio">
+                        <label class="radio form-padding-right">
                             <input type="radio" name="forma_pag" value="CreditCard" checked="">
                             <i></i>Cartão de Crédito
                         </label>
@@ -249,13 +210,13 @@
 
                 <section class="col col-9">
                     <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
-                        <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16">
+                        <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16" value="4111111111111111">
                     </label>
                 </section>
 
                 <section class="col col-3 form-padding-left">
                     <label class="input"> <i class="icon-append fa fa-question-circle"></i>
-                        <input type="text" name="cartao_cvv" placeholder="CVV">
+                        <input type="text" name="cartao_cvv" placeholder="CVV" value="123">
                         <b class="tooltip tooltip-top-right">
                             <i class="fa fa-warning txt-color-teal"></i> 
                             Digite o código de segurança
@@ -282,14 +243,14 @@
                             <option value="09">Setembro</option>
                             <option value="10">Outubro</option>
                             <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
+                            <option value="12" selected="">Dezembro</option>
                         </select> <i></i> 
                     </label>
                 </section>
 
                 <section class="col col-2 form-padding-right form-padding-left">
                     <label class="input">
-                        <input type="text" name="cartao_ano" placeholder="Ano" >
+                        <input type="text" name="cartao_ano" placeholder="Ano" value="2030">
                     </label>
                 </section>
 
@@ -314,88 +275,6 @@
         Comprar
     </button>
 </div>
-
-
-
-
-<!--================================================== -->
-
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<!--<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
-
-
-<!-- #PLUGINS -->
-<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-    if (!window.jQuery) {
-        document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');
-    }
-</script>
-
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script>
-    if (!window.jQuery.ui) {
-        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-    }
-</script>-->
-
-<!-- IMPORTANT: APP CONFIG -->
-<!--<script src="js/app.config.js"></script>-->
-
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<!--<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>--> 
-
-<!-- BOOTSTRAP JS -->
-<!--<script src="js/bootstrap/bootstrap.min.js"></script>-->
-
-<!-- CUSTOM NOTIFICATION -->
-<!--<script src="js/notification/SmartNotification.min.js"></script>-->
-
-<!-- JARVIS WIDGETS -->
-<!--<script src="js/smartwidgets/jarvis.widget.min.js"></script>-->
-
-<!-- EASY PIE CHARTS -->
-<!--<script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
-
-<!-- SPARKLINES -->
-<!--<script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
-
-<!-- JQUERY VALIDATE -->
-<!--<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
-
-<!-- JQUERY MASKED INPUT -->
-<!--<script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
-
-<!-- JQUERY SELECT2 INPUT -->
-<!--<script src="js/plugin/select2/select2.min.js"></script>-->
-
-<!-- JQUERY UI + Bootstrap Slider -->
-<!--<script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
-
-<!-- browser msie issue fix -->
-<!--<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>-->
-
-<!-- FastClick: For mobile devices: you can disable this in app.js -->
-<!--<script src="js/plugin/fastclick/fastclick.min.js"></script>-->
-
-<!--[if IE 8]>
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-<![endif]-->
-
-<!-- Demo purpose only -->
-<!--<script src="js/demo.min.js"></script>-->
-
-<!-- MAIN APP JS FILE -->
-<!--<script src="js/app.min.js"></script>-->
-
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-<!-- Voice command : plugin -->
-<!--<script src="js/speech/voicecommand.min.js"></script>-->
-
-<!-- SmartChat UI : plugin -->
-<!--<script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>-->
-<!--<script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>-->
 
 <!-- Your GOOGLE ANALYTICS CODE Below -->
 <script type="text/javascript">
@@ -538,132 +417,160 @@
     });
 
     var ps = {};
+    var sendFormData = {};
     var configCartao = {};
     var idSession = '<?= $token?>';
     var cartaoBandeira = '';
     var parcelaFixa = false;
     
-        
-        // set campos hidden
-        $('form#checkout-form input[name=valor_total]').val(valorTotal);
-        $('form#checkout-form input[name=gateway]').val(gateway);
-        
-        PagSeguroDirectPayment.setSessionId(idSession);
-        
-        // hash do cliente
-        ps.getHash = function() {
-            var hash_recebedor_primario = PagSeguroDirectPayment.getSenderHash();
-            $('form#checkout-form input[name=hash_recebedor_primario]').val(hash_recebedor_primario);
-            console.log('hash_recebedor_primario: ' + hash_recebedor_primario);
-        }
 
-        // get formas de pagamento
-        ps.getFormaPagamento = function(){
-            PagSeguroDirectPayment.getPaymentMethods({
+    // set campos hidden
+    $('form#checkout-form input[name=valor_total]').val(valorTotal);
+    $('form#checkout-form input[name=gateway]').val(gateway);
+
+    PagSeguroDirectPayment.setSessionId(idSession);
+
+    // hash do cliente
+    ps.getHash = function() {
+        var hash_recebedor_primario = PagSeguroDirectPayment.getSenderHash();
+        $('form#checkout-form input[name=hash_recebedor_primario]').val(hash_recebedor_primario);
+        console.log('hash_recebedor_primario: ' + hash_recebedor_primario);
+    }
+
+    // get formas de pagamento
+    ps.getFormaPagamento = function(){
+        PagSeguroDirectPayment.getPaymentMethods({
+            success: function(a){},
+            error: function(a){
+                console.log(a);
+            },
+            complete: function(a){
+                console.log(a);
+            }
+        });
+    }
+
+    // get sobre o cartao
+    ps.getConfigCartao = function(){
+        cartao = $('form#checkout-form input[name=cartao_numero]').val();
+        console.log(cartao);
+        if(cartao.length >= 6){
+            var bin = parseInt(cartao.substring(0,6));
+            PagSeguroDirectPayment.getBrand({
+                cardBin: bin,
                 success: function(a){},
                 error: function(a){
                     console.log(a);
                 },
                 complete: function(a){
-                    console.log(a);
+                    configCartao = a.brand;
+                    cartaoBandeira = configCartao.name;
+                    ps.getParcelamentoCartao();
                 }
             });
         }
+    }
+    if($('form#checkout-form input[name=cartao_numero]').val()){
+        ps.getConfigCartao();
+    }
 
-        // get sobre o cartao
-        ps.getConfigCartao = function(){
-            cartao = $('form#checkout-form input[name=cartao_numero]').val();
-            console.log(cartao);
-            if(cartao.length >= 6){
-                var bin = parseInt(cartao.substring(0,6));
-                PagSeguroDirectPayment.getBrand({
-                    cardBin: bin,
-                    success: function(a){},
-                    error: function(a){
-                        console.log(a);
-                    },
-                    complete: function(a){
-                        configCartao = a.brand;
-                        cartaoBandeira = configCartao.name;
-                        ps.getParcelamentoCartao();
-                    }
-                });
+    // get token do cartao
+    ps.getTokenCartao = function(callback){
+        param = {
+            cardNumber: $("form#checkout-form input[name=cartao_numero]").val(),
+            brand: cartaoBandeira,
+            cvv: $("form#checkout-form input[name=cartao_cvv]").val(),
+            expirationMonth: $("form#checkout-form select[name=cartao_mes]").val(),
+            expirationYear: $("form#checkout-form input[name=cartao_ano]").val(),
+            success: function(a){},
+            error: function(a){
+                console.log(a);
+            },
+            complete: function(a){
+                console.log(a);
+                configCartao.tk = a.card.token;
+                $('form#checkout-form input[name=cartao_token]').val(configCartao.tk);
+                callback();
             }
-        }
-        if($('form#checkout-form input[name=cartao_numero]').val()){
-            ps.getConfigCartao();
-        }
+        };
 
-        // get token do cartao
-        ps.getTokenCartao = function(){
-            param = {
-                cardNumber: $("form#checkout-form input[name=cartao_numero]").val(),
+        PagSeguroDirectPayment.createCardToken(param);
+
+    }
+
+    // get parcelamentos
+    ps.getParcelamentoCartao = function(){
+        if(!parcelaFixa){
+            PagSeguroDirectPayment.getInstallments({
+                amount: valorTotal,
                 brand: cartaoBandeira,
-                cvv: $("form#checkout-form input[name=cartao_cvv]").val(),
-                expirationMonth: $("form#checkout-form input[name=cartao_mes]").val(),
-                expirationYear: $("form#checkout-form input[name=cartao_ano]").val(),
+                maxInstallmentNoInterest: 4,
                 success: function(a){},
                 error: function(a){
                     console.log(a);
                 },
                 complete: function(a){
-                    configCartao.token = a.card.token;
-                    $('form#checkout-form input[name=cartao_token]').val(configCartao.token);
-                }
-            };
-
-            PagSeguroDirectPayment.createCardToken(param);
-
-        }
-
-        // get parcelamentos
-        ps.getParcelamentoCartao = function(){
-            if(!parcelaFixa){
-                PagSeguroDirectPayment.getInstallments({
-                    amount: valorTotal,
-                    brand: cartaoBandeira,
-                    maxInstallmentNoInterest: 4,
-                    success: function(a){},
-                    error: function(a){
-                        console.log(a);
-                    },
-                    complete: function(a){
-                        for(var i in a.installments[cartaoBandeira]){
-                            $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
-                                value: a.installments[cartaoBandeira][i].quantity + '-' + a.installments[cartaoBandeira][i].installmentAmount,
-                                text: a.installments[cartaoBandeira][i].quantity + 'x de R$' + a.installments[cartaoBandeira][i].installmentAmount
-                            }));
-                        }
+                    for(var i in a.installments[cartaoBandeira]){
+                        $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
+                            value: a.installments[cartaoBandeira][i].quantity + '-' + a.installments[cartaoBandeira][i].installmentAmount,
+                            text: a.installments[cartaoBandeira][i].quantity + 'x de R$' + a.installments[cartaoBandeira][i].installmentAmount
+                        }));
                     }
-                });
-            }
+                }
+            });
         }
-        
-        // preenche form com os parametros recebidos
-        for(var i in dados){
-            //console.log(i + ': ' + dados[i]);
-            // retira telefone e parcelas
-            if(i != 'comprador_tel_ddd' && i != 'comprador_tel_numero' && i != 'cartao_num_parcela' && i != 'cartao_vlr_parcela') {
-                $('form#checkout-form input[name=\'' + i + '\']').val(dados[i]);            
-                $('form#checkout-form input[name=\'' + i + '\']').prop("disabled", true);
-            }
-        };
-        
-        // telefone
-        if(dados['comprador_tel_ddd'] && dados['comprador_tel_numero']){
-            $('form#checkout-form input[name=comprador_tel]').val('(' + dados['comprador_tel_ddd'] + ') ' + dados['comprador_tel_numero']);
-            $('form#checkout-form input[name=comprador_tel]').prop("disabled", true);
+    }
+
+    // preenche form com os parametros recebidos
+    for(var i in dados){
+        //console.log(i + ': ' + dados[i]);
+        // retira telefone e parcelas
+        if(i != 'comprador_tel_ddd' && i != 'comprador_tel_numero' && i != 'cartao_num_parcela' && i != 'cartao_vlr_parcela') {
+            $('form#checkout-form input[name=\'' + i + '\']').val(dados[i]);            
+            $('form#checkout-form input[name=\'' + i + '\']').prop("readonly", true);
         }
-        
-        // parcela
-        if(dados['cartao_num_parcela'] && dados['cartao_vlr_parcela'] && dados['forma_pag'] == 'CreditCard'){
-            $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
-                value: dados['cartao_num_parcela'] + '-' + dados['cartao_vlr_parcela'],
-                text:  dados['cartao_num_parcela'] + 'x de R$' + dados['cartao_vlr_parcela']
-            }));
-            $('form#checkout-form select[name=cartao_parcela]').prop("disabled", true);
-            parcelaFixa = true;
-        }
+    };
+
+    // telefone
+    if(dados['comprador_tel_ddd'] && dados['comprador_tel_numero']){
+        $('form#checkout-form input[name=comprador_tel]').val('(' + dados['comprador_tel_ddd'] + ') ' + dados['comprador_tel_numero']);
+        $('form#checkout-form input[name=comprador_tel]').prop("readonly", true);
+    }
+
+    // parcela
+    if(dados['cartao_num_parcela'] && dados['cartao_vlr_parcela'] && dados['forma_pag'] == 'CreditCard'){
+        $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
+            value: dados['cartao_num_parcela'] + '-' + dados['cartao_vlr_parcela'],
+            text:  dados['cartao_num_parcela'] + 'x de R$' + dados['cartao_vlr_parcela']
+        }));
+        $('form#checkout-form select[name=cartao_parcela]').prop("readonly", true);
+        parcelaFixa = true;
+    }
 
     
+    sendFormData = function(){
+        
+        data = $('form#checkout-form').serializeArray();
+        data.push({name:'item', value:item});
+        data.push({name:'endereco_pais', value:endereco_pais});
+        
+        var r = $.ajax({
+            url: 'index.php?r=pagamento/pagamento/gateway',
+            type: 'POST',
+            data: {'dados': data},
+            dataType: "jsonp"
+        });
+        
+        r.always(function(data) {
+            $('#retornoo').html(data.responseText);
+        });
+        
+        console.log(data);
+    }
+    
+    $('button#btnComprar').on('click', function(){
+        ps.getHash();
+        ps.getTokenCartao(sendFormData);
+    });
 </script>
+<div id="retornoo"></div>

@@ -53,8 +53,7 @@ class AppMlAsset extends AssetBundle
         'js/smart-chat-ui/smart.chat.manager.min.js',
         'js/plugin/jquery-validate/jquery.validate.min.js',
     ];
-		
-   
     
-       public $jsOptions = [ 'position' => \yii\web\View::POS_END ];
+    public $jsOptions = ['position' => \yii\web\View::POS_END];
+       
 }

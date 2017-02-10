@@ -9,6 +9,32 @@ use backend\controllers\PagamentoController;
  */
 class TestePagseguroController extends Controller
 {
+    
+    public function behaviors()
+   {
+       return [
+           'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'rules' => [
+                   [
+                       'actions' => ['login', 'error', 'checkout','product-view','wbla'],
+                       'allow' => true,
+                   ],
+                   [
+                       'actions' => ['logout', 'index','wbla'],
+                       'allow' => true,
+                       'roles' => ['@'],
+                   ],
+               ],
+           ],
+           'verbs' => [
+               'class' => \yii\filters\VerbFilter::className(),
+               'actions' => [
+                   'logout' => ['post'],
+               ],
+           ],
+       ];
+   }
     public function actionIndex()
     {   
         return $this->render('index');
@@ -20,10 +46,10 @@ class TestePagseguroController extends Controller
     }
     
     
-    public function actionW()
-    {   
-        
-        return $this->renderPartial('w');
+    public function actionWbla()
+    {
+        $this->layout = null;
+        return $this->render('w');
     }
     
     public function actionTeste()
