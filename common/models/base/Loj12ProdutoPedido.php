@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use mootensai\behaviors\UUIDBehavior;
+use common\models\GlobalModel;
 
 /**
  * This is the base model class for table "loj12_produto_pedido".
@@ -19,7 +20,7 @@ use mootensai\behaviors\UUIDBehavior;
  * @property \common\models\Loj11Pedido $lOJ12PEDIDO
  * @property \common\models\Loj13ProdutoPedidoVariacao[] $loj13ProdutoPedidoVariacaos
  */
-class Loj12ProdutoPedido extends \yii\db\ActiveRecord
+class Loj12ProdutoPedido extends GlobalModel
 {
     use \mootensai\relation\RelationTrait;
 
@@ -31,8 +32,8 @@ class Loj12ProdutoPedido extends \yii\db\ActiveRecord
         return [
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_STATS'], 'integer'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+//            [['lock'], 'default', 'value' => '0'],
+//            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -99,21 +100,21 @@ class Loj12ProdutoPedido extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+//            'timestamp' => [
+//                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'created_at',
+//                'updatedAtAttribute' => 'updated_at',
+//                'value' => new \yii\db\Expression('NOW()'),
+//            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
+//            'uuid' => [
+//                'class' => UUIDBehavior::className(),
+//                'column' => 'id',
+//            ],
         ];
     }
 

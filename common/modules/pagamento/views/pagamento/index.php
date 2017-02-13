@@ -569,6 +569,9 @@
     }
     
     $('button#btnComprar').on('click', function(){
+        if(!cartaoBandeira)
+            ps.getConfigCartao();
+        
         ps.getHash();
         ps.getTokenCartao(sendFormData);
     });

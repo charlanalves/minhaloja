@@ -38,8 +38,8 @@ class PagamentoComponent extends Component {
 
         // Set a reference code for this payment request. It is useful to identify this payment
         // in future notifications.
-        if (empty($data['id'])) {
-            $pag->setReference($data['id']);
+        if (empty($data['cod_transacao'])) {
+            $pag->setReference($data['cod_transacao']);
         }
 
         // Add an item for this payment request
@@ -81,7 +81,8 @@ class PagamentoComponent extends Component {
 
         // Add an receiver for split this payment request
         $pag->setSplit()->addReceiver()->withParameters(
-            $data['hash_recebedor_secundario'], $data['valor_total'], 20, 0
+//            $data['hash_recebedor_secundario'], $data['valor_total'], 20, 0
+            '', $data['valor_total'], 20, 0
         );
     }
 

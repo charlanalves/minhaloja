@@ -46,6 +46,10 @@ return [
             'class' => 'common\components\pagamentoComponent',
         ],
         
+        'v' => [
+            'class' => 'common\components\ValidationComponent',
+        ],
+        
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

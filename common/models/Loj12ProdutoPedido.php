@@ -18,8 +18,8 @@ class Loj12ProdutoPedido extends BaseLoj12ProdutoPedido
 	    [
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_STATS'], 'integer'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+//            [['lock'], 'default', 'value' => '0'],
+//            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	

@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use mootensai\behaviors\UUIDBehavior;
+use common\models\GlobalModel;
 
 /**
  * This is the base model class for table "loj11_pedido".
@@ -25,7 +26,7 @@ use mootensai\behaviors\UUIDBehavior;
  * @property \common\models\Loj14Status[] $lOJ15Statuses
  * @property \common\models\Loj16Pagamento[] $loj16Pagamentos
  */
-class Loj11Pedido extends \yii\db\ActiveRecord
+class Loj11Pedido extends GlobalModel
 {
     use \mootensai\relation\RelationTrait;
 
@@ -39,8 +40,9 @@ class Loj11Pedido extends \yii\db\ActiveRecord
             [['LOJ11_CLIENTE_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
             [['LOJ11_VALOR'], 'number'],
             [['LOJ11_DT_INCLUSAO'], 'safe'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            [['LOJ11_FORMA_PAG'], 'string', 'max'=>50],
+//            [['lock'], 'default', 'value' => '0'],
+//            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -136,19 +138,19 @@ class Loj11Pedido extends \yii\db\ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
+                'createdAtAttribute' => 'LOJ11_DT_INCLUSAO',
+//                'updatedAtAttribute' => 'updated_at',
                 'value' => new \yii\db\Expression('NOW()'),
             ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
+//            'uuid' => [
+//                'class' => UUIDBehavior::className(),
+//                'column' => 'id',
+//            ],
         ];
     }
 
