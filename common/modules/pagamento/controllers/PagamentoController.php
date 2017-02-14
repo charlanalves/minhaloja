@@ -56,8 +56,7 @@ class PagamentoController extends GlobalBaseController
             // dados de configuracao
             'id' => uniqid('pag_' . date('Ymd') . '_'),
             'gateway' => $data['gateway'],
-            'forma_pag' => $data['forma_pag'],  
-            'hash_recebedor_primario' => '', // sessao é criada na tela de checkout
+            'forma_pag' => $data['forma_pag'], 
             'hash_recebedor_secundario' => $data['hash_recebedor_secundario'], // vendedor secundario key
             'valor_total' => $data['valor_total'],
 

@@ -17,11 +17,11 @@ class TestePagseguroController extends Controller
                'class' => \yii\filters\AccessControl::className(),
                'rules' => [
                    [
-                       'actions' => ['login', 'error', 'checkout','product-view','wbla'],
+                       'actions' => ['login', 'index', 'checkout','product-view','wbla','cartao'],
                        'allow' => true,
                    ],
                    [
-                       'actions' => ['logout', 'index','wbla'],
+                       'actions' => ['logout', 'index','wbla','cartao'],
                        'allow' => true,
                        'roles' => ['@'],
                    ],

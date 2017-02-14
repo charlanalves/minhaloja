@@ -11,6 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'pagamento' => [
+            'class' => 'common\modules\pagamento\Pagamento',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -36,6 +41,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        
+        'pagamentoComponent' => [
+            'class' => 'common\components\pagamentoComponent',
+        ],
+        
+        'v' => [
+            'class' => 'common\components\ValidationComponent',
+        ],
+        
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
