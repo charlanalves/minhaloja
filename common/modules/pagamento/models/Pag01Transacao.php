@@ -9,6 +9,9 @@ use \common\modules\pagamento\models\base\Pag01Transacao as BasePag01Transacao;
  */
 class Pag01Transacao extends BasePag01Transacao
 {
+    // cenario utilizado ao exibir o form para checkout - valida os parametros iniciais
+    const SCENARIO_OPENCHECKOUT = 'OPENCHECKOUT';
+    
     /**
      * @inheritdoc
      */
@@ -32,6 +35,13 @@ class Pag01Transacao extends BasePag01Transacao
 //            [['lock'], 'default', 'value' => '0'],
 //            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
+    }
+    
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_OPENCHECKOUT => ['GATEWAY', 'FORMA_PAG', 'HASH_RECEBEDOR_SECUNDARIO','VALOR_TOTAL','CARTAO_VLR_PARCELA',],
+        ];
     }
 	
 }

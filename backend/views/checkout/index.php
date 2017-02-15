@@ -28,3 +28,7 @@
 
 <div id="divCheckout" style="max-width: 650px; height: auto; border: 0px silver solid; margin: auto; margin-top: 0px;"></div>
 
+<style>
+    .wrap > .container {padding-top: 0px;}
+</style>
+

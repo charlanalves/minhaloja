@@ -1,23 +1,7 @@
 <?php 
     $dadosJson = (!empty($dados)) ? json_encode($dados, true) : '{}';
-?>
-
-<script>
-    var dados = JSON.parse('<?= $dadosJson?>');
-    var gateway = dados['gateway'];
-    var valorTotal = dados['valor_total'];
-    var hashSecundario = dados['hash_recebedor_secundario'];
-    var item = dados['item'];
-    var endereco_pais = dados['endereco_pais'];
-    
-</script>
-
-<?php
-
     $this->title = '';
-    
     $token = \Yii::$app->pagamentoComponent->pagseguroCreateSession();
-    
 ?>
 
 <!-- #GOOGLE FONT -->
@@ -40,64 +24,36 @@
 <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-<div id="content" style="padding: 10px">
-    
+<div id="content" style="padding: 10px;">
+    <h3 id="nome_loja">nome_loja</h3>
     <div class="product-content product-wrap clearfix" style="margin:0;border:0;">
         <div class="row" style="margin: 0px;">
             <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
                 <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
-                    <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive" /> 
-                    <!--<span class="tag2 hot">5%</span>-->
+                    <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive" id="item_img" /> 
                 </div>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
                 <div class="product-deatil" style="border:0; padding: 5px; margin: 0px">
-                    <h1 class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;">
-                        Aviator Clássico (Ray-Ban) Óculos De Sol
-                    </h1>
+                    <h2 id="item_desc" class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;">
+                        item_desc
+                    </h2>
                     <div class="font-xs">
                         <p>
-                            Tam.: 65 | Cor: Preto | Qtd: 1
+                            <label id="variacao_grupo">variacao_grupo:</label>
+                            <label id="variacao_descricao">variacao_descricao</label> | 
+                            <label id="item_qtd">item_qtd</label>
                         </p>
                     </div>
-                    <p class="price-container">
-                        <span>R$ 100,00</span>
+                    <p class="price-container" id="item_vlr">
+                        <span>item_vlr</span>
                     </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <style>
-        section {
-            padding: 0px 15px!important;
-            margin: 5px 0px!important;
-        }
-        fieldset{
-            margin: 0;
-            padding: 15px 0px!important;
-        }
-        fieldset legend{
-            padding-top: 0px!important;
-            margin: 0;
-        }
-        .form-padding-left{
-            /*padding-left: 5px!important
-            padding-left: 2px!important*/
-        }
-        .form-padding-right{
-            /*padding-right: 5px!important
-            padding-right: 2px!important*/
-        }
-        .page-footer{display: none}
-    </style>
-
     <form action="" id="checkout-form" name="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
-
-        <input type="text" name="hash_recebedor_primario" hidden="true" value="">
-        <input type="text" name="gateway" hidden="true" value="">
-        <input type="text" name="valor_total" hidden="true" value="">
-        <input type="text" name="cartao_token" hidden="true" value="">
 
         <fieldset>
             <legend>Meus dados</legend>
@@ -210,13 +166,13 @@
 
                 <section class="col col-9">
                     <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
-                        <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16" value="4111111111111111">
+                        <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16" value="">
                     </label>
                 </section>
 
                 <section class="col col-3 form-padding-left">
                     <label class="input"> <i class="icon-append fa fa-question-circle"></i>
-                        <input type="text" name="cartao_cvv" placeholder="CVV" value="123">
+                        <input type="text" name="cartao_cvv" placeholder="CVV" value="">
                         <b class="tooltip tooltip-top-right">
                             <i class="fa fa-warning txt-color-teal"></i> 
                             Digite o código de segurança
@@ -243,14 +199,14 @@
                             <option value="09">Setembro</option>
                             <option value="10">Outubro</option>
                             <option value="11">Novembro</option>
-                            <option value="12" selected="">Dezembro</option>
+                            <option value="12">Dezembro</option>
                         </select> <i></i> 
                     </label>
                 </section>
 
                 <section class="col col-2 form-padding-right form-padding-left">
                     <label class="input">
-                        <input type="text" name="cartao_ano" placeholder="Ano" value="2030">
+                        <input type="text" name="cartao_ano" placeholder="Ano" value="">
                     </label>
                 </section>
 
@@ -294,7 +250,56 @@
 
 </script>
 
+<style>
+    section {
+        padding: 0px 15px!important;
+        margin: 5px 0px!important;
+    }
+    fieldset{
+        margin: 0;
+        padding: 15px 0px!important;
+    }
+    fieldset legend{
+        padding-top: 0px!important;
+        margin: 0;
+    }
+    .form-padding-left{
+        /*padding-left: 5px!important
+        padding-left: 2px!important*/
+    }
+    .form-padding-right{
+        /*padding-right: 5px!important
+        padding-right: 2px!important*/
+    }
+    .page-footer{display: none}
+</style>
+
+
 <script type="text/javascript">
+    
+    var dados = JSON.parse('<?= $dadosJson?>');
+    var gateway = dados['gateway'];
+    var valor_total = dados['valor_total'];
+    var hashSecundario = dados['hash_recebedor_secundario'];
+    var item = dados['item'];
+    var endereco_pais = dados['endereco_pais'];
+    var nome_loja = dados['nome_loja'];
+    var logo_loja = dados['logo_loja'];
+    var telefone_loja = dados['telefone_loja'];
+    var email_loja = dados['email_loja'];
+    var variacao_grupo = dados['variacao_grupo'];
+    var variacao_descricao = dados['variacao_descricao'];
+    
+    console.log(dados);
+    
+    // set dados do checkout
+    $('h3#nome_loja').text(nome_loja);
+    $('h2#item_desc').text(item[0].item_desc);
+    $('label#variacao_grupo').text(variacao_grupo + ": ");
+    $('label#variacao_descricao').text(variacao_descricao);
+    $('label#item_qtd').text("Qtd.: " + item[0].item_qtd);
+    $('p#item_vlr span').text("R$ " + valor_total);
+    $('img#item_img').attr('src',(item[0].item_img || ''));
 
     pageSetUp();
 
@@ -422,19 +427,15 @@
     var idSession = '<?= $token?>';
     var cartaoBandeira = '';
     var parcelaFixa = false;
+    var hash_recebedor_primario;
     
 
-    // set campos hidden
-    $('form#checkout-form input[name=valor_total]').val(valorTotal);
-    $('form#checkout-form input[name=gateway]').val(gateway);
 
     PagSeguroDirectPayment.setSessionId(idSession);
 
     // hash do cliente
     ps.getHash = function() {
-        var hash_recebedor_primario = PagSeguroDirectPayment.getSenderHash();
-        $('form#checkout-form input[name=hash_recebedor_primario]').val(hash_recebedor_primario);
-        console.log('hash_recebedor_primario: ' + hash_recebedor_primario);
+        hash_recebedor_primario = PagSeguroDirectPayment.getSenderHash();
     }
 
     // get formas de pagamento
@@ -487,9 +488,7 @@
                 console.log(a);
             },
             complete: function(a){
-                console.log(a);
                 configCartao.tk = a.card.token;
-                $('form#checkout-form input[name=cartao_token]').val(configCartao.tk);
                 callback();
             }
         };
@@ -502,7 +501,7 @@
     ps.getParcelamentoCartao = function(){
         if(!parcelaFixa){
             PagSeguroDirectPayment.getInstallments({
-                amount: valorTotal,
+                amount: valor_total,
                 brand: cartaoBandeira,
                 maxInstallmentNoInterest: 4,
                 success: function(a){},
@@ -547,13 +546,24 @@
         parcelaFixa = true;
     }
 
+    $('button#btnComprar').on('click', function(){
+        if(!cartaoBandeira)
+            ps.getConfigCartao();
+        
+        ps.getHash();
+        ps.getTokenCartao(sendFormData);
+    });
     
     sendFormData = function(){
         
         data = $('form#checkout-form').serializeArray();
+        data.push({name:'valor_total', value:valor_total});
+        data.push({name:'gateway', value:gateway});
+        data.push({name:'hash_recebedor_primario', value:hash_recebedor_primario});
+        data.push({name:'cartao_token', value:configCartao.tk});
         data.push({name:'item', value:item});
         data.push({name:'endereco_pais', value:endereco_pais});
-        
+
         var r = $.ajax({
             url: 'index.php?r=pagamento/pagamento/gateway',
             type: 'POST',
@@ -567,13 +577,5 @@
         
         console.log(data);
     }
-    
-    $('button#btnComprar').on('click', function(){
-        if(!cartaoBandeira)
-            ps.getConfigCartao();
-        
-        ps.getHash();
-        ps.getTokenCartao(sendFormData);
-    });
 </script>
 <div id="retornoo"></div>
