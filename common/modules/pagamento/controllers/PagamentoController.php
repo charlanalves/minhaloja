@@ -63,18 +63,16 @@ class PagamentoController extends GlobalBaseController
     
     public function actionGateway()
     {
+        $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        
         try{
             //set data
             $this->setPagamento(\Yii::$app->request->post('dados'));
             
             //CASE_UPPER para o DB
             $dataDB = array_change_key_case($this->data, CASE_UPPER);
-//            var_dump($dataDB);
-//            return;
-
-            $connection = \Yii::$app->db;
-            $transaction = $connection->beginTransaction();
-
+            
             // registra transacão (DB)
             $transacao = new Pag01Transacao();
             $transacao->setAttributes($dataDB);
@@ -123,18 +121,18 @@ class PagamentoController extends GlobalBaseController
         $this->data['cod_transacao'] = (!empty($dados['cod_transacao'])) ? $dados['cod_transacao'] : uniqid('pag_'.date('Ymd').'_');
         foreach($dados as $v)
             if($v['name'] == 'item')
-                foreach($v['value'][0] as $k => $vv){
+                foreach($v['value'] as $k => $vv){
                     $vv = array_values($vv);
                     $this->data[$v['name']][$k]['item_qtd'] = $vv[0];
                     $this->data[$v['name']][$k]['item_cod'] = $vv[1];
                     $this->data[$v['name']][$k]['item_desc'] = $vv[2];
                     $this->data[$v['name']][$k]['item_vlr'] = $vv[3];
                 }
-            else
+            else if(!empty($v['name']) && !empty($v['value']))
                 $this->data[$v['name']] = $v['value'];
         
-        //parcelas
-        if(!empty($this->data['cartao_parcela'])){
+        // parcelas do cartao
+        if(!empty($this->data['cartao_parcela']) && !empty($this->data['cartao_num_parcela']) && !empty($this->data['cartao_vlr_parcela'])){
             $cp = explode('-', $this->data['cartao_parcela']);
             $this->data['cartao_num_parcela'] = $cp[0];
             $this->data['cartao_vlr_parcela'] = $cp[1];
@@ -146,10 +144,11 @@ class PagamentoController extends GlobalBaseController
         unset($this->data['comprador_tel']);
         
         // @todo necessario implementar no formulario
-        $this->data['hash_recebedor_secundario'] = '';
-        $this->data['comprador_data_nascimento'] = '26/08/1989';
+        $this->data['comprador_data_nascimento'] = '01/01/1985';
         $this->data['cartao_nome'] = 'Comprador D Teste';
+        $this->data['endereco_pais'] = 'BRA';
         //$this->data['hash_recebedor_secundario'] = 'PUBF5E6A73B00C64677928A7CEE036481A9'; // Vendedor 2
+        
     }
 
 }

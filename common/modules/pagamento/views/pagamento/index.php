@@ -24,7 +24,7 @@
 <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-<form action="" id="checkout-form" name="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
+<form action="" id="checkout-form" name="checkout-form" onsubmit="return false" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
     <div id="content" style="padding: 10px;">
         
         <h3 id="nome_loja">nome_loja</h3>
@@ -175,72 +175,18 @@
                 <section class="col col-9">
                     <div class="inline-group">
                         <label class="radio form-padding-right">
-                            <input type="radio" name="forma_pag" value="CreditCard" checked="">
+                            <input type="radio" name="forma_pag" class="checkout-forma-pag" value="CreditCard" />
                             <i></i>Cartão de Crédito
                         </label>
                         <label class="radio">
-                            <input type="radio" name="forma_pag" value="Boleto" disabled="">
+                            <input type="radio" name="forma_pag" class="checkout-forma-pag" value="Boleto" />
                             <i></i>Boleto
                         </label>
                     </div>
                 </section>
             </div>
-
-            <div class="row">
-
-                <section class="col col-9">
-                    <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
-                        <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16" value="">
-                    </label>
-                </section>
-
-                <section class="col col-3 form-padding-left">
-                    <label class="input"> <i class="icon-append fa fa-question-circle"></i>
-                        <input type="text" name="cartao_cvv" placeholder="CVV" value="">
-                        <b class="tooltip tooltip-top-right">
-                            <i class="fa fa-warning txt-color-teal"></i> 
-                            Digite o código de segurança
-                        </b>
-                    </label>
-                </section>
-
-            </div>
-
-            <div class="row">
-
-                <section class="col col-4 form-padding-right form-padding-left">
-                    <label class="select">
-                        <select name="cartao_mes">
-                            <option value="0" selected="" disabled="">Mês</option>
-                            <option value="01">Janeiro</option>
-                            <option value="01">Fevereiro</option>
-                            <option value="03">Março</option>
-                            <option value="04">Abril</option>
-                            <option value="05">Maio</option>
-                            <option value="06">Junho</option>
-                            <option value="07">Julho</option>
-                            <option value="08">Agosto</option>
-                            <option value="09">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select> <i></i> 
-                    </label>
-                </section>
-
-                <section class="col col-2 form-padding-right form-padding-left">
-                    <label class="input">
-                        <input type="text" name="cartao_ano" placeholder="Ano" value="">
-                    </label>
-                </section>
-
-                <section class="col col-6 form-padding-left">
-                    <label class="select">
-                        <select name="cartao_parcela"></select>
-                    </label>
-                </section>
-
-            </div>
+            
+            <div id="complemento-pagamento"></div>
 
         </fieldset>
 
@@ -249,13 +195,79 @@
     <!--    <button type="button" class="btn btn-default">
             Cancel
         </button>-->
-        <button type="submit" class="btn btn-primary" id="btnComprar">
+    <button type="submit" class="btn btn-primary" id="btnComprar">
             <i class="fa fa-shopping-cart"></i>
             Comprar
         </button>
     </div>
 
 </form>
+
+<div id="complemento-pag-cartao-credito" style="display: none">
+    <div>
+        <div class="row">
+
+            <section class="col col-9">
+                <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
+                    <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16" value="">
+                </label>
+            </section>
+
+            <section class="col col-3 form-padding-left">
+                <label class="input"> <i class="icon-append fa fa-question-circle"></i>
+                    <input type="text" name="cartao_cvv" placeholder="CVV" value="">
+                    <b class="tooltip tooltip-top-right">
+                        <i class="fa fa-warning txt-color-teal"></i> 
+                        Digite o código de segurança
+                    </b>
+                </label>
+            </section>
+
+        </div>
+
+        <div class="row">
+
+            <section class="col col-4 form-padding-right form-padding-left">
+                <label class="select">
+                    <select name="cartao_mes">
+                        <option value="0" selected="" disabled="">Mês</option>
+                        <option value="01">Janeiro</option>
+                        <option value="01">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select> <i></i> 
+                </label>
+            </section>
+
+            <section class="col col-2 form-padding-right form-padding-left">
+                <label class="input">
+                    <input type="text" name="cartao_ano" placeholder="Ano" value="">
+                </label>
+            </section>
+
+            <section class="col col-6 form-padding-left">
+                <label class="select">
+                    <select name="cartao_parcela"></select>
+                </label>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="complemento-pag-boleto" style="display: none">
+    <div></div>
+</div>
+    
 
 <!-- Your GOOGLE ANALYTICS CODE Below -->
 <script type="text/javascript">
@@ -314,6 +326,7 @@
     var email_loja = dados['email_loja'];
     var variacao_grupo = dados['variacao_grupo'];
     var variacao_descricao = dados['variacao_descricao'];
+    var forma_pag = dados['forma_pag'];
     
     var ps = {};
     var sendFormData = {};
@@ -322,6 +335,8 @@
     var cartaoBandeira = '';
     var parcelaFixa = false;
     var hash_recebedor_primario;
+    
+    var $checkoutForm = {};
     
     console.log(dados);
     
@@ -333,7 +348,7 @@
     $('label#item_qtd').text("Qtd.: " + item[0].item_qtd);
     $('p#item_vlr span').text("R$ " + valor_total);
     //$('img#item_img').attr('src',(item[0].item_img || ''));
-
+    
     pageSetUp();
 
 //    document.addEventListener("DOMContentLoaded", function(event) {
@@ -343,7 +358,7 @@
             var errorClass = 'invalid';
             var errorElement = 'em';
 
-            var $checkoutForm = $('#checkout-form').validate({
+            $checkoutForm = $('#checkout-form').validate({
                 errorClass: errorClass,
                 errorElement: errorElement,
                 highlight: function (element) {
@@ -382,6 +397,9 @@
                         required: true
                     },
                     endereco_uf: {
+                        required: true
+                    },
+                    forma_pag: {
                         required: true
                     },
                     cartao_numero: {
@@ -431,6 +449,9 @@
                     },
                     endereco_uf: {
                         required: 'Informe o UF'
+                    },
+                    forma_pag: {
+                        required: 'Selecione uma forma de pagamento'
                     },
                     cartao_numero: {
                         required: 'Informe o número do cartão',
@@ -554,7 +575,7 @@
     for(var i in dados){
         //console.log(i + ': ' + dados[i]);
         // retira telefone e parcelas
-        if(i != 'comprador_tel_ddd' && i != 'comprador_tel_numero' && i != 'cartao_num_parcela' && i != 'cartao_vlr_parcela') {
+        if(i != 'comprador_tel_ddd' && i != 'comprador_tel_numero' && i != 'cartao_num_parcela' && i != 'cartao_vlr_parcela' && i!= 'forma_pag') {
             $('form#checkout-form input[name=\'' + i + '\']').val(dados[i]);            
             $('form#checkout-form input[name=\'' + i + '\']').prop("readonly", true);
         }
@@ -566,22 +587,56 @@
         $('form#checkout-form input[name=comprador_tel]').prop("readonly", true);
     }
 
-    // parcela
-    if(dados['cartao_num_parcela'] && dados['cartao_vlr_parcela'] && dados['forma_pag'] == 'CreditCard'){
+    // Formas de pagamento
+    //CreditCard
+    if(dados['cartao_num_parcela'] && dados['cartao_vlr_parcela'] && forma_pag == 'CreditCard'){
         $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
             value: dados['cartao_num_parcela'] + '-' + dados['cartao_vlr_parcela'],
             text:  dados['cartao_num_parcela'] + 'x de R$' + dados['cartao_vlr_parcela']
         }));
         $('form#checkout-form select[name=cartao_parcela]').prop("readonly", true);
+        $('form#checkout-form input[name=forma_pag][value=CreditCard]').prop("checked", true);
+        $('form#checkout-form input[name=forma_pag]').prop("disabled", true);
         parcelaFixa = true;
+        
+    // Boleto
+    } else if(forma_pag == 'Boleto'){
+        $('form#checkout-form input[name=forma_pag][value=Boleto]').prop("checked", true);
+        $('form#checkout-form input[name=forma_pag]').prop("disabled", true);
     }
+    
+    // compra
+    $('form#checkout-form button#btnComprar').on('click', function(){
+        console.log($checkoutForm.form());
+        
+        if($checkoutForm.form() === true){
+            if(forma_pag === 'CreditCard'){
+                if(!cartaoBandeira)
+                    ps.getConfigCartao();
+                ps.getTokenCartao(sendFormData);
 
-    $('form#checkout-form button#btnComprar').on('submit', function(){
-        if(!cartaoBandeira)
-            ps.getConfigCartao();
+            } else if(forma_pag === 'Boleto'){
+                ps.getHash();
+                sendFormData();
 
-        ps.getHash();
-        ps.getTokenCartao(sendFormData);
+            }
+        }
+    });
+    
+    // seleciona forma de pagamento
+    $("form#checkout-form input.checkout-forma-pag").on("click", function() {
+        forma_pag = $("form#checkout-form input.checkout-forma-pag:checked").val();
+        
+        if(forma_pag === 'CreditCard'){
+            complementoCartao = $('div#complemento-pag-cartao-credito div').prop('outerHTML');
+            $('div#complemento-pagamento').html(complementoCartao);
+            
+        } else if(forma_pag === 'Boleto'){
+            complementoBoleto = $('div#complemento-pag-boleto div').prop('outerHTML');
+            $('div#complemento-pagamento').html(complementoBoleto);
+            
+        }
+            
     });
     
     sendFormData = function(){
@@ -590,9 +645,11 @@
         data.push({name:'valor_total', value:valor_total});
         data.push({name:'gateway', value:gateway});
         data.push({name:'hash_recebedor_primario', value:hash_recebedor_primario});
+        data.push({name:'hash_recebedor_secundario', value:hashSecundario});
         data.push({name:'cartao_token', value:configCartao.tk});
         data.push({name:'item', value:item});
         data.push({name:'endereco_pais', value:endereco_pais});
+        data.push({name:'forma_pag', value:forma_pag});
 
         var r = $.ajax({
             url: 'index.php?r=pagamento/pagamento/gateway',
@@ -607,5 +664,8 @@
         
         console.log(data);
     }
+    
+    
+    
 </script>
 <div id="retornoo"></div>

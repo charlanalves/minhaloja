@@ -14,6 +14,7 @@ class Pag01Transacao extends BasePag01Transacao
     
     /**
      * @inheritdoc
+     * @todo Criar regras de campo obrigatório por gateway e forma de pagamento
      */
     public function rules()
     {
@@ -27,7 +28,7 @@ class Pag01Transacao extends BasePag01Transacao
             [['COD_TRANSACAO', 'GATEWAY', 'FORMA_PAG', 'HASH_RECEBEDOR_PRIMARIO', 'HASH_RECEBEDOR_SECUNDARIO', 'COMPRADOR_NOME', 'COMPRADOR_EMAIL', 'ENDERECO_LOGRADOURO', 'ENDERECO_BAIRRO', 'ENDERECO_CIDADE', 'ENDERECO_COMPLEMENTO', 'CARTAO_NOME'], 'string', 'max' => 100],
             [['COMPRADOR_CPF'], 'string', 'max' => 14],
             [['ENDERECO_NUMERO'], 'string', 'max' => 5],
-            [['ENDERECO_CEP'], 'string', 'max' => 8],
+            [['ENDERECO_CEP'], 'string', 'max' => 9],
             [['ENDERECO_UF'], 'string', 'max' => 2],
             [['ENDERECO_PAIS'], 'string', 'max' => 3],
             [['CARTAO_TOKEN'], 'string', 'max' => 32],
@@ -39,9 +40,9 @@ class Pag01Transacao extends BasePag01Transacao
     
     public function scenarios()
     {
-        return [
-            self::SCENARIO_OPENCHECKOUT => ['GATEWAY', 'FORMA_PAG', 'HASH_RECEBEDOR_SECUNDARIO','VALOR_TOTAL','CARTAO_VLR_PARCELA',],
-        ];
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_OPENCHECKOUT] = ['GATEWAY', 'HASH_RECEBEDOR_SECUNDARIO','VALOR_TOTAL','CARTAO_VLR_PARCELA'];
+        return $scenarios;
     }
 	
 }

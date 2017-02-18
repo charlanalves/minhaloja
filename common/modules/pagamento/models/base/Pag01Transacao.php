@@ -57,7 +57,7 @@ class Pag01Transacao extends GlobalModel
             [['COD_TRANSACAO', 'GATEWAY', 'FORMA_PAG', 'HASH_RECEBEDOR_PRIMARIO', 'HASH_RECEBEDOR_SECUNDARIO', 'COMPRADOR_NOME', 'COMPRADOR_EMAIL', 'ENDERECO_LOGRADOURO', 'ENDERECO_BAIRRO', 'ENDERECO_CIDADE', 'ENDERECO_COMPLEMENTO', 'CARTAO_NOME'], 'string', 'max' => 100],
             [['COMPRADOR_CPF'], 'string', 'max' => 14],
             [['ENDERECO_NUMERO'], 'string', 'max' => 5],
-            [['ENDERECO_CEP'], 'string', 'max' => 8],
+            [['ENDERECO_CEP'], 'string', 'max' => 9],
             [['ENDERECO_UF'], 'string', 'max' => 2],
             [['ENDERECO_PAIS'], 'string', 'max' => 3],
             [['CARTAO_TOKEN'], 'string', 'max' => 32],
