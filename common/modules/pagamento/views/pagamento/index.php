@@ -24,36 +24,60 @@
 <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-<div id="content" style="padding: 10px;">
-    <h3 id="nome_loja">nome_loja</h3>
-    <div class="product-content product-wrap clearfix" style="margin:0;border:0;">
-        <div class="row" style="margin: 0px;">
-            <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
-                <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
-                    <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive" id="item_img" /> 
+<form action="" id="checkout-form" name="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
+    <div id="content" style="padding: 10px;">
+        
+        <h3 id="nome_loja">nome_loja</h3>
+        <div class="product-content product-wrap clearfix" style="margin:0;border:0;">
+            <div class="row" style="margin: 0px;">
+                <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
+
+    <!--                <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
+                        <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive" id="item_img" /> 
+                    </div>-->
+                    <div id="myCarousel" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+                            <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <!-- Slide 1 -->
+                            <div class="item active">
+                                <img src="img/demo/e-comm/detail-1.png" alt="">
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="item">
+                                <img src="img/demo/e-comm/detail-2.png" alt="">
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="item">
+                                <img src="img/demo/e-comm/detail-3.png" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+                    </div>  
+
+
                 </div>
-            </div>
-            <div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
-                <div class="product-deatil" style="border:0; padding: 5px; margin: 0px">
-                    <h2 id="item_desc" class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;">
-                        item_desc
-                    </h2>
-                    <div class="font-xs">
-                        <p>
-                            <label id="variacao_grupo">variacao_grupo:</label>
-                            <label id="variacao_descricao">variacao_descricao</label> | 
-                            <label id="item_qtd">item_qtd</label>
+                <div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
+                    <div class="product-deatil" style="border:0; padding: 5px; margin: 0px">
+                        <h2 id="item_desc" class="name"style="margin:0;margin-bottom: 5px;border:0;width: 100%;"></h2>
+                        <div class="font-xs">
+                            <p>
+                                <label id="variacao_grupo"></label>
+                                <label id="variacao_descricao"></label> | 
+                                <label id="item_qtd"></label>
+                            </p>
+                        </div>
+                        <p class="price-container" id="item_vlr">
+                            <span></span>
                         </p>
                     </div>
-                    <p class="price-container" id="item_vlr">
-                        <span>item_vlr</span>
-                    </p>
                 </div>
             </div>
         </div>
-    </div>
-
-    <form action="" id="checkout-form" name="checkout-form" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
 
         <fieldset>
             <legend>Meus dados</legend>
@@ -61,7 +85,7 @@
             <div class="row">
                 <section class="col col-6 form-padding-right">
                     <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                        <input type="text" name="comprador_nome" placeholder="Nome completo">
+                        <input type="text" name="comprador_nome" placeholder="Nome completo" required="">
                     </label>
                 </section>
                 <section class="col col-6 form-padding-left">
@@ -219,18 +243,19 @@
             </div>
 
         </fieldset>
-    </form>
 
-</div>
-<div class="modal-footer">
-<!--    <button type="button" class="btn btn-default">
-        Cancel
-    </button>-->
-    <button type="button" class="btn btn-primary" id="btnComprar">
-        <i class="fa fa-shopping-cart"></i>
-        Comprar
-    </button>
-</div>
+    </div>
+    <div class="modal-footer">
+    <!--    <button type="button" class="btn btn-default">
+            Cancel
+        </button>-->
+        <button type="submit" class="btn btn-primary" id="btnComprar">
+            <i class="fa fa-shopping-cart"></i>
+            Comprar
+        </button>
+    </div>
+
+</form>
 
 <!-- Your GOOGLE ANALYTICS CODE Below -->
 <script type="text/javascript">
@@ -290,6 +315,14 @@
     var variacao_grupo = dados['variacao_grupo'];
     var variacao_descricao = dados['variacao_descricao'];
     
+    var ps = {};
+    var sendFormData = {};
+    var configCartao = {};
+    var idSession = '<?= $token?>';
+    var cartaoBandeira = '';
+    var parcelaFixa = false;
+    var hash_recebedor_primario;
+    
     console.log(dados);
     
     // set dados do checkout
@@ -299,11 +332,12 @@
     $('label#variacao_descricao').text(variacao_descricao);
     $('label#item_qtd').text("Qtd.: " + item[0].item_qtd);
     $('p#item_vlr span').text("R$ " + valor_total);
-    $('img#item_img').attr('src',(item[0].item_img || ''));
+    //$('img#item_img').attr('src',(item[0].item_img || ''));
 
     pageSetUp();
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+//    document.addEventListener("DOMContentLoaded", function(event) {
+        
         var pagefunction = function () {
 
             var errorClass = 'invalid';
@@ -322,29 +356,32 @@
                 },
                 // Rules for form validation
                 rules: {
-                    nome: {
+                    comprador_nome: {
                         required: true
                     },
-                    cpf: {
+                    comprador_cpf: {
                         required: true
                     },
-                    email: {
+                    comprador_email: {
                         required: true,
                         email: true
                     },
-                    telefone: {
-                        required: true
-                    },
-                    endereco_uf: {
-                        required: true
-                    },
-                    endereco_cidade: {
+                    comprador_tel: {
                         required: true
                     },
                     endereco_cep: {
                         required: true
                     },
-                    logradouro: {
+                    endereco_logradouro: {
+                        required: true
+                    },
+                    endereco_bairro: {
+                        required: true
+                    },
+                    endereco_cidade: {
+                        required: true
+                    },
+                    endereco_uf: {
                         required: true
                     },
                     cartao_numero: {
@@ -365,32 +402,35 @@
                 },
                 // Messages for form validation
                 messages: {
-                    name: {
+                    comprador_nome: {
                         required: 'Informe seu nome completo'
                     },
-                    cpf: {
+                    comprador_cpf: {
                         required: 'Informe seu CPF',
                         digits: 'Digite um CPF valido'
                     },
-                    email: {
+                    comprador_email: {
                         required: 'Informe seu email',
                         email: 'Informe um email VALIDO'
                     },
-                    telefone: {
-                        required: 'Informe um telefone'
-                    },
-                    endereco_uf: {
-                        required: 'Informe o UF'
-                    },
-                    'endereco_cidade': {
-                        required: 'Informe a cidade'
+                    comprador_tel: {
+                        required: 'Informe seu telefone'
                     },
                     endereco_cep: {
-                        required: 'Informe o CEP',
+                        required: 'Informe seu CEP',
                         digits: 'Apenas números'
                     },
                     endereco_logradouro: {
-                        required: 'Infome o endereço'
+                        required: 'Informe o logradouro (Rua, Avenida, Rodovia, Sítio, Chácara...)',
+                    },
+                    endereco_bairro: {
+                        required: 'Informe seu bairro'
+                    },
+                    endereco_cidade: {
+                        required: 'Informe sua cidade'
+                    },
+                    endereco_uf: {
+                        required: 'Informe o UF'
                     },
                     cartao_numero: {
                         required: 'Informe o número do cartão',
@@ -401,7 +441,7 @@
                         digits: 'Apenas números'
                     },
                     cartao_mes: {
-                        required: 'Selecione um mês'
+                        required: 'Selecione o mês de vencimento do cartão'
                     },
                     cartao_ano: {
                         required: 'Informe o ano de vencimento do cartão',
@@ -419,17 +459,7 @@
         // Load form valisation dependency 
         loadScript("js/plugin/jquery-form/jquery-form.min.js", pagefunction);
 
-    });
-
-    var ps = {};
-    var sendFormData = {};
-    var configCartao = {};
-    var idSession = '<?= $token?>';
-    var cartaoBandeira = '';
-    var parcelaFixa = false;
-    var hash_recebedor_primario;
-    
-
+//    });
 
     PagSeguroDirectPayment.setSessionId(idSession);
 
@@ -546,10 +576,10 @@
         parcelaFixa = true;
     }
 
-    $('button#btnComprar').on('click', function(){
+    $('form#checkout-form button#btnComprar').on('submit', function(){
         if(!cartaoBandeira)
             ps.getConfigCartao();
-        
+
         ps.getHash();
         ps.getTokenCartao(sendFormData);
     });

@@ -50,6 +50,7 @@ class CheckoutController extends GlobalBaseController {
                 'item_vlr' => $data['LOJ12_VLR_UNID'],
                 'item_img' => $data['LOJ10_URL'],
             ]],
+            'cod_transacao' => $data['LOJ11_ID'], // sera salvo o id do pedido na transacao do gateway
             'nome_loja' => $data['LOJ07_NOME'],
             'descricao_loja' => $data['LOJ07_DESCRICAO'],
             'logo_loja' => $data['LOJ07_LOGO'],

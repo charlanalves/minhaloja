@@ -67,7 +67,7 @@
                         <h2 class="font-xl"><strong>Oooops, Algo deu errado!</strong></h2>
                         <br />
                         <p class="lead semi-bold">
-                            <strong>Estamos trabalhando duro para corrigir esse problema. Aguarde alguns instantes e tente novamente.</strong><br><br>
+                            <strong><?=$dados?></strong><br><br>
                             <small><a href="javascript:history.back();"><small><i class="fa fa-arrow-left"></i> Voltar</small></a></small>
                         </p>
                     </div>
