@@ -24,6 +24,7 @@
 <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
+<!--<form action="" id="checkout-form" name="checkout-form" onsubmit="return false" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">-->
 <form action="" id="checkout-form" name="checkout-form" onsubmit="return false" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
     <div id="content" style="padding: 10px;">
         
@@ -170,22 +171,25 @@
 
         <fieldset>
             <legend>Forma de pagamento</legend>
-
-            <div class="row">
-                <section class="col col-9">
-                    <div class="inline-group">
-                        <label class="radio form-padding-right">
-                            <input type="radio" name="forma_pag" class="checkout-forma-pag" value="CreditCard" />
-                            <i></i>Cartão de Crédito
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="forma_pag" class="checkout-forma-pag" value="Boleto" />
-                            <i></i>Boleto
-                        </label>
-                    </div>
-                </section>
-            </div>
             
+            <div class="row">
+
+                <section class="col col-4 form-padding-right">
+                    <label class="radio radio-inline">
+                        <input type="radio" name="forma_pag" class="checkout-forma-pag" value="CreditCard" />
+                        <i></i>Cartão de Crédito
+                    </label>
+                </section>
+                
+                <section class="col col-4 form-padding-left">
+                    <label class="radio radio-inline">
+                        <input type="radio" name="forma_pag" class="checkout-forma-pag" value="Boleto" />
+                        <i></i>Boleto
+                    </label>
+                </section>
+                
+            </div>
+
             <div id="complemento-pagamento"></div>
 
         </fieldset>
@@ -207,13 +211,13 @@
     <div>
         <div class="row">
 
-            <section class="col col-9">
+            <section class="col col-4">
                 <label class="input"><i class="icon-prepend fa fa-credit-card"></i>
                     <input type="text" name="cartao_numero" placeholder="Número do cartão" onchange="ps.getConfigCartao()" maxlength="16" value="">
                 </label>
             </section>
 
-            <section class="col col-3 form-padding-left">
+            <section class="col col-2 form-padding-left">
                 <label class="input"> <i class="icon-append fa fa-question-circle"></i>
                     <input type="text" name="cartao_cvv" placeholder="CVV" value="">
                     <b class="tooltip tooltip-top-right">
@@ -223,6 +227,12 @@
                 </label>
             </section>
 
+            <section class="col col-6">
+                <label class="input">
+                    <input type="text" name="cartao_nome" placeholder="Nome impresso no cartão" value="">
+                </label>
+            </section>
+            
         </div>
 
         <div class="row">
@@ -255,7 +265,9 @@
 
             <section class="col col-6 form-padding-left">
                 <label class="select">
-                    <select name="cartao_parcela"></select>
+                    <select name="cartao_parcela">
+                        <option value="">selecione o numero de parcelas...</option>
+                    </select>
                 </label>
             </section>
 
@@ -338,7 +350,6 @@
     
     var $checkoutForm = {};
     
-    console.log(dados);
     
     // set dados do checkout
     $('h3#nome_loja').text(nome_loja);
@@ -410,12 +421,18 @@
                         required: true,
                         digits: true
                     },
+                    cartao_nome: {
+                        required: true
+                    },
                     cartao_mes: {
                         required: true
                     },
                     cartao_ano: {
                         required: true,
                         digits: true
+                    },
+                    cartao_parcela: {
+                        required: true
                     }
                 },
                 // Messages for form validation
@@ -461,12 +478,18 @@
                         required: 'Informe o código de segurança do cartão',
                         digits: 'Apenas números'
                     },
+                    cartao_nome: {
+                        required: 'Informe o nome impresso no cartão',
+                    },
                     cartao_mes: {
                         required: 'Selecione o mês de vencimento do cartão'
                     },
                     cartao_ano: {
                         required: 'Informe o ano de vencimento do cartão',
                         digits: 'Apenas números'
+                    },
+                    cartao_parcela: {
+                        required: 'Selecione uma opção de pagamento'
                     }
                 },
                 // Do not change code below
@@ -494,33 +517,41 @@
         PagSeguroDirectPayment.getPaymentMethods({
             success: function(a){},
             error: function(a){
+                console.log('erro: ');
                 console.log(a);
             },
-            complete: function(a){
-                console.log(a);
-            }
+            complete: function(a){}
         });
     }
 
     // get sobre o cartao
     ps.getConfigCartao = function(){
         cartao = $('form#checkout-form input[name=cartao_numero]').val();
-        console.log(cartao);
+        
         if(cartao.length >= 6){
             var bin = parseInt(cartao.substring(0,6));
             PagSeguroDirectPayment.getBrand({
                 cardBin: bin,
                 success: function(a){},
                 error: function(a){
+                    console.log('erro: ');
                     console.log(a);
                 },
                 complete: function(a){
-                    configCartao = a.brand;
-                    cartaoBandeira = configCartao.name;
-                    ps.getParcelamentoCartao();
+                    if(a.error === true){
+                        cartaoBandeira = null;
+                        $('form#checkout-form select[name=cartao_parcela]').empty();
+
+                    } else {
+                        configCartao = a.brand;
+                        cartaoBandeira = configCartao.name;
+                        ps.getParcelamentoCartao();
+                        
+                    }
                 }
             });
         }
+        
     }
     if($('form#checkout-form input[name=cartao_numero]').val()){
         ps.getConfigCartao();
@@ -536,6 +567,7 @@
             expirationYear: $("form#checkout-form input[name=cartao_ano]").val(),
             success: function(a){},
             error: function(a){
+                console.log('erro: ');
                 console.log(a);
             },
             complete: function(a){
@@ -550,16 +582,18 @@
 
     // get parcelamentos
     ps.getParcelamentoCartao = function(){
-        if(!parcelaFixa){
+        if(!parcelaFixa && cartaoBandeira){
             PagSeguroDirectPayment.getInstallments({
                 amount: valor_total,
                 brand: cartaoBandeira,
                 maxInstallmentNoInterest: 4,
                 success: function(a){},
                 error: function(a){
+                    console.log('erro: ');
                     console.log(a);
                 },
                 complete: function(a){
+                    $('form#checkout-form select[name=cartao_parcela]').empty();
                     for(var i in a.installments[cartaoBandeira]){
                         $('form#checkout-form select[name=cartao_parcela]').append($('<option>', {
                             value: a.installments[cartaoBandeira][i].quantity + '-' + a.installments[cartaoBandeira][i].installmentAmount,
@@ -573,7 +607,6 @@
 
     // preenche form com os parametros recebidos
     for(var i in dados){
-        //console.log(i + ': ' + dados[i]);
         // retira telefone e parcelas
         if(i != 'comprador_tel_ddd' && i != 'comprador_tel_numero' && i != 'cartao_num_parcela' && i != 'cartao_vlr_parcela' && i!= 'forma_pag') {
             $('form#checkout-form input[name=\'' + i + '\']').val(dados[i]);            
@@ -607,7 +640,7 @@
     
     // compra
     $('form#checkout-form button#btnComprar').on('click', function(){
-        console.log($checkoutForm.form());
+//        console.log($checkoutForm.form());
         
         if($checkoutForm.form() === true){
             if(forma_pag === 'CreditCard'){
@@ -662,7 +695,6 @@
             $('#retornoo').html(data.responseText);
         });
         
-        console.log(data);
     }
     
     

@@ -145,7 +145,7 @@ class PagamentoController extends GlobalBaseController
         
         // @todo necessario implementar no formulario
         $this->data['comprador_data_nascimento'] = '01/01/1985';
-        $this->data['cartao_nome'] = 'Comprador D Teste';
+        //$this->data['cartao_nome'] = 'Comprador D Teste';
         $this->data['endereco_pais'] = 'BRA';
         //$this->data['hash_recebedor_secundario'] = 'PUBF5E6A73B00C64677928A7CEE036481A9'; // Vendedor 2
         
