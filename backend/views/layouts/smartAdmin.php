@@ -830,7 +830,11 @@
 		</aside>
 		<!-- END NAVIGATION -->
 		
-		<!-- #MAIN PANEL -->
+                <!-- #FINALIZAR VENDA -->
+                <?= ( isset( $this->params['bloco-finalizar-venda'] ) ) ? $this->params['bloco-finalizar-venda'] : '' ?>
+		<!-- FINALIZAR VENDA -->
+		
+                <!-- #MAIN PANEL -->
 		<div id="main" role="main">
 
 			<!-- RIBBON -->
@@ -869,7 +873,6 @@
 
 		</div>
 		<!-- END #MAIN PANEL -->
-                <?= ( isset( $this->params['bloco-finalizar-venda'] ) ) ? $this->params['bloco-finalizar-venda'] : '' ?>
                 
 		<!-- #PAGE FOOTER -->
 <!--		<div class="page-footer">
@@ -1027,7 +1030,16 @@
 		<!-- SmartChat UI : plugin -->
 		<script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
 		<script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
-
+                <script src="js/plugin/datatables/jquery.dataTables.min.js"></script>
+		<script src="js/plugin/datatables/dataTables.colVis.min.js"></script>
+		<script src="js/plugin/datatables/dataTables.tableTools.min.js"></script>
+		<script src="js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+		<script src="js/plugin/x-editable/x-editable.min.js"></script>
+		<script src="js/plugin/x-editable/moment.min.js"></script>
+		<script src="js/plugin/x-editable/jquery.mockjax.min.js"></script>
+                
+         
 <script type="text/javascript">
     
 	
@@ -1121,8 +1133,19 @@
                 thousandsSeparator: '.'
             });
         
-
-	
+          $('#enviarCobranca').editable({
+		        url: './index.php?r=site/enviar-email',
+		        type: 'text',
+		        pk: 1,
+		        name: 'username',
+		        title: 'Enter username'
+		    });
+                    
+  $('#enviarCobranca').click(function(){
+      var emailCliente = $('#enviarCobranca').closest('tr').find('#emailcliente').val();
+    $('.editable-input input').val(emailCliente);
+  });
+  
 </script>
 </body>
 
