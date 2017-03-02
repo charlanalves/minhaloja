@@ -25,8 +25,6 @@ class Loj02Cliente extends BaseLoj02Cliente
             [['LOJ02_CPF'], 'string', 'max' => 14],
             [['LOJ02_CNPJ'], 'string', 'max' => 18],
             [['LOJ02_CPF'], 'unique'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	

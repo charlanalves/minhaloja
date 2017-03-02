@@ -12,7 +12,7 @@ use common\models\GlobalModel;
  * This is the base model class for table "loj11_pedido".
  *
  * @property integer $LOJ11_ID
- * @property integer $LOJ11_CLIENTE_ID
+ * @property integer $LOJ11_LOJA_ID
  * @property integer $LOJ11_USUARIO_ID
  * @property string $LOJ11_VALOR
  * @property integer $LOJ11_NUM_PARCELA
@@ -36,8 +36,8 @@ class Loj11Pedido extends GlobalModel
     public function rules()
     {
         return [
-            [['LOJ11_CLIENTE_ID', 'LOJ11_USUARIO_ID', 'LOJ11_VALOR'], 'required'],
-            [['LOJ11_CLIENTE_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
+            [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_VALOR'], 'required'],
+            [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
             [['LOJ11_VALOR'], 'number'],
             [['LOJ11_DT_INCLUSAO'], 'safe'],
             [['LOJ11_FORMA_PAG'], 'string', 'max'=>50],
@@ -72,7 +72,7 @@ class Loj11Pedido extends GlobalModel
     {
         return [
             'LOJ11_ID' => 'Loj11  ID',
-            'LOJ11_CLIENTE_ID' => 'Loj11  Cliente  ID',
+            'LOJ11_LOJA_ID' => 'Loj11  Loja  ID',
             'LOJ11_USUARIO_ID' => 'Loj11  Usuario  ID',
             'LOJ11_VALOR' => 'Loj11  Valor',
             'LOJ11_NUM_PARCELA' => 'Loj11  Num  Parcela',
@@ -86,7 +86,7 @@ class Loj11Pedido extends GlobalModel
      */
     public function getLOJ11CLIENTE()
     {
-        return $this->hasOne(\common\models\Loj02Cliente::className(), ['LOJ02_ID' => 'LOJ11_CLIENTE_ID']);
+        return $this->hasOne(\common\models\Loj07Loja::className(), ['LOJ07_ID' => 'LOJ11_LOJA_ID']);
     }
         
     /**

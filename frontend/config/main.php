@@ -49,7 +49,6 @@ return [
         'v' => [
             'class' => 'common\components\ValidationComponent',
         ],
-        
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

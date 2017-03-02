@@ -17,7 +17,9 @@ class Loj12ProdutoPedido extends BaseLoj12ProdutoPedido
         return array_replace_recursive(parent::rules(),
 	    [
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
-            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_STATS'], 'integer'],
+            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_VARIACAO_ID', 'LOJ12_QTD'], 'integer'],
+            [['LOJ12_VLR_UNID'], 'float'],
+            [['LOJ12_NOME_PRODUTO'], 'string', 'max' => 100],
 //            [['lock'], 'default', 'value' => '0'],
 //            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

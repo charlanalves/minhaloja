@@ -33,9 +33,10 @@
             <div class="row" style="margin: 0px;">
                 <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
 
-    <!--                <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
+                    <div class="product-image" style="min-height: auto; border:0; padding: 0px 10px; margin: 0px">
                         <img src="img/demo/e-comm/3.png" alt="194x228" class="img-responsive" id="item_img" /> 
-                    </div>-->
+                    </div>
+<!--                    
                     <div id="myCarousel" class="carousel slide">
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class=""></li>
@@ -43,22 +44,22 @@
                             <li data-target="#myCarousel" data-slide-to="2" class=""></li>
                         </ol>
                         <div class="carousel-inner">
-                            <!-- Slide 1 -->
+                             Slide 1 
                             <div class="item active">
                                 <img src="img/demo/e-comm/detail-1.png" alt="">
                             </div>
-                            <!-- Slide 2 -->
+                             Slide 2 
                             <div class="item">
                                 <img src="img/demo/e-comm/detail-2.png" alt="">
                             </div>
-                            <!-- Slide 3 -->
+                             Slide 3 
                             <div class="item">
                                 <img src="img/demo/e-comm/detail-3.png" alt="">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#myCarousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
                         <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
-                    </div>  
+                    </div>  -->
 
 
                 </div>
@@ -117,7 +118,7 @@
 
                 <section class="col col-4 form-padding-right">
                     <label class="input">
-                        <input type="text" name="endereco_cep" placeholder="CEP" data-mask="99999-999">
+                        <input type="text" name="endereco_cep" placeholder="CEP" data-mask="99999-999" onkeyup="buscaCEP(this.value)">
                     </label>
                 </section>
 
@@ -199,7 +200,7 @@
     <!--    <button type="button" class="btn btn-default">
             Cancel
         </button>-->
-    <button type="submit" class="btn btn-primary" id="btnComprar">
+        <button type="submit" class="btn btn-primary" id="btnComprar">
             <i class="fa fa-shopping-cart"></i>
             Comprar
         </button>
@@ -349,7 +350,7 @@
     var hash_recebedor_primario;
     
     var $checkoutForm = {};
-    
+        
     
     // set dados do checkout
     $('h3#nome_loja').text(nome_loja);
@@ -358,7 +359,41 @@
     $('label#variacao_descricao').text(variacao_descricao);
     $('label#item_qtd').text("Qtd.: " + item[0].item_qtd);
     $('p#item_vlr span').text("R$ " + valor_total);
-    //$('img#item_img').attr('src',(item[0].item_img || ''));
+    $('img#item_img').attr('src',(item[0].item_img || ''));
+    
+    var ultimoCEP = '';
+    function buscaCEP(v){
+	v = v.replace('X','');
+        if(v.length === 9 && ultimoCEP != v){
+            ultimoCEP = v;
+            globalGetEnderecoByCEP(v, preencheEndereco);
+        }
+    }
+    
+    function preencheEndereco(data){
+        if(data.erro){
+            $.smallBox({
+                title: "Busca de CEP",
+                content: "<i class='fa fa-clock-o'></i> <i>O CEP digitado não foi encontrado, verifique o CEP ou preencha os dados do endereço...</i>",
+                color: "#C46A69",
+                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                timeout: 8000
+            });
+            $('form#checkout-form input[name=endereco_logradouro]').val('');
+            $('form#checkout-form input[name=endereco_bairro]').val('');
+            $('form#checkout-form input[name=endereco_cidade]').val('');
+            $('form#checkout-form input[name=endereco_uf]').val('');
+            $('form#checkout-form input[name=endereco_complemento]').val('');
+            
+        }else{
+            console.log(data);
+            $('form#checkout-form input[name=endereco_logradouro]').val(data.logradouro);
+            $('form#checkout-form input[name=endereco_bairro]').val(data.bairro);
+            $('form#checkout-form input[name=endereco_cidade]').val(data.localidade);
+            $('form#checkout-form input[name=endereco_uf]').val(data.uf);
+            $('form#checkout-form input[name=endereco_complemento]').val(data.complemento);
+        }
+    }
     
     pageSetUp();
 

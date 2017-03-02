@@ -20,4 +20,24 @@ class LojaConfigController extends GlobalBaseController {
         return $this->render('index', ['data' => $data]);
     }
 
+    public function actionSave() {
+        
+        try {
+            $session = \Yii::$app->session;
+            $session['LOJ07_ID'] = 1;
+            
+            $post = \Yii::$app->request->post();
+            $postFormatado = self::formatDataForm($post['dados']);
+            
+            $loja = Loj07Loja::findOne($session['LOJ07_ID']);
+            $loja->setAttributes($postFormatado);
+            $loja->save();
+            
+        } catch (\Exception $exc) {
+            var_dump($exc->getMessage());
+            
+        }
+
+    }
+
 }

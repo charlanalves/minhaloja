@@ -20,9 +20,16 @@ class Loj10FotoProduto extends BaseLoj10FotoProduto
             [['LOJ10_PRODUTO_ID', 'LOJ10_STATUS'], 'integer'],
             [['LOJ10_DT_INCLUSAO'], 'safe'],
             [['LOJ10_URL'], 'string', 'max' => 100],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
-	
+    
+    /**
+     * @inheritdoc
+     * @return array - fotos ativas do produto
+     */
+    public static function getFotosAtivasByProduto($produto)
+    {
+        return self::findAll(['LOJ10_PRODUTO_ID' => $produto, 'LOJ10_STATUS' => 1]);
+    }
+    
 }

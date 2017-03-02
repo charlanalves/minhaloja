@@ -32,8 +32,6 @@ class Loj10FotoProduto extends \yii\db\ActiveRecord
             [['LOJ10_PRODUTO_ID', 'LOJ10_STATUS'], 'integer'],
             [['LOJ10_DT_INCLUSAO'], 'safe'],
             [['LOJ10_URL'], 'string', 'max' => 100],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -42,7 +40,7 @@ class Loj10FotoProduto extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'loj10_foto_produto';
+        return 'LOJ10_FOTO_PRODUTO';
     }
 
     /**
@@ -87,19 +85,19 @@ class Loj10FotoProduto extends \yii\db\ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
+                'createdAtAttribute' => 'LOJ10_DT_INCLUSAO',
+//                'updatedAtAttribute' => 'updated_at',
                 'value' => new \yii\db\Expression('NOW()'),
             ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
+//            'uuid' => [
+//                'class' => UUIDBehavior::className(),
+//                'column' => 'id',
+//            ],
         ];
     }
 

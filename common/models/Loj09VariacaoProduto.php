@@ -19,9 +19,34 @@ class Loj09VariacaoProduto extends BaseLoj09VariacaoProduto
             [['LOJ09_PRODUTO_ID', 'LOJ09_DESCRICAO', 'LOJ09_GRUPO'], 'required'],
             [['LOJ09_PRODUTO_ID', 'LOJ09_GRUPO'], 'integer'],
             [['LOJ09_DESCRICAO'], 'string', 'max' => 100],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
+    
+    /**
+     * @inheritdoc
+     * @return array - variações do produto
+     */
+    public static function getVariacoesByProduto($produto)
+    {
+        return self::findAll(['LOJ09_PRODUTO_ID' => $produto]);
+    }
+    
+    /**
+     * @inheritdoc
+     * @return array - variações do produto agrupadas
+     */
+    public static function getVariacoesAgrupadasByProduto($produto)
+    {
+        $return = [];
+        if(($v = self::getVariacoesByProduto($produto))){
+            foreach ($v as $value) {
+                $att = $value->attributes;
+                $return[$att['LOJ09_GRUPO']][$att['LOJ09_ID']] = $att['LOJ09_DESCRICAO'];
+            }
+        }
+        
+        return $return;
+    }
+    
 	
 }

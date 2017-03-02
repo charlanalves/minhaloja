@@ -44,6 +44,7 @@ class AppMlAsset extends AssetBundle
         'js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js',
         'js/plugin/sparkline/jquery.sparkline.min.js',
         'js/plugin/masked-input/jquery.maskedinput.min.js',
+        'js/plugin/masked-input/jquery.maskMoney.min.js',
         'js/plugin/select2/select2.min.js',
         'js/plugin/bootstrap-slider/bootstrap-slider.min.js',
         'js/plugin/msie-fix/jquery.mb.browser.min.js',
@@ -52,6 +53,7 @@ class AppMlAsset extends AssetBundle
         'js/smart-chat-ui/smart.chat.ui.min.js',
         'js/smart-chat-ui/smart.chat.manager.min.js',
         'js/plugin/jquery-validate/jquery.validate.min.js',
+        'js/global.js',
     ];
     
     public $jsOptions = ['position' => \yii\web\View::POS_END];

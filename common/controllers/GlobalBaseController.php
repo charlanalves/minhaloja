@@ -297,4 +297,12 @@ class GlobalBaseController extends Controller
     
         return $config;
     }
+    
+    protected static function formatDataForm($dados) {
+        $newData = [];
+        foreach ($dados as $v) {
+            $newData[$v['name']] = $v['value'];
+        }
+        return $newData;
+    }
 }

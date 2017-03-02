@@ -14,7 +14,10 @@ use common\models\GlobalModel;
  * @property integer $LOJ12_ID
  * @property integer $LOJ12_PRODUTO_ID
  * @property integer $LOJ12_PEDIDO_ID
- * @property integer $LOJ12_STATS
+ * @property integer $LOJ12_NOME_PRODUTO
+ * @property integer $LOJ12_VLR_UNID
+ * @property integer $LOJ12_VARIACAO_ID
+ * @property integer $LOJ12_QTD
  *
  * @property \common\models\Loj08Produto $lOJ12PRODUTO
  * @property \common\models\Loj11Pedido $lOJ12PEDIDO
@@ -31,7 +34,9 @@ class Loj12ProdutoPedido extends GlobalModel
     {
         return [
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
-            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_STATS'], 'integer'],
+            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_VARIACAO_ID', 'LOJ12_QTD'], 'integer'],
+            [['LOJ12_VLR_UNID'], 'float'],
+            [['LOJ12_NOME_PRODUTO'], 'string', 'max' => 100],
 //            [['lock'], 'default', 'value' => '0'],
 //            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
