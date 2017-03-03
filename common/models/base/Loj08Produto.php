@@ -41,8 +41,6 @@ class Loj08Produto extends \yii\db\ActiveRecord
             [['LOJ08_DT_INCLUSAO'], 'safe'],
             [['LOJ08_NOME'], 'string', 'max' => 50],
             [['LOJ08_DESCRICAO'], 'string', 'max' => 300],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -51,7 +49,7 @@ class Loj08Produto extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'loj08_produto';
+        return 'LOJ08_PRODUTO';
     }
 
     /**
@@ -122,21 +120,21 @@ class Loj08Produto extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+//            'timestamp' => [
+//                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'created_at',
+//                'updatedAtAttribute' => 'updated_at',
+//                'value' => new \yii\db\Expression('NOW()'),
+//            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
+//            'uuid' => [
+//                'class' => UUIDBehavior::className(),
+//                'column' => 'id',
+//            ],
         ];
     }
 

@@ -31,8 +31,6 @@ class Loj09VariacaoProduto extends \yii\db\ActiveRecord
             [['LOJ09_PRODUTO_ID', 'LOJ09_DESCRICAO', 'LOJ09_GRUPO'], 'required'],
             [['LOJ09_PRODUTO_ID', 'LOJ09_GRUPO'], 'integer'],
             [['LOJ09_DESCRICAO'], 'string', 'max' => 100],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -41,7 +39,7 @@ class Loj09VariacaoProduto extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'loj09_variacao_produto';
+        return 'LOJ09_VARIACAO_PRODUTO';
     }
 
     /**
@@ -91,21 +89,21 @@ class Loj09VariacaoProduto extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+//            'timestamp' => [
+//                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'created_at',
+//                'updatedAtAttribute' => 'updated_at',
+//                'value' => new \yii\db\Expression('NOW()'),
+//            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
+//            'uuid' => [
+//                'class' => UUIDBehavior::className(),
+//                'column' => 'id',
+//            ],
         ];
     }
 

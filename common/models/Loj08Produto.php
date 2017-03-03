@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use \common\models\base\Loj08Produto as BaseLoj08Produto;
+use common\models\base\Loj08Produto as BaseLoj08Produto;
 
 /**
  * This is the model class for table "loj08_produto".
@@ -22,9 +22,16 @@ class Loj08Produto extends BaseLoj08Produto
             [['LOJ08_DT_INCLUSAO'], 'safe'],
             [['LOJ08_NOME'], 'string', 'max' => 50],
             [['LOJ08_DESCRICAO'], 'string', 'max' => 300],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
-	
+    
+    /**
+     * @inheritdoc
+     * @return array - produtos ativos da loja
+     */
+    public static function getProdutosAtivosByLoja($loja)
+    {
+        return self::findAll(['LOJ08_LOJA_ID' => $loja, 'LOJ08_STATUS' => 1]);
+    }
+    
 }

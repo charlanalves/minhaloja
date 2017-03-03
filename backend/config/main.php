@@ -11,7 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'pagamento' => [
+            'class' => 'common\modules\pagamento\Pagamento',
+        ],
+    ],
     'components' => [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -43,6 +47,10 @@ return [
         
         'pagamentoComponent' => [
             'class' => 'common\components\pagamentoComponent',
+        ],
+        
+        'v' => [
+            'class' => 'common\components\ValidationComponent',
         ],
         
         /*

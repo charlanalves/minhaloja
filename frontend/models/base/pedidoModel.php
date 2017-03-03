@@ -1,0 +1,154 @@
+<?php
+
+namespace app\models\base;
+
+use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use mootensai\behaviors\UUIDBehavior;
+
+/**
+ * This is the base model class for table "loj11_pedido".
+ *
+ * @property integer $LOJ11_ID
+ * @property integer $LOJ11_CLIENTE_ID
+ * @property integer $LOJ11_USUARIO_ID
+ * @property string $LOJ11_VALOR
+ * @property integer $LOJ11_NUM_PARCELA
+ * @property integer $LOJ11_STATUS
+ * @property string $LOJ11_DT_INCLUSAO
+ *
+ * @property \app\models\Loj02Cliente $lOJ11CLIENTE
+ * @property \app\models\Loj01Usuario $lOJ11USUARIO
+ * @property \app\models\Loj12ProdutoPedido[] $loj12ProdutoPedidos
+ * @property \app\models\Loj15StatusPedido[] $loj15StatusPedidos
+ * @property \app\models\Loj14Status[] $lOJ15Statuses
+ * @property \app\models\Loj16Pagamento[] $loj16Pagamentos
+ */
+class pedidoModel extends \yii\db\ActiveRecord
+{
+    use \mootensai\relation\RelationTrait;
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['LOJ11_CLIENTE_ID', 'LOJ11_USUARIO_ID', 'LOJ11_VALOR'], 'required'],
+            [['LOJ11_CLIENTE_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
+            [['LOJ11_VALOR'], 'number'],
+            [['LOJ11_DT_INCLUSAO'], 'safe'],
+            [['lock'], 'default', 'value' => '0'],
+            [['lock'], 'mootensai\components\OptimisticLockValidator']
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'loj11_pedido';
+    }
+
+    /**
+     * 
+     * @return string
+     * overwrite function optimisticLock
+     * return string name of field are used to stored optimistic lock 
+     * 
+     */
+    public function optimisticLock() {
+        return 'lock';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'LOJ11_ID' => 'Loj11  ID',
+            'LOJ11_CLIENTE_ID' => 'Loj11  Cliente  ID',
+            'LOJ11_USUARIO_ID' => 'Loj11  Usuario  ID',
+            'LOJ11_VALOR' => 'Loj11  Valor',
+            'LOJ11_NUM_PARCELA' => 'Loj11  Num  Parcela',
+            'LOJ11_STATUS' => 'Loj11  Status',
+            'LOJ11_DT_INCLUSAO' => 'Loj11  Dt  Inclusao',
+        ];
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLOJ11CLIENTE()
+    {
+        return $this->hasOne(\app\models\Loj02Cliente::className(), ['LOJ02_ID' => 'LOJ11_CLIENTE_ID']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLOJ11USUARIO()
+    {
+        return $this->hasOne(\app\models\Loj01Usuario::className(), ['LOJ01_ID' => 'LOJ11_USUARIO_ID']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLoj12ProdutoPedidos()
+    {
+        return $this->hasMany(\app\models\Loj12ProdutoPedido::className(), ['LOJ12_PEDIDO_ID' => 'LOJ11_ID']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLoj15StatusPedidos()
+    {
+        return $this->hasMany(\app\models\Loj15StatusPedido::className(), ['LOJ15_PEDIDO_ID' => 'LOJ11_ID']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLOJ15Statuses()
+    {
+        return $this->hasMany(\app\models\Loj14Status::className(), ['LOJ14_ID' => 'LOJ15_STATUS_ID'])->viaTable('loj15_status_pedido', ['LOJ15_PEDIDO_ID' => 'LOJ11_ID']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLoj16Pagamentos()
+    {
+        return $this->hasMany(\app\models\Loj16Pagamento::className(), ['LOJ16_PEDIDO_ID' => 'LOJ11_ID']);
+    }
+    
+/**
+     * @inheritdoc
+     * @return array mixed
+     */ 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new \yii\db\Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+            'uuid' => [
+                'class' => UUIDBehavior::className(),
+                'column' => 'id',
+            ],
+        ];
+    }
+}

@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use mootensai\behaviors\UUIDBehavior;
+use common\models\GlobalModel;
 
 /**
  * This is the base model class for table "loj12_produto_pedido".
@@ -13,13 +14,16 @@ use mootensai\behaviors\UUIDBehavior;
  * @property integer $LOJ12_ID
  * @property integer $LOJ12_PRODUTO_ID
  * @property integer $LOJ12_PEDIDO_ID
- * @property integer $LOJ12_STATS
+ * @property integer $LOJ12_NOME_PRODUTO
+ * @property integer $LOJ12_VLR_UNID
+ * @property integer $LOJ12_VARIACAO_ID
+ * @property integer $LOJ12_QTD
  *
  * @property \common\models\Loj08Produto $lOJ12PRODUTO
  * @property \common\models\Loj11Pedido $lOJ12PEDIDO
  * @property \common\models\Loj13ProdutoPedidoVariacao[] $loj13ProdutoPedidoVariacaos
  */
-class Loj12ProdutoPedido extends \yii\db\ActiveRecord
+class Loj12ProdutoPedido extends GlobalModel
 {
     use \mootensai\relation\RelationTrait;
 
@@ -29,10 +33,12 @@ class Loj12ProdutoPedido extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
-            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_STATS'], 'integer'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_QTD'], 'required'],
+            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_VARIACAO_ID', 'LOJ12_QTD'], 'integer'],
+            [['LOJ12_VLR_UNID'], 'float'],
+            [['LOJ12_NOME_PRODUTO'], 'string', 'max' => 100],
+//            [['lock'], 'default', 'value' => '0'],
+//            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -41,7 +47,7 @@ class Loj12ProdutoPedido extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'loj12_produto_pedido';
+        return 'LOJ12_PRODUTO_PEDIDO';
     }
 
     /**
@@ -99,21 +105,21 @@ class Loj12ProdutoPedido extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+//            'timestamp' => [
+//                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'created_at',
+//                'updatedAtAttribute' => 'updated_at',
+//                'value' => new \yii\db\Expression('NOW()'),
+//            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
+//            'uuid' => [
+//                'class' => UUIDBehavior::className(),
+//                'column' => 'id',
+//            ],
         ];
     }
 
