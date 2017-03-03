@@ -16,9 +16,9 @@ class Loj12ProdutoPedido extends BaseLoj12ProdutoPedido
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
+            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_QTD'], 'required'],
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_VARIACAO_ID', 'LOJ12_QTD'], 'integer'],
-            [['LOJ12_VLR_UNID'], 'float'],
+            [['LOJ12_VLR_UNID'], 'number'],
             [['LOJ12_NOME_PRODUTO'], 'string', 'max' => 100],
 //            [['lock'], 'default', 'value' => '0'],
 //            [['lock'], 'mootensai\components\OptimisticLockValidator']
@@ -40,7 +40,7 @@ class Loj12ProdutoPedido extends BaseLoj12ProdutoPedido
                 LOJ10_FOTO_PRODUTO.LOJ10_URL
                 FROM LOJ12_PRODUTO_PEDIDO
                 LEFT JOIN LOJ08_PRODUTO ON(LOJ08_PRODUTO.LOJ08_ID = LOJ12_PRODUTO_PEDIDO.LOJ12_PRODUTO_ID)
-                LEFT JOIN LOJ09_VARIACAO_PRODUTO ON(LOJ09_VARIACAO_PRODUTO.LOJ09_ID = LOJ12_PRODUTO_PEDIDO.LOJ12_ID_VARIACAO)
+                LEFT JOIN LOJ09_VARIACAO_PRODUTO ON(LOJ09_VARIACAO_PRODUTO.LOJ09_ID = LOJ12_PRODUTO_PEDIDO.LOJ12_VARIACAO_ID)
                 LEFT JOIN LOJ10_FOTO_PRODUTO ON(LOJ10_FOTO_PRODUTO.LOJ10_PRODUTO_ID = LOJ08_PRODUTO.LOJ08_ID AND LOJ10_FOTO_PRODUTO.LOJ10_STATUS = 1)
                 WHERE LOJ12_PRODUTO_PEDIDO.LOJ12_PEDIDO_ID = :pedido";
 

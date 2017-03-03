@@ -33,7 +33,7 @@ class Loj12ProdutoPedido extends GlobalModel
     public function rules()
     {
         return [
-            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID'], 'required'],
+            [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_QTD'], 'required'],
             [['LOJ12_PRODUTO_ID', 'LOJ12_PEDIDO_ID', 'LOJ12_VARIACAO_ID', 'LOJ12_QTD'], 'integer'],
             [['LOJ12_VLR_UNID'], 'float'],
             [['LOJ12_NOME_PRODUTO'], 'string', 'max' => 100],
@@ -47,7 +47,7 @@ class Loj12ProdutoPedido extends GlobalModel
      */
     public static function tableName()
     {
-        return 'loj12_produto_pedido';
+        return 'LOJ12_PRODUTO_PEDIDO';
     }
 
     /**

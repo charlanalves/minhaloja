@@ -16,11 +16,11 @@ class Loj11Pedido extends BaseLoj11Pedido
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_VALOR'], 'required'],
+            [['LOJ11_LOJA_ID', 'LOJ11_GATEWAY', 'LOJ11_VALOR'], 'required'],
             [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
             [['LOJ11_VALOR'], 'number'],
             [['LOJ11_DT_INCLUSAO'], 'safe'],
-            [['LOJ11_FORMA_PAG'], 'string', 'max'=>50],
+            [['LOJ11_FORMA_PAG', 'LOJ11_GATEWAY'], 'string', 'max'=>50],
 //            [['lock'], 'default', 'value' => '0'],
 //            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

@@ -80,7 +80,21 @@
         padding-right: 10px!important;
         padding-left: 10px!important;
     }
-
+    
+    @media only screen and (min-width: 1024px) {
+        .product-content .product-image {
+            border-right: 0px;
+            margin-right: 0px;
+        }
+    }
+    
+    @media (min-width: 992px){
+        .container {width: 100%;}
+    }
+    
+    @media (min-width: 768px){
+        .container {width: 100%;}
+    }
 </style>
 
 <script>
@@ -92,11 +106,11 @@ foreach ($data['PRODUTOS'] as $k => $v) {
     ?>
     <div class="row" style="max-width: 600px">
 
-        <div class="col-sm-12 col-md-6 col-lg-6 col-no-padding">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-no-padding">
             <!-- product -->
             <div class="product-content product-wrap clearfix" style="margin-top:0px!important;margin-bottom:10px!important;">
                 <div class="row">
-                    <div class="col-md-5 col-sm-12 col-xs-12  col-no-padding">
+                    <div class="col-md-12 col-sm-12 col-xs-12  col-no-padding">
                         <div class="product-image" style="border-bottom: 2px solid silver">
                             <img src="<?= (isset($v['IMAGENS'][0]['LOJ10_URL'])) ? $v['IMAGENS'][0]['LOJ10_URL'] : "img/sem_imagem.jpg" ?>" alt="194x228" class="img-responsive"> 
     <!--                        <span class="tag2 hot">
@@ -112,8 +126,8 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-7 col-sm-12 col-xs-12 col-xs-custom-50" style="padding: 0 25px;">
-                        <div class="product-deatil no-padding">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-xs-custom-50" style="padding: 0 25px;">
+                        <div class="product-deatil no-padding no-margin">
                             <h5 class="name">
                                 <a href="#">
                                     <?= $v['LOJ08_NOME'] ?><span><?= $v['LOJ08_DESCRICAO'] ?></span>
@@ -279,10 +293,7 @@ foreach ($data['PRODUTOS'] as $k => $v) {
     }
 
     sendFormData = function (a) {
-
         data = $('form#form-' + a).serializeArray();
-        console.log(data);
-        return false;
 
         var r = $.ajax({
             url: 'index.php?r=loja/save',
@@ -292,9 +303,10 @@ foreach ($data['PRODUTOS'] as $k => $v) {
         });
 
         r.always(function (data) {
-            console.log(data.responseText);
-            if (!data.responseText) {
+            retorno = data.responseText;
+            if ($.isNumeric(retorno)) {
                 // move para a pagina de checkout
+                self.location.href = 'http://localhost/minhaloja/backend/web/index.php?r=checkout&pedido=' + retorno;
             } else {
                 $.smallBox({
                     title: "Opss",

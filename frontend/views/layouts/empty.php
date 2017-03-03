@@ -24,7 +24,7 @@ AppMlAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <div class="container" style="padding-top: 0px!important">
+    <div class="container" style="padding-top: 0px!important;">
         <?= $content ?>
     </div>
 </div>

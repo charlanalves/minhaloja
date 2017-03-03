@@ -14,12 +14,13 @@ use common\models\GlobalModel;
  * @property integer $LOJ11_ID
  * @property integer $LOJ11_LOJA_ID
  * @property integer $LOJ11_USUARIO_ID
+ * @property string $LOJ11_GATEWAY
  * @property string $LOJ11_VALOR
  * @property integer $LOJ11_NUM_PARCELA
  * @property integer $LOJ11_STATUS
  * @property string $LOJ11_DT_INCLUSAO
  *
- * @property \common\models\Loj02Cliente $lOJ11CLIENTE
+ * @property \common\models\Loj07Loja $lOJ07LOJA
  * @property \common\models\Loj01Usuario $lOJ11USUARIO
  * @property \common\models\Loj12ProdutoPedido[] $loj12ProdutoPedidos
  * @property \common\models\Loj15StatusPedido[] $loj15StatusPedidos
@@ -36,11 +37,11 @@ class Loj11Pedido extends GlobalModel
     public function rules()
     {
         return [
-            [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_VALOR'], 'required'],
+            [['LOJ11_LOJA_ID', 'LOJ11_GATEWAY', 'LOJ11_VALOR'], 'required'],
             [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
             [['LOJ11_VALOR'], 'number'],
             [['LOJ11_DT_INCLUSAO'], 'safe'],
-            [['LOJ11_FORMA_PAG'], 'string', 'max'=>50],
+            [['LOJ11_FORMA_PAG', 'LOJ11_GATEWAY'], 'string', 'max'=>50],
 //            [['lock'], 'default', 'value' => '0'],
 //            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -51,9 +52,9 @@ class Loj11Pedido extends GlobalModel
      */
     public static function tableName()
     {
-        return 'loj11_pedido';
+        return 'LOJ11_PEDIDO';
     }
-
+    
     /**
      * 
      * @return string
@@ -74,6 +75,7 @@ class Loj11Pedido extends GlobalModel
             'LOJ11_ID' => 'Loj11  ID',
             'LOJ11_LOJA_ID' => 'Loj11  Loja  ID',
             'LOJ11_USUARIO_ID' => 'Loj11  Usuario  ID',
+            'LOJ11_GATEWAY' => 'Loj11  Gateway',
             'LOJ11_VALOR' => 'Loj11  Valor',
             'LOJ11_NUM_PARCELA' => 'Loj11  Num  Parcela',
             'LOJ11_STATUS' => 'Loj11  Status',
@@ -84,7 +86,7 @@ class Loj11Pedido extends GlobalModel
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLOJ11CLIENTE()
+    public function getLOJ07LOJA()
     {
         return $this->hasOne(\common\models\Loj07Loja::className(), ['LOJ07_ID' => 'LOJ11_LOJA_ID']);
     }
@@ -136,12 +138,12 @@ class Loj11Pedido extends GlobalModel
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'LOJ11_DT_INCLUSAO',
+//            'timestamp' => [
+//                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'LOJ11_DT_INCLUSAO',
 //                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
+//                'value' => new \yii\db\Expression('NOW()'),
+//            ],
 //            'blameable' => [
 //                'class' => BlameableBehavior::className(),
 //                'createdByAttribute' => 'created_by',
