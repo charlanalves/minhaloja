@@ -16,8 +16,7 @@ use common\models\Loj12ProdutoPedido;
 class LojaController extends GlobalBaseController {
 
     public function actionIndex() {
-        $this->layout = 'smartAdmin';
-        
+        $this->layout = 'smartAdmin';        
         $idLoja = \Yii::$app->request->get('id');
 
         // dados da loja
@@ -96,6 +95,10 @@ class LojaController extends GlobalBaseController {
     public function actionLikeProduto() {
         try {
             $session = \Yii::$app->session;
+            if(empty($session->get('gostei_produtos'))){
+                $session->set('gostei_produtos',[]);
+            }
+            
             $gostei = $session->get('gostei_produtos');
             
             $produto = \Yii::$app->request->get('produto');
