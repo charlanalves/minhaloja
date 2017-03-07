@@ -16,6 +16,9 @@ use common\models\Loj12ProdutoPedido;
 class LojaController extends GlobalBaseController {
 
     public function actionIndex() {
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
         $this->layout = 'smartAdmin';
         
         $idLoja = \Yii::$app->request->get('id');
