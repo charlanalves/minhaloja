@@ -22,9 +22,6 @@
     .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
         box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
     }
-    .green.accent-4 {
-        background-color: #00C853 !important;
-    }
     .waves-effect {
         position: relative;
         cursor: pointer;
@@ -54,16 +51,26 @@
         height: 37px;
         line-height: 37px;
         padding: 0;
-        background-color: #ff4081;
+        background-color: #FFF;
         border-radius: 50%;
         transition: .3s;
         cursor: pointer;
         vertical-align: middle;
     }
     .btn-floating:active{opacity: 0.3}
-    .green {
+    
+    .card-action-buttons .pink {
+        background-color: #ff4081 !important;
+    }
+    
+    .card-action-buttons .blue {
+        background-color: #0063dc !important;
+    }
+    
+    .card-action-buttons .green {
         background-color: #4CAF50 !important;
     }
+    
     .btn-floating i {
         width: inherit;
         display: inline-block;
@@ -95,6 +102,50 @@
     @media (min-width: 768px){
         .container {width: 100%;}
     }
+    
+    .price-container span{
+        font-size: 26px!important;
+    }
+    
+    .price-container span span{
+        padding-left: 12px!important;
+        font-size: 11px!important;
+        color: #888!important;
+    }
+    
+    div.info-produto{
+        position: absolute;
+        background-color: #fff;
+        display: block; 
+        transform: translateY(-100%); 
+        opacity: 0;
+        position: absolute;
+        overflow-y: auto;
+        min-height: 10%;
+        max-height: 35%;
+        width: calc(100% - 26px)!important;
+        padding: 10px;
+        padding-bottom: 30px;
+        margin: 0px;
+    }
+    
+    .price-container {
+        margin-top: -25px!important;
+        position: relative;
+        float: right!important; 
+        text-align: right;
+    }
+    
+    .price-container span{
+        display:block;
+        clear:both;
+    }
+    
+    .product-content .product-deatil{
+        margin: 0px!important;
+        margin-bottom: 8px!important;
+    }
+    
 </style>
 
 <script>
@@ -112,30 +163,39 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12  col-no-padding">
                         <div class="product-image" style="border-bottom: 2px solid silver">
-                            <img src="<?= (isset($v['IMAGENS'][0]['LOJ10_URL'])) ? $v['IMAGENS'][0]['LOJ10_URL'] : "img/sem_imagem.jpg" ?>" alt="194x228" class="img-responsive"> 
+                            <img src="<?= ($v['IMAGENS'][0]['LOJ10_URL']) ? : "img/sem_imagem.jpg" ?>" alt="194x228" class="img-responsive"> 
     <!--                        <span class="tag2 hot">
                                 DESCONTO
                             </span> -->
                         </div>
+                        <div id="info-produto-<?= $v['LOJ08_ID'] ?>" class="info-produto">
+                            <span><i class="fa fa-close" style="float: right; cursor: pointer" onclick="fechaInfo(<?= $v['LOJ08_ID'] ?>);"></i></span>
+                            <p><?= $v['LOJ08_DESCRICAO'] ?></p>
+                        </div>
                         <ul class="card-action-buttons">
-                            <li><a class="btn-floating waves-effect waves-light light-blue"><i class="fa fa-heart"></i></a>
-                                <br/><label>321</label>
+                            <li><a id="a-gostei-<?= $v['LOJ08_ID'] ?>" class="btn-floating waves-effect waves-light pink" onclick="gosteiProduto(<?= $v['LOJ08_ID'] ?>);"><i class="fa fa-heart"></i></a>
+                                <br/><label id="gostei-<?= $v['LOJ08_ID'] ?>"><?= $v['LOJ08_QTD_LIKE'] ?></label>
                             </li>
                             <li><a class="btn-floating waves-effect waves-light green" href="whatsapp://send?text=Teste"><i class="fa fa-share-alt"></i></a>
+                                <br/><label></label>
+                            </li>
+                            <li><a class="btn-floating waves-effect waves-light blue" onclick="abreInfo(<?= $v['LOJ08_ID'] ?>);"><i class="fa fa-info"></i></a>
                                 <br/><label></label>
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 col-xs-custom-50" style="padding: 0 25px;">
                         <div class="product-deatil no-padding no-margin">
-                            <h5 class="name">
-                                <a href="#">
-                                    <?= $v['LOJ08_NOME'] ?><span><?= $v['LOJ08_DESCRICAO'] ?></span>
+                            <p class="price-container">
+                                <span>R$ <?= $v['LOJ08_PRECO'] ?>
+                                    <span>frete: R$ <?= $data['LOJ07_FRETE'] ?></span>
+                                </span>
+                            </p>
+                            <h5 class="name" style="margin-bottom: 10px;">
+                                <a style="font-size: 20px!important">
+                                    <?= $v['LOJ08_NOME'] ?>
                                 </a>
                             </h5>
-                            <p class="price-container">
-                                <span>R$ <?= $v['LOJ08_PRECO'] ?></span>
-                            </p>
                             <span class="tag1"></span> 
                         </div>
                         <div class="row">
@@ -285,6 +345,42 @@ foreach ($data['PRODUTOS'] as $k => $v) {
     document.addEventListener("DOMContentLoaded", function (event) {
         pageSetUp();
     });
+    
+    function abreInfo(produto){
+        $('div#info-produto-'+produto).animate({'opacity':'0.9'}, 300);
+    }
+    
+    function fechaInfo(produto){
+        $('div#info-produto-'+produto).animate({'opacity':'0'}, 200);
+    }
+    
+    function gosteiProduto(produto){
+        
+        var r = $.ajax({
+            url: 'index.php?r=loja/like-produto',
+            type: 'GET',
+            data: {'produto': produto},
+            dataType: "jsonp"
+        });
+
+        r.always(function (data) {
+            retorno = data.responseText;
+            if ($.isNumeric(retorno)) {
+                $('label#gostei-' + produto).text(retorno);
+                $('a#a-gostei-' + produto).attr('onclick','return false;');
+            } else {
+                $.smallBox({
+                    title: "Opss",
+                    content: "<i class='fa fa-clock-o'></i> <i>Tente novamente...</i>",
+                    color: "#C46A69",
+                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                    timeout: 2000
+                });
+            }
+        });
+        
+    }
+    
 
     function btnPedido(a) {
         if (form[a].form() === true) {

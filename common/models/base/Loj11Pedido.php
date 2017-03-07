@@ -15,7 +15,8 @@ use common\models\GlobalModel;
  * @property integer $LOJ11_LOJA_ID
  * @property integer $LOJ11_USUARIO_ID
  * @property string $LOJ11_GATEWAY
- * @property string $LOJ11_VALOR
+ * @property number $LOJ11_VALOR
+ * @property number $LOJ11_FRETE
  * @property integer $LOJ11_NUM_PARCELA
  * @property integer $LOJ11_STATUS
  * @property string $LOJ11_DT_INCLUSAO
@@ -39,7 +40,7 @@ class Loj11Pedido extends GlobalModel
         return [
             [['LOJ11_LOJA_ID', 'LOJ11_GATEWAY', 'LOJ11_VALOR'], 'required'],
             [['LOJ11_LOJA_ID', 'LOJ11_USUARIO_ID', 'LOJ11_NUM_PARCELA', 'LOJ11_STATUS'], 'integer'],
-            [['LOJ11_VALOR'], 'number'],
+            [['LOJ11_VALOR','LOJ11_FRETE'], 'number'],
             [['LOJ11_DT_INCLUSAO'], 'safe'],
             [['LOJ11_FORMA_PAG', 'LOJ11_GATEWAY'], 'string', 'max'=>50],
 //            [['lock'], 'default', 'value' => '0'],
@@ -77,6 +78,7 @@ class Loj11Pedido extends GlobalModel
             'LOJ11_USUARIO_ID' => 'Loj11  Usuario  ID',
             'LOJ11_GATEWAY' => 'Loj11  Gateway',
             'LOJ11_VALOR' => 'Loj11  Valor',
+            'LOJ11_FRETE' => 'Loj11  Frete',
             'LOJ11_NUM_PARCELA' => 'Loj11  Num  Parcela',
             'LOJ11_STATUS' => 'Loj11  Status',
             'LOJ11_DT_INCLUSAO' => 'Loj11  Dt  Inclusao',

@@ -8,6 +8,9 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
 AppMlAsset::register($this);
+
+//var_dump($this->params);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -79,10 +82,10 @@ AppMlAsset::register($this);
     <body class="smart-style-0 fixed-header">
 
         <!-- #HEADER -->
-        <header id="header">
-            <div id="logo-group">
+        <header id="header" class="height-top">
+            <div id="logo-group" class="height-top">
                 <!-- PLACE YOUR LOGO HERE -->
-                <span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
+                <span id="logo"> <img src="<?= ($this->params['LOJ07_LOGO']) ? : 'img/logo.png' ?>" alt="SmartAdmin"> </span>
                 <!-- END LOGO PLACEHOLDER -->
             </div>
 

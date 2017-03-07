@@ -62,13 +62,13 @@ class LojaController extends GlobalBaseController {
             $post = \Yii::$app->request->post();
             $postFormatado = self::formatDataForm($post['dados']);
             $dadosProduto = json_decode($postFormatado['JSON_DATA'], true);
-//            var_dump($postFormatado);
 
             // salva pedido
             $pedido = new Loj11Pedido();
             $pedido->LOJ11_LOJA_ID = $dadosProduto['LOJ08_LOJA_ID'];
             $pedido->LOJ11_GATEWAY = 'pagseguro';
             $pedido->LOJ11_VALOR = $dadosProduto['LOJ08_PRECO'];
+            $pedido->LOJ11_FRETE = Loj07Loja::getFrete($dadosProduto['LOJ08_LOJA_ID']);
             $pedido->save();
             $idPedido = $pedido->LOJ11_ID;
             
@@ -89,6 +89,30 @@ class LojaController extends GlobalBaseController {
             $transaction->rollBack();
             var_dump($exc->getMessage());
             return;   
+        }
+
+    }
+    
+    public function actionLikeProduto() {
+        try {
+            $session = \Yii::$app->session;
+            $gostei = $session->get('gostei_produtos');
+            
+            $produto = \Yii::$app->request->get('produto');
+            
+            $Loj08Produto = Loj08Produto::findOne($produto);
+            if(!empty($Loj08Produto) && !in_array($produto, $gostei)){
+                $Loj08Produto->LOJ08_QTD_LIKE++;
+                $Loj08Produto->save();
+
+                $gostei[] = $produto;
+                $session->set('gostei_produtos', $gostei);
+            }
+            
+            return $Loj08Produto->LOJ08_QTD_LIKE;
+            
+        } catch (\Exception $exc) {
+            return false;
         }
 
     }
