@@ -16,11 +16,17 @@ use common\models\Loj12ProdutoPedido;
 class LojaController extends GlobalBaseController {
 
     public function actionIndex() {
-        $this->layout = 'smartAdmin';        
+        
+        $this->layout = 'smartAdmin';
+        
         $idLoja = \Yii::$app->request->get('id');
 
         // dados da loja
-        $data = Loj07Loja::findOne($idLoja)->attributes;
+        $data = Loj07Loja::findOne($idLoja);
+        if (empty($data)){
+            return $this->renderPartial('error',['dados'=> 'Loja não encontrada...']);
+        }
+        $data = $data->attributes;
         foreach ($data as $k => $v) {
             \Yii::$app->view->params[$k] = $v;
         }
@@ -47,7 +53,6 @@ class LojaController extends GlobalBaseController {
                 }
             }
         }
-        
         return $this->render('index', ['data' => $data]);
     }
 
