@@ -1,3 +1,7 @@
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
 
 <style>
     ul.card-action-buttons {
@@ -21,9 +25,6 @@
     }
     .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
         box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
-    }
-    .green.accent-4 {
-        background-color: #00C853 !important;
     }
     .waves-effect {
         position: relative;
@@ -54,16 +55,26 @@
         height: 37px;
         line-height: 37px;
         padding: 0;
-        background-color: #ff4081;
+        background-color: #FFF;
         border-radius: 50%;
         transition: .3s;
         cursor: pointer;
         vertical-align: middle;
     }
     .btn-floating:active{opacity: 0.3}
-    .green {
+    
+    .card-action-buttons .pink {
+        background-color: #ff4081 !important;
+    }
+    
+    .card-action-buttons .blue {
+        background-color: #0063dc !important;
+    }
+    
+    .card-action-buttons .green {
         background-color: #4CAF50 !important;
     }
+    
     .btn-floating i {
         width: inherit;
         display: inline-block;
@@ -95,6 +106,16 @@
     @media (min-width: 768px){
         .container {width: 100%;}
     }
+    
+    .price-container span{
+        font-size: 26px!important;
+    }
+    
+    .price-container span span{
+        padding-left: 12px!important;
+        font-size: 11px!important;
+        color: #888!important;
+    }
 </style>
 
 <script>
@@ -102,7 +123,11 @@
 </script>
 
 <?php
+
+
+
 foreach ($data['PRODUTOS'] as $k => $v) {
+
     ?>
     <div class="row" style="max-width: 600px">
 
@@ -112,16 +137,18 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12  col-no-padding">
                         <div class="product-image" style="border-bottom: 2px solid silver">
-                            <img src="<?= (isset($v['IMAGENS'][0]['LOJ10_URL'])) ? $v['IMAGENS'][0]['LOJ10_URL'] : "img/sem_imagem.jpg" ?>" alt="194x228" class="img-responsive"> 
+                            <img src="<?= ($v['IMAGENS'][0]['LOJ10_URL']) ? : "img/sem_imagem.jpg" ?>" alt="194x228" class="img-responsive"> 
     <!--                        <span class="tag2 hot">
                                 DESCONTO
                             </span> -->
                         </div>
-                        <ul class="card-action-buttons">
-                            <li><a class="btn-floating waves-effect waves-light light-blue"><i class="fa fa-heart"></i></a>
-                                <br/><label>321</label>
+                            <li><a class="btn-floating waves-effect waves-light pink"><i class="fa fa-heart"></i></a>
+                                <br/><label><?= $v['LOJ08_QTD_LIKE'] ?></label>
                             </li>
                             <li><a class="btn-floating waves-effect waves-light green" href="whatsapp://send?text=Teste"><i class="fa fa-share-alt"></i></a>
+                                <br/><label></label>
+                            </li>
+                            <li><a class="btn-floating waves-effect waves-light blue" onclick="return false"><i class="fa fa-info"></i></a>
                                 <br/><label></label>
                             </li>
                         </ul>
@@ -134,7 +161,7 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                                 </a>
                             </h5>
                             <p class="price-container">
-                                <span>R$ <?= $v['LOJ08_PRECO'] ?></span>
+                                <span>R$ <?= $v['LOJ08_PRECO'] ?><span>frete: R$ <?= $data['LOJ07_FRETE'] ?></span></span>
                             </p>
                             <span class="tag1"></span> 
                         </div>
@@ -195,8 +222,8 @@ foreach ($data['PRODUTOS'] as $k => $v) {
     </script>
 
     <?php
-    // monta variações
-    if (($variacoes = $v['VARIACAO'])) {
+
+   if (($variacoes = $v['VARIACAO'])) {
         foreach ($variacoes as $key => $value) {
             $label = $key;
             $options = [];
@@ -204,8 +231,8 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                 $options[] = ['val' => $var, 'text' => $text];
             }
         }
-        ?>
 
+        ?>
         <script>
 
             document.addEventListener("DOMContentLoaded", function (event) {
@@ -319,4 +346,6 @@ foreach ($data['PRODUTOS'] as $k => $v) {
         });
     }
 </script>
+
+
 

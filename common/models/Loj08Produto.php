@@ -17,7 +17,7 @@ class Loj08Produto extends BaseLoj08Produto
         return array_replace_recursive(parent::rules(),
 	    [
             [['LOJ08_LOJA_ID', 'LOJ08_NOME', 'LOJ08_PRECO'], 'required'],
-            [['LOJ08_LOJA_ID', 'LOJ08_QTD_VIEW', 'LOJ08_QTD_COMPART', 'LOJ08_STATUS'], 'integer'],
+            [['LOJ08_LOJA_ID', 'LOJ08_QTD_LIKE', 'LOJ08_QTD_COMPART', 'LOJ08_STATUS'], 'integer'],
             [['LOJ08_PRECO'], 'number'],
             [['LOJ08_DT_INCLUSAO'], 'safe'],
             [['LOJ08_NOME'], 'string', 'max' => 50],

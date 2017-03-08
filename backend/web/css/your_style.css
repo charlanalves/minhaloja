@@ -89,10 +89,7 @@
     }
 
     .smart-form .row {
-        margin: 0px 0px !important;
-        padding-left: 5px;
-        margin-bottom: 8px !important;
-        padding-right: 40px;
+        margin: 0px 32px !important;
     }
     .product-content .product-info {
        float:right;
@@ -162,8 +159,6 @@ span.campo-obrigatorio {
 
 #wizard-1 .form-group {
     text-align: left;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 div#form-bootstrapWizard {
     text-align: center;
@@ -184,6 +179,7 @@ div#form-bootstrapWizard {
     width: 100%;
     margin: 0;
     padding-top: 7px;
+    padding-bottom: 100%;
 }
 
 .height-800{
@@ -226,7 +222,6 @@ div#form-bootstrapWizard {
 .fixed-page{
     position: fixed;
     z-index: 9999999;
-    bottom: 0;
 }
 
 .finalizar-venda{
@@ -237,35 +232,3 @@ div#form-bootstrapWizard {
     display: none;
 }
 
-.smart-form input-lg {
-    height: 26px !important;
-    padding: 10px 16px;
-    font-size: 17px;
-    line-height: 1.33;
-}
-
-.smart-form input.input-lg,.smart-form select.input-lg {
-    height: 26px !important;
-    padding: 10px 16px;
-    font-size: 17px;
-    line-height: 1.33;
-}
-
-.forma-pgto{
-    display: inline-block !important;
-}
-
-.jarviswidget>div {
-    padding: 13px 0px 0;
-}
-
-.widget-body.no-padding {
-    margin: -12px 0px 0;
-}
-
-@media only screen and (max-width: 479px) and (min-width: 320px)
-{
-    #sparks li {
-        padding: 0 5px 0 4px !important;
-    }
-}

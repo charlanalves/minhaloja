@@ -16,16 +16,15 @@ use common\models\Loj12ProdutoPedido;
 class LojaController extends GlobalBaseController {
 
     public function actionIndex() {
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-        $this->layout = 'smartAdmin';
+  
+		 $this->layout = 'smartAdmin';
         
         $idLoja = \Yii::$app->request->get('id');
 
         // dados da loja
         $data = Loj07Loja::findOne($idLoja)->attributes;
-        foreach ($data as $k => $v) {
+       
+	foreach ($data as $k => $v) {
             \Yii::$app->view->params[$k] = $v;
         }
         
@@ -51,8 +50,8 @@ error_reporting(E_ALL);
                 }
             }
         }
-        
-        return $this->render('index', ['data' => $data]);
+       
+      return $this->render('index', ['data' => $data]);
     }
 
     public function actionSave() {
@@ -65,13 +64,13 @@ error_reporting(E_ALL);
             $post = \Yii::$app->request->post();
             $postFormatado = self::formatDataForm($post['dados']);
             $dadosProduto = json_decode($postFormatado['JSON_DATA'], true);
-//            var_dump($postFormatado);
 
             // salva pedido
             $pedido = new Loj11Pedido();
             $pedido->LOJ11_LOJA_ID = $dadosProduto['LOJ08_LOJA_ID'];
             $pedido->LOJ11_GATEWAY = 'pagseguro';
             $pedido->LOJ11_VALOR = $dadosProduto['LOJ08_PRECO'];
+            $pedido->LOJ11_FRETE = Loj07Loja::getFrete($dadosProduto['LOJ08_LOJA_ID']);
             $pedido->save();
             $idPedido = $pedido->LOJ11_ID;
             
@@ -94,6 +93,22 @@ error_reporting(E_ALL);
             return;   
         }
 
+    }
+    
+    public function actionLikeProduto() {
+        
+        $session = \Yii::$app->session;
+        $gostei = $session['gostei_produtos'];
+        $produto = \Yii::$app->request->get('produto');
+        
+        if(!in_array($produto, $gostei)){
+            $Loj08Produto = Loj08Produto::findOne($produto);
+            $Loj08Produto->LOJ08_QTD_LIKE++;
+            $Loj08Produto->save();
+            
+            $session['gostei_produtos'][] = $produto;
+        }
+        
     }
 
 }

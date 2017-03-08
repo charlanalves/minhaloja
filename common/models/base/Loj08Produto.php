@@ -15,7 +15,7 @@ use mootensai\behaviors\UUIDBehavior;
  * @property string $LOJ08_NOME
  * @property string $LOJ08_DESCRICAO
  * @property string $LOJ08_PRECO
- * @property integer $LOJ08_QTD_VIEW
+ * @property integer $LOJ08_QTD_LIKE
  * @property integer $LOJ08_QTD_COMPART
  * @property integer $LOJ08_STATUS
  * @property string $LOJ08_DT_INCLUSAO
@@ -36,7 +36,7 @@ class Loj08Produto extends \yii\db\ActiveRecord
     {
         return [
             [['LOJ08_LOJA_ID', 'LOJ08_NOME', 'LOJ08_PRECO'], 'required'],
-            [['LOJ08_LOJA_ID', 'LOJ08_QTD_VIEW', 'LOJ08_QTD_COMPART', 'LOJ08_STATUS'], 'integer'],
+            [['LOJ08_LOJA_ID', 'LOJ08_QTD_LIKE', 'LOJ08_QTD_COMPART', 'LOJ08_STATUS'], 'integer'],
             [['LOJ08_PRECO'], 'number'],
             [['LOJ08_DT_INCLUSAO'], 'safe'],
             [['LOJ08_NOME'], 'string', 'max' => 50],
@@ -74,7 +74,7 @@ class Loj08Produto extends \yii\db\ActiveRecord
             'LOJ08_NOME' => 'Loj08  Nome',
             'LOJ08_DESCRICAO' => 'Loj08  Descricao',
             'LOJ08_PRECO' => 'Loj08  Preco',
-            'LOJ08_QTD_VIEW' => 'Loj08  Qtd  View',
+            'LOJ08_QTD_LIKE' => 'Loj08  Qtd  Like',
             'LOJ08_QTD_COMPART' => 'Loj08  Qtd  Compart',
             'LOJ08_STATUS' => 'Loj08  Status',
             'LOJ08_DT_INCLUSAO' => 'Loj08  Dt  Inclusao',

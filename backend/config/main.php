@@ -17,9 +17,6 @@ return [
         ],
     ],
     'components' => [
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
