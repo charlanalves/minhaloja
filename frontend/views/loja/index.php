@@ -1,3 +1,7 @@
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
 
 <style>
     ul.card-action-buttons {
@@ -153,7 +157,11 @@
 </script>
 
 <?php
+
+
+
 foreach ($data['PRODUTOS'] as $k => $v) {
+
     ?>
     <div class="row" style="max-width: 600px">
 
@@ -255,8 +263,8 @@ foreach ($data['PRODUTOS'] as $k => $v) {
     </script>
 
     <?php
-    // monta variações
-    if (($variacoes = $v['VARIACAO'])) {
+
+   if (($variacoes = $v['VARIACAO'])) {
         foreach ($variacoes as $key => $value) {
             $label = $key;
             $options = [];
@@ -264,8 +272,8 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                 $options[] = ['val' => $var, 'text' => $text];
             }
         }
-        ?>
 
+        ?>
         <script>
 
             document.addEventListener("DOMContentLoaded", function (event) {
@@ -415,4 +423,6 @@ foreach ($data['PRODUTOS'] as $k => $v) {
         });
     }
 </script>
+
+
 
