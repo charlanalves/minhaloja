@@ -35,6 +35,6 @@ class Loj07Loja extends BaseLoj07Loja
         $connection = \Yii::$app->db;
         $command = $connection->createCommand("SELECT LOJ07_FRETE FROM LOJ07_LOJA WHERE LOJ07_ID = :loja");
         $command->bindValue(':loja', $loja);
-        return $command->query()->readAll();
+        return $command->query()->readAll()[0]['LOJ07_FRETE'];
     }
 }
