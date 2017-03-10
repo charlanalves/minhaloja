@@ -16,15 +16,18 @@ use common\models\Loj12ProdutoPedido;
 class LojaController extends GlobalBaseController {
 
     public function actionIndex() {
-  
-		 $this->layout = 'smartAdmin';
+        
+        $this->layout = 'smartAdmin';
         
         $idLoja = \Yii::$app->request->get('id');
 
         // dados da loja
-        $data = Loj07Loja::findOne($idLoja)->attributes;
-       
-	foreach ($data as $k => $v) {
+        $data = Loj07Loja::findOne($idLoja);
+        if (empty($data)){
+            return $this->renderPartial('error',['dados'=> 'Loja não encontrada...']);
+        }
+        $data = $data->attributes;
+        foreach ($data as $k => $v) {
             \Yii::$app->view->params[$k] = $v;
         }
         
@@ -50,8 +53,7 @@ class LojaController extends GlobalBaseController {
                 }
             }
         }
-       
-      return $this->render('index', ['data' => $data]);
+        return $this->render('index', ['data' => $data]);
     }
 
     public function actionSave() {
@@ -96,19 +98,31 @@ class LojaController extends GlobalBaseController {
     }
     
     public function actionLikeProduto() {
-        
-        $session = \Yii::$app->session;
-        $gostei = $session['gostei_produtos'];
-        $produto = \Yii::$app->request->get('produto');
-        
-        if(!in_array($produto, $gostei)){
-            $Loj08Produto = Loj08Produto::findOne($produto);
-            $Loj08Produto->LOJ08_QTD_LIKE++;
-            $Loj08Produto->save();
+        try {
+            $session = \Yii::$app->session;
+            if(empty($session->get('gostei_produtos'))){
+                $session->set('gostei_produtos',[]);
+            }
             
-            $session['gostei_produtos'][] = $produto;
+            $gostei = $session->get('gostei_produtos');
+            
+            $produto = \Yii::$app->request->get('produto');
+            
+            $Loj08Produto = Loj08Produto::findOne($produto);
+            if(!empty($Loj08Produto) && !in_array($produto, $gostei)){
+                $Loj08Produto->LOJ08_QTD_LIKE++;
+                $Loj08Produto->save();
+
+                $gostei[] = $produto;
+                $session->set('gostei_produtos', $gostei);
+            }
+            
+            return $Loj08Produto->LOJ08_QTD_LIKE;
+            
+        } catch (\Exception $exc) {
+            return false;
         }
-        
+
     }
 
 }

@@ -116,6 +116,40 @@ ini_set('display_errors', 1);
         font-size: 11px!important;
         color: #888!important;
     }
+    
+    div.info-produto{
+        position: absolute;
+        background-color: #fff;
+        display: block; 
+        transform: translateY(-100%); 
+        opacity: 0;
+        position: absolute;
+        overflow-y: auto;
+        min-height: 10%;
+        max-height: 35%;
+        width: calc(100% - 26px)!important;
+        padding: 10px;
+        padding-bottom: 30px;
+        margin: 0px;
+    }
+    
+    .price-container {
+        margin-top: -25px!important;
+        position: relative;
+        float: right!important; 
+        text-align: right;
+    }
+    
+    .price-container span{
+        display:block;
+        clear:both;
+    }
+    
+    .product-content .product-deatil{
+        margin: 0px!important;
+        margin-bottom: 8px!important;
+    }
+    
 </style>
 
 <script>
@@ -142,27 +176,34 @@ foreach ($data['PRODUTOS'] as $k => $v) {
                                 DESCONTO
                             </span> -->
                         </div>
-                            <li><a class="btn-floating waves-effect waves-light pink"><i class="fa fa-heart"></i></a>
-                                <br/><label><?= $v['LOJ08_QTD_LIKE'] ?></label>
+                        <div id="info-produto-<?= $v['LOJ08_ID'] ?>" class="info-produto">
+                            <span><i class="fa fa-close" style="float: right; cursor: pointer" onclick="fechaInfo(<?= $v['LOJ08_ID'] ?>);"></i></span>
+                            <p><?= $v['LOJ08_DESCRICAO'] ?></p>
+                        </div>
+                        <ul class="card-action-buttons">
+                            <li><a id="a-gostei-<?= $v['LOJ08_ID'] ?>" class="btn-floating waves-effect waves-light pink" onclick="gosteiProduto(<?= $v['LOJ08_ID'] ?>);"><i class="fa fa-heart"></i></a>
+                                <br/><label id="gostei-<?= $v['LOJ08_ID'] ?>"><?= $v['LOJ08_QTD_LIKE'] ?></label>
                             </li>
                             <li><a class="btn-floating waves-effect waves-light green" href="whatsapp://send?text=Teste"><i class="fa fa-share-alt"></i></a>
                                 <br/><label></label>
                             </li>
-                            <li><a class="btn-floating waves-effect waves-light blue" onclick="return false"><i class="fa fa-info"></i></a>
+                            <li><a class="btn-floating waves-effect waves-light blue" onclick="abreInfo(<?= $v['LOJ08_ID'] ?>);"><i class="fa fa-info"></i></a>
                                 <br/><label></label>
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 col-xs-custom-50" style="padding: 0 25px;">
                         <div class="product-deatil no-padding no-margin">
-                            <h5 class="name">
-                                <a href="#">
-                                    <?= $v['LOJ08_NOME'] ?><span><?= $v['LOJ08_DESCRICAO'] ?></span>
+                            <p class="price-container">
+                                <span>R$ <?= $v['LOJ08_PRECO'] ?>
+                                    <span>frete: R$ <?= $data['LOJ07_FRETE'] ?></span>
+                                </span>
+                            </p>
+                            <h5 class="name" style="margin-bottom: 10px;">
+                                <a style="font-size: 20px!important">
+                                    <?= $v['LOJ08_NOME'] ?>
                                 </a>
                             </h5>
-                            <p class="price-container">
-                                <span>R$ <?= $v['LOJ08_PRECO'] ?><span>frete: R$ <?= $data['LOJ07_FRETE'] ?></span></span>
-                            </p>
                             <span class="tag1"></span> 
                         </div>
                         <div class="row">
@@ -312,6 +353,42 @@ foreach ($data['PRODUTOS'] as $k => $v) {
     document.addEventListener("DOMContentLoaded", function (event) {
         pageSetUp();
     });
+    
+    function abreInfo(produto){
+        $('div#info-produto-'+produto).animate({'opacity':'0.9'}, 300);
+    }
+    
+    function fechaInfo(produto){
+        $('div#info-produto-'+produto).animate({'opacity':'0'}, 200);
+    }
+    
+    function gosteiProduto(produto){
+        
+        var r = $.ajax({
+            url: 'index.php?r=loja/like-produto',
+            type: 'GET',
+            data: {'produto': produto},
+            dataType: "jsonp"
+        });
+
+        r.always(function (data) {
+            retorno = data.responseText;
+            if ($.isNumeric(retorno)) {
+                $('label#gostei-' + produto).text(retorno);
+                $('a#a-gostei-' + produto).attr('onclick','return false;');
+            } else {
+                $.smallBox({
+                    title: "Opss",
+                    content: "<i class='fa fa-clock-o'></i> <i>Tente novamente...</i>",
+                    color: "#C46A69",
+                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                    timeout: 2000
+                });
+            }
+        });
+        
+    }
+    
 
     function btnPedido(a) {
         if (form[a].form() === true) {

@@ -60,7 +60,7 @@ class Loj08Produto extends \yii\db\ActiveRecord
      * 
      */
     public function optimisticLock() {
-        return 'lock';
+//        return 'lock';
     }
 
     /**
