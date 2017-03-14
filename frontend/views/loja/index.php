@@ -410,7 +410,7 @@ foreach ($data['PRODUTOS'] as $k => $v) {
             retorno = data.responseText;
             if ($.isNumeric(retorno)) {
                 // move para a pagina de checkout
-                self.location.href = 'http://localhost/minhaloja/backend/web/index.php?r=checkout&pedido=' + retorno;
+                self.location.href = 'index.php?r=checkout&pedido=' + retorno;
             } else {
                 $.smallBox({
                     title: "Opss",

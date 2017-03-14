@@ -23,13 +23,13 @@
 }
 
 @media only screen and (max-width: 479px) and (min-width: 320px){
-#header {
-    padding-right: 0px !important;
-}
+    #header {
+        padding-right: 0px !important;
+    }
 }
 
 .nav-tabs>li.active>a {
-     -webkit-box-shadow: 0 0 0 #57889c;
+    -webkit-box-shadow: 0 0 0 #57889c;
     -moz-box-shadow: 0 0 0 #57889c;
     /* box-shadow: 0px 3px 0px #57889c; */
     border-top-width: 0 !important;
@@ -53,17 +53,20 @@
 }
 
 .widget-body {
-    width: 100%;
+    width: 100% !important;
+    margin: 0 auto!important;
+    padding:0 !important;
 }
 
 .fixed-header #header {
-    position: fixed;
+    position: relative;
     width: 100%;
     z-index: 905;
     top: 0;
     border-bottom: 2px solid #999;
     border-bottom: 0px solid rgba(0, 0, 0, .3);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, .1);
+    padding: 0 !important;
 }
 .btn-success {
     color: #fff;
@@ -71,7 +74,7 @@
     border-color: #659265;
 }
 
-@media (max-width:750px) {
+@media (max-width:50px) {
     .col-xs-custom-50{
         width: 50%;
     }
@@ -89,15 +92,12 @@
     }
 
     .smart-form .row {
-        margin: 0px 0px !important;
-        padding-left: 5px;
-        margin-bottom: 8px !important;
-        padding-right: 40px;
+        margin: 0px 32px !important;
     }
     .product-content .product-info {
-       float:right;
+        float:right;
     }
-    
+
     .product-content .description {    
         padding: 4px 10px 10px 16px;
     }
@@ -117,22 +117,22 @@
         margin-top: 5px;
     }
     .padding-10 {
-    padding: 0px!important;
+        padding: 0px!important;
     }
-    
-   #content, #ribbon {   
-    padding-top: 46px;
-   }
-   .bg-white{
-       background: white;
-   }
-   .width-100{
-       width: 100%;
-       padding: 8px !important;
-   }
-   .row.bg-white {
-    margin-top: 51px;
-}
+
+    #content, #ribbon {   
+        padding-top: 0px;
+    }
+    .bg-white{
+        background: white;
+    }
+    .width-100{
+        width: 100%;
+        padding: 8px !important;
+    }
+    .row.bg-white {
+        margin-top: 51px;
+    }
 }
 
 @media (max-width:380px) {
@@ -153,7 +153,7 @@
     background: #0091d9 !important;
 }
 .h3etapa{
-        margin-top: 43px;
+    margin-top: 43px;
 }
 
 span.campo-obrigatorio {
@@ -162,8 +162,6 @@ span.campo-obrigatorio {
 
 #wizard-1 .form-group {
     text-align: left;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 div#form-bootstrapWizard {
     text-align: center;
@@ -184,6 +182,7 @@ div#form-bootstrapWizard {
     width: 100%;
     margin: 0;
     padding-top: 7px;
+    padding-bottom: 100%;
 }
 
 .height-800{
@@ -194,17 +193,18 @@ div#form-bootstrapWizard {
     display: none !important;
 }
 
-  .fixed-header #main {
-         margin-top: 0 !important; 
-    }
-    #main {
-        min-height: 420px !important;
-    }
+.fixed-header #main {
+    /*margin-top: 99px !important; */
+}
+#main {
+    min-height: 420px !important;
+    margin: 0!important;
+}
 
 
 @media (min-width: 768px) {
 
-     .height-800{
+    .height-800{
         height: auto;
     }
     .modal-dialog.modal-venda-rapida {    
@@ -217,16 +217,15 @@ div#form-bootstrapWizard {
     #container-finalizar-venda-web{
         display: block !important;
     }
-    
 
-  
-   
+
+
+
 }
 
 .fixed-page{
     position: fixed;
     z-index: 9999999;
-    bottom: 0;
 }
 
 .finalizar-venda{
@@ -237,35 +236,28 @@ div#form-bootstrapWizard {
     display: none;
 }
 
-.smart-form input-lg {
-    height: 26px !important;
-    padding: 10px 16px;
-    font-size: 17px;
-    line-height: 1.33;
-}
-
-.smart-form input.input-lg,.smart-form select.input-lg {
-    height: 26px !important;
-    padding: 10px 16px;
-    font-size: 17px;
-    line-height: 1.33;
-}
-
-.forma-pgto{
-    display: inline-block !important;
-}
-
-.jarviswidget>div {
-    padding: 13px 0px 0;
-}
-
-.widget-body.no-padding {
-    margin: -12px 0px 0;
-}
-
-@media only screen and (max-width: 479px) and (min-width: 320px)
-{
-    #sparks li {
-        padding: 0 5px 0 4px !important;
+@media screen and (max-width: 600px){
+    .smart-form .col {
+        float: left;
+        width: 100%;
     }
+    .smart-form .col-4 {
+        width: 33.33%;
+    }
+    .smart-form .col-3 {
+        width: 25%;
+    }
+    .smart-form .col-5 {
+        width: 41.66%;
+    }
+    .smart-form .col-8 {
+        width: 66.67%;
+    }
+
 }
+
+.height-top {
+    height:70px!important;
+}
+
+

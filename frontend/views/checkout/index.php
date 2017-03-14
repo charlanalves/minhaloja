@@ -1,6 +1,6 @@
 <?php
 
-    use backend\assets\AppMlAsset;    
+    use frontend\assets\AppMlAsset;    
     AppMlAsset::register($this);
     
     $dataJson = json_encode($data);

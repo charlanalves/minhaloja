@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use common\controllers\GlobalBaseController;
 use common\models\Loj11Pedido;
