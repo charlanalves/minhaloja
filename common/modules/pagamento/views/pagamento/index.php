@@ -28,7 +28,7 @@
 <form action="" id="checkout-form" name="checkout-form" onsubmit="return false" class="smart-form" novalidate="novalidate" style="background-color: #FFF;padding: 10px">
     <div id="content" style="padding: 10px;">
         
-        <h3 id="nome_loja">nome_loja</h3>
+        <h3 id="nome_loja" style="display: none"></h3>
         <div class="product-content product-wrap clearfix" style="margin:0;border:0;">
             <div class="row" style="margin: 0px;">
                 <div class="col-md-5 col-sm-12 col-xs-12 col-xs-custom-50 col-no-padding" style="padding:0">
@@ -73,8 +73,11 @@
                                 <label id="item_qtd"></label>
                             </p>
                         </div>
-                        <p class="price-container" id="item_vlr">
-                            <span></span>
+                        <p class="price-container">
+                            <span id="item_vlr"></span>
+                            <span id="frete_vlr">
+                                <span></span>
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -329,7 +332,6 @@
     
     var dados = JSON.parse('<?= $dadosJson?>');
     var gateway = dados['gateway'];
-    var valor_total = dados['valor_total'];
     var hashSecundario = dados['hash_recebedor_secundario'];
     var item = dados['item'];
     var endereco_pais = dados['endereco_pais'];
@@ -340,6 +342,9 @@
     var variacao_grupo = dados['variacao_grupo'];
     var variacao_descricao = dados['variacao_descricao'];
     var forma_pag = dados['forma_pag'];
+    var valor_frete = parseFloat(dados['valor_frete']);
+    var valor_produto = parseFloat(dados['valor_total']);
+    var valor_total = parseFloat(valor_produto + valor_frete);
     
     var ps = {};
     var sendFormData = {};
@@ -350,7 +355,6 @@
     var hash_recebedor_primario;
     
     var $checkoutForm = {};
-        
     
     // set dados do checkout
     $('h3#nome_loja').text(nome_loja);
@@ -358,7 +362,8 @@
     $('label#variacao_grupo').text(variacao_grupo + ": ");
     $('label#variacao_descricao').text(variacao_descricao);
     $('label#item_qtd').text("Qtd.: " + item[0].item_qtd);
-    $('p#item_vlr span').text("R$ " + valor_total);
+    $('p span#item_vlr').text("R$ " + valor_produto);
+    $('p span#frete_vlr span').text("Frete: R$ " + valor_frete);
     $('img#item_img').attr('src',(item[0].item_img || ''));
     
     var ultimoCEP = '';
