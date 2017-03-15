@@ -24,7 +24,7 @@ class CheckoutController extends GlobalBaseController {
 
             $Loj12ProdutoPedido = new Loj12ProdutoPedido();
             $dadosProdutoPedido = $Loj12ProdutoPedido->getProdutoPedido($pedido);
-
+            
             if (empty($dadosPedido[0]) || empty($dadosProdutoPedido[0])) {
                 $view = 'error';
             } else {
@@ -42,6 +42,7 @@ class CheckoutController extends GlobalBaseController {
             'gateway' => $data['LOJ11_GATEWAY'],
             'forma_pag' => $data['LOJ11_FORMA_PAG'],
             'valor_total' => $data['LOJ11_VALOR'] * (int)$data['LOJ11_NUM_PARCELA'],
+            'valor_frete' => $data['LOJ11_FRETE'],
             'hash_recebedor_secundario' => $data['LOJ07_HASH_PAGSEGURO'],
             'item' => [[
                 'item_cod' => $data['LOJ08_ID'],

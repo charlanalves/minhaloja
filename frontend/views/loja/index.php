@@ -107,16 +107,6 @@ ini_set('display_errors', 1);
         .container {width: 100%;}
     }
     
-    .price-container span{
-        font-size: 26px!important;
-    }
-    
-    .price-container span span{
-        padding-left: 12px!important;
-        font-size: 11px!important;
-        color: #888!important;
-    }
-    
     div.info-produto{
         position: absolute;
         background-color: #fff;
@@ -131,18 +121,6 @@ ini_set('display_errors', 1);
         padding: 10px;
         padding-bottom: 30px;
         margin: 0px;
-    }
-    
-    .price-container {
-        margin-top: -25px!important;
-        position: relative;
-        float: right!important; 
-        text-align: right;
-    }
-    
-    .price-container span{
-        display:block;
-        clear:both;
     }
     
     .product-content .product-deatil{
